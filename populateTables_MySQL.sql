@@ -55,9 +55,9 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
   
 
 /* teams Table Commands */
-INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
-  VALUES ('mjschranz@learn.senecac.on.ca;sara.underwood@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
-    'WE LIKE PUPPIES AND RAINBOWS');
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, hasRegistered, teamLogo)
+  VALUES ('mjschranz@learn.senecac.on.ca;derpina.derpin@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
+    'WE LIKE PUPPIES AND RAINBOWS', 1, 'http://senecacprj566.files.wordpress.com/2011/05/beam_solutions.png?w=274&h=108');
   
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
   VALUES ('edavlatian@learn.senecac.on.ca;bmcohen@learn.senecac.on.ca;klcaliso1@learn.senecac.on.ca', 'NRA Solutions', 'C#<br/>SQLite<br/>Apache', 2,
@@ -68,11 +68,13 @@ INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription
     'RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE');
 
 /* teammember Table Commands */
-INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId)
-  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'Almost like McGyver in programming form', 1, 1);
+INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId, memberImage)
+  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'Almost like McGyver in programming form', 1, 1,
+    'http://a2.twimg.com/profile_images/1536166961/319944_10150285788839342_501759341_7890203_313784_n.jpg');
   
-INSERT INTO teammember (firstName, lastName, email, description, teamId)
-  VALUES ('Derpina', 'Derpin', 'derpina.derpin@learn.senecac.on.ca', 'Almost like McGyver in programming form, V2', 1);
+INSERT INTO teammember (firstName, lastName, email, description, teamId, memberImage)
+  VALUES ('Derpina', 'Derpin', 'derpina.derpin@learn.senecac.on.ca', 'Almost like McGyver in programming form, V2', 1,
+    'http://troll.me/images/derpina/derpina.jpg');
   
 INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId)
   VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'Almost NOT like McGyver in programming form', 1, 2);
@@ -130,21 +132,21 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
-  
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
-
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Something', 'I have given up on the whole coming up with information part.', 'Java<br/>MySQL<br/>Apache', 4);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
   VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6); 
   
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Reddit', 'Were Reddit. We are the internet. We are assuming control. We are assuming control.', 'Java<br/>MySQL<br/>Apache', 6);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) 
+  VALUES ('AV', 'Reddit', 'Were Reddit. We are the internet. We are assuming control. We are assuming control.', 'Java<br/>MySQL<br/>Apache', 6);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
   VALUES ('AV', 'Fruit Loops', 'Were bringing back Fruit Loops. Why? Because Fruit Loops are super awesome and kids these days do not know what they are missing.', 'Java<br/>MySQL<br/>Apache', 6);
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Molsdon Canadian', 'Were trying to make our beer not taste like crap. We want you to help us.', 'Java<br/>MySQL<br/>Apache', 5);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) 
+  VALUES ('AV', 'Molsdon Canadian', 'Were trying to make our beer not taste like crap. We want you to help us.', 'Java<br/>MySQL<br/>Apache', 5);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) 
+  VALUES ('AV', 'Something', 'I have given up on the whole coming up with information part.', 'Java<br/>MySQL<br/>Apache', 4);
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)

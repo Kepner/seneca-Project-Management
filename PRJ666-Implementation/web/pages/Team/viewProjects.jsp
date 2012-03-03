@@ -46,7 +46,7 @@
         </td>
       </tr>
       <tr valign="top">
-        <td rowspan="5" align="left" width="200"> 
+        <td rowspan="1000" align="left" width="200"> 
           <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>

@@ -37,10 +37,6 @@ CREATE TABLE teams (
   teamName varchar(20),
   teamConstraints varchar(120),
   teamDescription varchar(400),
-  /*
-    teamLogo will contain the address of the location of the picture
-    that was saved to the server.
-  */
   teamLogo varchar(200),
   projectId int,
   hasRegistered int DEFAULT 0,
