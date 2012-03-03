@@ -52,6 +52,8 @@ CREATE TABLE company (
   companyId int AUTO_INCREMENT PRIMARY KEY,
   companyName varchar(25) NOT NULL,
   companyPhone varchar(12) NOT NULL,
+  businessAreas varchar(200),
+  companyDescription varchar(600),
   userId int NOT NULL,
   CONSTRAINT fk_CompanyAccount FOREIGN KEY (userId) REFERENCES accounts (userId)
 );
@@ -96,11 +98,7 @@ CREATE TABLE teammember (
   firstName varchar(15) NOT NULL,
   lastName varchar(15) NOT NULL,
   email varchar(50) NOT NULL,
-  /*
-    memberImage will contain the address of the location of the picture
-    that was saved to the server.
-  */
-  memberImage varchar(200),
+  memberImage varchar(300),
   description varchar(250),
   teamLeader INT DEFAULT 0,
   teamId INTEGER NOT NULL,

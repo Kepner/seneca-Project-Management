@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
@@ -99,7 +100,6 @@
       </tr>
       <tr>
         <td>
-          Here is your Team Home Page, Team <%=userBean.getTeam().getTeamName()%>.
           <div style="color: green;">
           <%
             if(session.getAttribute("editSuccess") != null) {
@@ -108,6 +108,69 @@
             }
           %>
           </div>
+          <br/>
+          <%
+            Teams team = userBean.getTeam();
+            List<Teammember> members = userBean.getAllTeamMembers(team.getTeamId());
+            Teammember leader = userBean.getLeader(team.getTeamId());
+          %>
+          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
+            <h3><%= team.getTeamName() %></h3>
+          </div>
+          <div style="width: 700px; padding: 5px;">
+            <div style="float: left;">
+              <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
+                   style="max-width: 230px; max-height: 180px;"/>
+            </div>
+            <div style="float: right;">
+              <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
+              <br/><br/>
+              Description: <br/>
+              <%= team.getTeamDescription() %>
+              <br/><br/>
+              Constraints: <br/>
+              <%= team.getTeamConstraints() %>
+            </div>
+          </div>
+          <div style="width: 700px; background-color: #D5E7E9; padding: 5px; float: left;">
+            <h3>Team Leader</h3> 
+          </div>
+          <div style="width: 700px; padding: 5px; float: left;">
+            <div style="float: left;">
+              <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
+                   style="max-width: 450px; max-height: 300px;"/>
+            </div>
+            <div style="float: right;">
+              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
+              <br/>
+              Email: <%= leader.getEmail() %>
+              <br/> <br/>
+              Description: <br/>
+              <%= leader.getDescription() %>
+            </div>
+          </div>
+          <div style="width: 700px; background-color: #D5E7E9; padding: 5px; float: left;">
+            <h3>Team Members</h3> 
+          </div>
+          <%
+            for(int i = 0, len = members.size(); i < len; i++){
+              leader = members.get(i);
+          %>
+          <div style="width: 700px; padding: 5px; float: left;">
+            <div style="float: left;">
+              <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
+                   style="max-width: 450px; max-height: 300px;"/>
+            </div>
+            <div style="float: right;">
+              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
+              <br/>
+              Email: <%= leader.getEmail() %>
+              <br/> <br/>
+              Description: <br/>
+              <%= leader.getDescription() %>
+            </div>
+          </div>
+          <% } %>
         </td>
       </tr>
     </table>

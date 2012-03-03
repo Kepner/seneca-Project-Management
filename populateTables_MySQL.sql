@@ -72,7 +72,7 @@ INSERT INTO teammember (firstName, lastName, email, description, teamLeader, tea
   VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'Almost like McGyver in programming form', 1, 1);
   
 INSERT INTO teammember (firstName, lastName, email, description, teamId)
-  VALUES ('Sara', 'Underwood', 'sara.underwood@learn.senecac.on.ca', 'Almost like McGyver in programming form', 1);
+  VALUES ('Derpina', 'Derpin', 'derpina.derpin@learn.senecac.on.ca', 'Almost like McGyver in programming form, V2', 1);
   
 INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId)
   VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'Almost NOT like McGyver in programming form', 1, 2);
@@ -84,30 +84,30 @@ INSERT INTO teammember (firstName, lastName, email, description, teamId)
   VALUES ('Kepner', 'Caliso', 'klcaliso1@learn.senecac.on.ca', 'Almost like NOT McGyver in programming form. Jokes.', 2);
   
 INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId)
-  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'Nothing can describe me', 1, 3);
+  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'Nothing can describe me. Super Programmer.', 1, 3);
 
 INSERT INTO teammember (firstName, lastName, email, description, teamId)
   VALUES ('Batman', 'Batman', 'batman.batman@learn.senecac.on.ca', 'BATMAN. DUNAH NUNAH NUNAH NUNAH NUNAH NUNAH NUNAH BATMAN!', 3);
 
 
 /* company Table Commands */
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('Batman Anonymous', '123-456-7890', 7);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('Batman Anonymous', '123-456-7890', 'Crime Fighting. Bruce Wayne Industries', 'Dunuah DUNAH Dunuah DUNAH Dunuah DUNAH Dunuah DUNAH Dunuah DUNAH BATMAAAAAANN', 7);
   
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('JUMANJI', '123-456-7891', 9);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('JUMANJI', '123-456-7891', 'Board Games', 'Awesome Board Games. We are going to make the next Monopoly.', 9);
   
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('Robin Anonymous', '123-456-7892', 8);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('Robin Anonymous', '123-456-7892', 'Movie Industry', 'Going to make the next awesome series of movies. Win many grammies.', 8);
   
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('Wilde Things', '123-456-7879', 10);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('Wilde Things', '123-456-7879', 'Philanthropy', 'Saving the world, one person at a time.', 10);
 
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('Downers', '123-456-4879', 12);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('Downers', '123-456-4879', 'Sad Emo Stuff', 'Woop Woop Woop Woop. Derp Derp Derp Derp. DOOOOOOOOOOOOOO', 12);
   
-INSERT INTO company (companyName, companyPhone, userId)
-  VALUES ('Buckles', '123-356-7879', 11);
+INSERT INTO company (companyName, companyPhone, businessAreas, companyDescription, userId)
+  VALUES ('Buckles', '123-356-7879', 'Robotic Industries.', 'Basically going to take over the world. You are either with us or against us.',11);
   
 /* projects Table Commands */
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
@@ -123,19 +123,28 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
   VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PR', 'EPIC MEAL TIMEz', 'We are going to be doing super awesome stuffb. Our project is going to be the next Wordpress! JIBERISH WOOO', 'Drupal<br/>MySQL, BUTTER', 2, 5);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PR', 'EPIC MEAL TIMEH', 'We are going to be doing super awesome stuffz. Our project is going to be the next Wordpress! WOOP DERP', 'Drupal<br/>MySQL, MORE DERP, POPCORN', 3, 5);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
   
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
 
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Something', 'I have given up on the whole coming up with information part.', 'Java<br/>MySQL<br/>Apache', 4);
+
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
   VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6); 
   
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
-  VALUES ('AV', 'Reddit', 'Were Reddit. We are the internet. We are assuming control. We are assuming control.', 'Java<br/>MySQL<br/>Apache', 6);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Reddit', 'Were Reddit. We are the internet. We are assuming control. We are assuming control.', 'Java<br/>MySQL<br/>Apache', 6);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
-  VALUES ('AV', 'Fruit Loops', "Were bringing back Fruit Loops. Why? Because Fruit Loops are super awesome and kids these days don't know what they are missing.", 'Java<br/>MySQL<br/>Apache', 6);
+  VALUES ('AV', 'Fruit Loops', 'Were bringing back Fruit Loops. Why? Because Fruit Loops are super awesome and kids these days do not know what they are missing.', 'Java<br/>MySQL<br/>Apache', 6);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId) VALUES ('AV', 'Molsdon Canadian', 'Were trying to make our beer not taste like crap. We want you to help us.', 'Java<br/>MySQL<br/>Apache', 5);
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)
@@ -145,7 +154,7 @@ INSERT INTO comments (projectId, commentDescription, commentStatus)
   VALUES (2, 'JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI!', 1);
 
 INSERT INTO comments (projectId, commentDescription, commentStatus)
-  VALUES (3, 'This is a comment. Your groups work sucked. I hope you all failed.', 1);
+  VALUES (3, 'This is a comment. Your groups work was terrible. I hope you all failed.', 1);
   
 INSERT INTO comments (projectId, commentDescription, commentStatus)
   VALUES (4, 'This is a comment. Your groups work was awesome. Have my babies.', 1);

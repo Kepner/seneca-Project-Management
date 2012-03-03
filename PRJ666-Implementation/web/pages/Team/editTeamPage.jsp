@@ -151,7 +151,7 @@
               </div>
               <div style="clear: both"></div>
               <div style="float: left; width: 150px">Team Logo:</div>
-              <div style="float: left"><input type="text" name="id_tLogo" value="Debate Changing Logos to same as Files" /></div>
+              <div style="float: left"><input type="text" name="id_tLogo" value="<%= team.getTeamLogo() %>" /></div>
               <div style="float: left; color: red;">
               <%
                 if(session.getAttribute("tLogo") != null) {
