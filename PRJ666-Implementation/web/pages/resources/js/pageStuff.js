@@ -169,7 +169,7 @@ function validateFileSize( fileControl ) {
 
 function displayDetails( aButton ){
   var parentElement = aButton.parentNode,
-      details = parentElement.childNodes[ 15 ];
+      details = parentElement.childNodes[ 13 ];
       
   if( aButton.innerHTML === "Show Details" ){
     aButton.innerHTML = "Hide Details";

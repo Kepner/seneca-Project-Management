@@ -26,8 +26,12 @@ li a:link, li a:visited
   color: red; 
 }
 
-tr.projects{
+p.projects{
   text-align: center;
+}
+
+p.description{
+  margin-top: -2px;
 }
 
 h3.title{

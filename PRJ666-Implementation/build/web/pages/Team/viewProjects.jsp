@@ -99,34 +99,43 @@
           </div>
         </td>
       </tr>
-      <tr class="projects">
+      <tr>
         <td><h3 class="title">Available Projects</h3></td>
       </tr>
-      <%
-        List<Projects> projects = userBean.getAvailableProjects( "AV" );
-        Company comp;
+      <tr>
+        <td>
+        <%
+          List<Projects> projects = userBean.getAvailableProjects( "AV" );
+          Company comp;
         
-        if( !projects.isEmpty() ) {
-          for( int i = 0, len = projects.size(); i < len; i++){
-            Projects proj = projects.get( i );
-            comp = userBean.getCompanyByID( proj.getCompanyId() );
-            out.println( "<tr><td>" );
-            out.println( "Company Name: " + comp.getCompanyName() + "<br/>" );
-            out.println( "Company Telephone: " + comp.getCompanyPhone() + "<br/><br/>" );
-            out.println( "About Us: TODO: Debate adding additional column to Company Table <br/><br/>" );
-            out.println( "Project Name: " + proj.getPrjName() + "&#09;<button onclick='displayDetails( this )'>"
-                    + "Show Details</button><br/>" );
-            out.println( "Status: " + proj.getStatus() + "<br/><br/>" );
-            out.println( "<div style='display: none'>Project Description: " + proj.getDescription() 
-                    + "</br>");
-            out.println( "Project Constraints:<br/>" + proj.getPrjConstraints() + "</div>");
-            out.println( "</td></tr>" );
+          if( !projects.isEmpty() ) {
+            for( int i = 0, len = projects.size(); i < len; i++){
+              Projects proj = projects.get( i );
+              comp = userBean.getCompanyByID( proj.getCompanyId() );
+        %>
+              <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
+                <h3><%= proj.getPrjName() %></h3>
+              </div>
+              <div style="width: 700px; padding: 5px;">
+                Company Name: <%= comp.getCompanyName() %> <br/>
+                Company Description: <p class="description"><%= comp.getCompanyDescription() %></p> <br/>
+                Business Areas: <p class="description"><%= comp.getBusinessAreas() %></p> <br/>
+                <button onclick='displayDetails( this )'>Show Details</button>
+                <div style='display: none'>
+                  Project Description: <p class="description"><%= proj.getDescription() %></p> <br/>
+                  Project Constraints: <p class="description"><%= proj.getPrjConstraints() %></p>
+                </div>
+              </div>
+        <%
+            }
           }
-        }
-        else{
-          out.print( "<tr class='projects'><td>There were no available projects.</td></tr>" );
-        }
-      %>
+          else{ %>
+            <p class="projects">There were no available projects.</p>
+        <%
+          }
+        %>
+        </td>
+      </tr>
     </table>
   </body>
 </html>
