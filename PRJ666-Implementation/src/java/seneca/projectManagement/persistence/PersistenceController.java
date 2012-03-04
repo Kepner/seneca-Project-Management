@@ -217,6 +217,15 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
+  public Projects getTeamProject( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByTeamId")
+            .setParameter( "teamId", aTeamId );
+    
+    return (Projects) q.getSingleResult();
+  }
+  
   public List<Projectfile> getProjectFiles( Integer aProjectId ){
     em = getEntityManager();
     
@@ -289,5 +298,46 @@ public class PersistenceController extends EntityControllerBase {
 
     return true;
   }
+  
+  public List<Milestone> getProjectMilestones( Integer aProjectId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Milestone.findByProjectId" )
+            .setParameter( "projectId", aProjectId );
+    
+    return (List<Milestone>)q.getResultList();
+  }
 
+  public boolean newMilestone( Milestone aMilestone ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist( aMilestone );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public Milestone getMilestone( Integer aMilestoneId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Milestone.findByMilestoneId" )
+            .setParameter( "milestoneId", aMilestoneId );
+    
+    return (Milestone)q.getSingleResult();
+  }
+  
+  public boolean updateMilestone( Milestone aMilestone ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aMilestone );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
 }

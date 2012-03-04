@@ -121,6 +121,10 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
   VALUES ('MA', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
 
+UPDATE teams SET projectId = 1 WHERE teamId = 1;
+UPDATE teams SET projectId = 2 WHERE teamId = 2;
+UPDATE teams SET projectId = 3 WHERE teamId = 3;
+
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
 
@@ -163,29 +167,29 @@ INSERT INTO comments (projectId, commentDescription, commentStatus)
 
  
 /* milestone Table Commands */
-INSERT INTO milestone (description, projectId)
-  VALUES ('Design Underway', 1);
+INSERT INTO milestone (description, projectId, milestoneName)
+  VALUES ('Design Underway', 1, 'Design Start');
   
-INSERT INTO milestone (description, projectId)
-  VALUES ('Design Underway', 2);
+INSERT INTO milestone (description, projectId, milestoneName)
+  VALUES ('Design Underway', 2, 'Design Start');
   
-INSERT INTO milestone (description, projectId)
-  VALUES ('Design Underway', 3);
+INSERT INTO milestone (description, projectId, milestoneName)
+  VALUES ('Design Underway', 3, 'Design Start');
   
-INSERT INTO milestone (description, projectId)
-  VALUES ('Design Underway', 4);
+INSERT INTO milestone (description, projectId, milestoneName)
+  VALUES ('Design Underway', 4, 'Design Start');
   
-INSERT INTO milestone (description, milestoneStatus, projectId)
-  VALUES ('PID Completion', 'CO', 1);
+INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
+  VALUES ('PID Completion', 'CO', 1, 'Project Completion');
   
-INSERT INTO milestone (description, milestoneStatus, projectId)
-  VALUES ('PID Completion', 'CO', 2);
+INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
+  VALUES ('PID Completion', 'CO', 2, 'Project Completion');
   
-INSERT INTO milestone (description, milestoneStatus, projectId)
-  VALUES ('PID Completion', 'CO', 3);
+INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
+  VALUES ('PID Completion', 'CO', 3, 'Project Completion');
   
-INSERT INTO milestone (description, milestoneStatus, projectId)
-  VALUES ('PID Completion', 'CO', 4);
+INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
+  VALUES ('PID Completion', 'CO', 4, 'Project Completion');
   
 /* teamprojectranking Table Command */
 /* THESE ARE RANKINGS DONE BY TEAMS */

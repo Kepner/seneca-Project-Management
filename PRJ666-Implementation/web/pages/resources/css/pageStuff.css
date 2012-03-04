@@ -41,3 +41,9 @@ h3.title{
 input[type=text], textArea {
   width: 300px;
 }
+
+button {
+  background-image: url('../images/header_bg.jpg'); 
+  background-repeat: repeat; 
+  font-weight: bold;
+}

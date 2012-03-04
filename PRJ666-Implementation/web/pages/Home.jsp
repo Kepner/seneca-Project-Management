@@ -82,11 +82,12 @@
               else if(userBean.getLoggedUser().getUserRole().equals("TL")){
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
-            <li><a href="Team/teamHome.jsp">Team Home</a></li>
-            <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="Team/viewProjects.jsp">View Projects</a></li>
-            <li><a href="Team/editTeamPage.jsp">Manage Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
+			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/editMilestone.jsp">Edit Project Milestones</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
           <%
                 }
                 else {

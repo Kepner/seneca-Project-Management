@@ -41,7 +41,8 @@ CREATE TABLE teams (
   projectId int,
   hasRegistered int DEFAULT 0,
   userId int NOT NULL,
-  CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId) 
+  CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId),
+  CONSTRAINT fk_TeamProject FOREIGN KEY (projectId) REFERENCES projects (projectId) 
 );
 
 CREATE TABLE company (
@@ -63,7 +64,7 @@ CREATE TABLE projects (
   prjConstraints varchar(250) NOT NULL,
   agreementDate TIMESTAMP DEFAULT NOW(),
   companyId int NOT NULL,
-  teamId int,
+  teamId int UNIQUE,
   instructorId int,
   CONSTRAINT fk_CompanyId FOREIGN KEY (companyId) REFERENCES COMPANY (companyId),
   CONSTRAINT fk_TeamId FOREIGN KEY (teamId) REFERENCES teams (teamId),
@@ -74,6 +75,7 @@ ALTER TABLE teams ADD CONSTRAINT fk_ProjectId FOREIGN KEY (projectId) REFERENCES
 
 CREATE TABLE milestone (
   milestoneId int AUTO_INCREMENT PRIMARY KEY,
+  milestoneName varchar(70) NOT NULL,
   description varchar(125) NOT NULL,
   projectId INTEGER NOT NULL,
   milestoneStatus char(2) DEFAULT 'NS',

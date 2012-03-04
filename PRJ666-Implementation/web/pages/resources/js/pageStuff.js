@@ -142,13 +142,11 @@ function validateMemberDescription( textControl ) {
   }
 };
 
-/* Currently isn't functioning the way I intended */
-function validateFileSize( fileControl ) {
+function validateImage( imageControl ) {
   var errors,
-      cellNode = fileControl.parentNode;
+      cellNode = imageControl.parentNode;
       
-  /*
-  if ( fileControl.fileSize <= 512800 ) {
+  if ( imageControl.value.length > 0 ) {
     cellNode.removeChild( cellNode.childNodes[ 1 ] );
     areErrors = false;
   }
@@ -162,7 +160,6 @@ function validateFileSize( fileControl ) {
     
     areErrors = true;
   }
-  */
 
   areErrors = false;
 };
