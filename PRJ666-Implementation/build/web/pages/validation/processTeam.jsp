@@ -415,7 +415,10 @@ else if("true".equals(request.getParameter("editMilestone"))){
 }
 else if("true".equals(request.getParameter("teamRanking"))){
   String[] rankings = request.getParameterValues("pRank"),
-           pIds = request.getParameterValues("pId");
+           pIds = request.getParameterValues("pId"),
+           numUsed;
+  
+  int rankCount = 0;
   
   Calendar cal = Calendar.getInstance();
   String s;
@@ -440,7 +443,32 @@ else if("true".equals(request.getParameter("teamRanking"))){
       s = "Fall" + cal.get(Calendar.YEAR);
   }
   
-  Integer count = userBean.countSemesterTeams(s);
-  out.println(count);
+  int teamCount = userBean.countSemesterTeams(s);
+  
+  for(int i = 0, len = rankings.length; i < len; i++){
+    if(!rankings[i].isEmpty())
+      rankCount++;
+  }
+    
+  if(rankCount < teamCount && rankCount > 0){
+    session.setAttribute("rankFailed", "Error. Can not rank less projects than there are teams this semester.");
+    %>
+    <jsp:forward page="../Team/rankProjects.jsp" />
+    <%
+  }
+  else if(teamCount > pIds.length && rankCount < pIds.length){
+    session.setAttribute("rankFailed", "Error. Must rank all projects when there are more teams than projects.");
+    %>
+    <jsp:forward page="../Team/rankProjects.jsp" />
+    <%
+  }
+  else if(rankCount == 0){
+    session.setAttribute("rankFailed", "Error. Can not rank no projects.");
+    %>
+    <jsp:forward page="../Team/rankProjects.jsp" />
+    <%
+  }
+  
+  numUsed = new String[rankCount];
 }
 %>

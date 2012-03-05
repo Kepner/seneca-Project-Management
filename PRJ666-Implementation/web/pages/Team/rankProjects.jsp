@@ -180,6 +180,17 @@
               }
            %>
             </table>
+            <%
+              if(session.getAttribute("rankFailed") != null){
+            %>
+                <div style="color: red;">
+                  <%= session.getAttribute("rankFailed").toString() %>
+                </div>
+                <br/>
+            <%
+                session.removeAttribute("rankFailed");
+              }
+            %>
             <input type="hidden" name="teamRanking" value="true"/>
             <button>Save Rankings</button>
           </form>
