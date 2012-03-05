@@ -20,6 +20,10 @@
           session.setAttribute("Error", "Account has not been activated yet.");
           response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
+        else if(userBean.getTeam().getProjectId() >= 0){
+          session.setAttribute("Error", "You already are matched to a project");
+          response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+        }
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
@@ -30,7 +34,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Team Home</title>
+    <title>PRJ566 - Rank Projects</title>
   </head>
   <body>
     <table> 
@@ -101,7 +105,84 @@
       </tr>
       <tr>
         <td>
-          Placeholder.
+          <%
+            if(session.getAttribute("rankSuccess") != null){
+          %>
+              <div style="float: left; color: green;">
+                <%= session.getAttribute("rankSuccess").toString() %>
+              </div>
+              <br/>
+          <%
+              session.removeAttribute("rankSuccess");
+            }
+            else if(session.getAttribute("rankFail") != null) {
+          %>
+              <div style="float: left; color: red;">
+                <%= session.getAttribute("rankFail").toString() %>
+              </div>
+              <br/>
+          <%
+              session.removeAttribute("rankFail");  
+            } 
+          %>
+          <div style="width: 900px; background-color: #D5E7E9; padding: 5px;">
+            <h3>Rank Available Projects</h3>
+          </div>
+          <form method="post" action="../validation/processTeam.jsp">
+            <table style="width: 90%;" cellpadding="5">
+              <tr>
+                <th style="width: 20%">Project Name</th>
+                <th style="width: 45%">Project Description</th>
+                <th style="width: 30%">Project Constraints</th>
+                <th style="width: 5%">Your Rank</th>
+              </tr>
+          <%
+              List<Projects> projects = userBean.getAllProjects("AV");
+              Teams t = userBean.getTeam();
+              Projects p;
+              
+              if(!projects.isEmpty()){
+                if(!t.getHasRanked()){
+                  for(int i = 0, len = projects.size(); i < len; i++){
+                    p = projects.get(i);
+          %>
+                    <tr>
+                      <td><%= p.getPrjName() %></td>
+                      <td><%= p.getDescription() %></td>
+                      <td><%= p.getPrjConstraints() %></td>
+                      <td>
+                        <input type="text" name="pRank" value="" style="width: 40px;" /><br/>
+                        <input type="hidden" name="pId" value="<%= p.getProjectId() %>" />
+                      </td>
+                    </tr>
+           <%
+                  }
+                }
+                else{
+                  List<Teamprojectranking> rankings = userBean.getTeamProjectRankings(t.getTeamId());
+                  Teamprojectranking tm;
+                  for(int i = 0, len = projects.size(); i < len; i++){
+                    p = projects.get(i);
+                    tm = rankings.get(i);
+           %>
+                    <tr>
+                      <td><%= p.getPrjName() %></td>
+                      <td><%= p.getDescription() %></td>
+                      <td><%= p.getPrjConstraints() %></td>
+                      <td>
+                        <input type="text" name="pRank" value="<%= tm.getRanking() %>" style="width: 40px;" /><br/>
+                        <input type="hidden" name="pId" value="<%= p.getProjectId() %>" />
+                      </td>
+                    </tr>
+           <%
+                  }
+                }
+              }
+           %>
+            </table>
+            <input type="hidden" name="teamRanking" value="true"/>
+            <button>Save Rankings</button>
+          </form>
         </td>
       </tr>
     </table>

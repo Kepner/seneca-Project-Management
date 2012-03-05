@@ -223,5 +223,13 @@ public class UserSession {
   public boolean updateMilestone( Milestone aMilestone ){
     return pc.updateMilestone( aMilestone );
   }
+  
+  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
+    return pc.getTeamProjectRankings( aTeamId );
+  }
+  
+  public int countSemesterTeams( String aPeriod ){
+    return pc.countSemesterTeams( aPeriod ).intValue();
+  }
 }
  

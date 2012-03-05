@@ -85,7 +85,7 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Team Home</a></li>
 			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
@@ -119,11 +119,9 @@
             <h3><%= team.getTeamName() %></h3>
           </div>
           <div style="width: 700px; padding: 5px;">
-            <div style="float: left;">
-              <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
-                   style="max-width: 230px; max-height: 180px;"/>
-            </div>
-            <div style="float: right;">
+            <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
+                 style="max-width: 230px; max-height: 180px;"/>
+            <div>
               <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
               <br/><br/>
               Description: <br/>
@@ -133,15 +131,13 @@
               <%= team.getTeamConstraints() %>
             </div>
           </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px; float: left;">
+          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
             <h3>Team Leader</h3> 
           </div>
-          <div style="width: 700px; padding: 5px; float: left;">
-            <div style="float: left;">
-              <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                   style="max-width: 450px; max-height: 300px;"/>
-            </div>
-            <div style="float: right;">
+          <div style="width: 700px; padding: 5px;">
+            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
+                 style="max-width: 450px; max-height: 300px;"/>
+            <div>
               Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
               <br/>
               Email: <%= leader.getEmail() %>
@@ -150,19 +146,17 @@
               <%= leader.getDescription() %>
             </div>
           </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px; float: left;">
+          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
             <h3>Team Members</h3> 
           </div>
           <%
             for(int i = 0, len = members.size(); i < len; i++){
               leader = members.get(i);
           %>
-          <div style="width: 700px; padding: 5px; float: left;">
-            <div style="float: left;">
-              <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                   style="max-width: 450px; max-height: 300px;"/>
-            </div>
-            <div style="float: right;">
+          <div style="width: 700px; padding: 5px;">
+            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
+                 style="max-width: 450px; max-height: 300px;"/>
+            <div>
               Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
               <br/>
               Email: <%= leader.getEmail() %>

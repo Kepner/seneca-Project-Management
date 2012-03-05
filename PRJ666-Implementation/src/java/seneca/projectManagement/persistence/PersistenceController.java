@@ -272,7 +272,7 @@ public class PersistenceController extends EntityControllerBase {
   public List<Projects> getAvailableProjects( String aStatus ){
     em = getEntityManager();
     
-    Query q = em.createNamedQuery( "Projects.findByStatus")
+    Query q = em.createNamedQuery( "SELECT p FROM projects p WHERE p.status = :status ORDER BY p.projectId ASC")
             .setParameter( "status", aStatus );
     
     return (List<Projects>)q.getResultList();
@@ -339,5 +339,23 @@ public class PersistenceController extends EntityControllerBase {
     em.close();
     
     return true;
+  }
+  
+  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "SELECT m from Teamprojectranking m WHERE m.teamId = :teamId ORDER BY m.projectId ASC")
+            .setParameter( "teamId", aTeamId );
+    
+    return (List<Teamprojectranking>) q.getResultList();
+  }
+  
+  public Number countSemesterTeams( String aPeriod ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT COUNT(a.userIdentifier) FROM Accounts a WHERE a.userIdentifier LIKE :period ")
+            .setParameter( "period", "%" + aPeriod + "%" );
+    
+    return (Number)q.getSingleResult();
   }
 }

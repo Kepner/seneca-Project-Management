@@ -28,7 +28,7 @@
         </td>
       </tr>
       <tr valign="top">
-        <td rowspan="5" align="left" width="200"> 
+        <td rowspan="100" align="left" width="200"> 
           <img src="resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
           <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
@@ -135,6 +135,16 @@
           </div>
         </td>
       </tr>
+      <%
+        if(session.getAttribute("Error") != null){
+      %>
+          <tr><td style="color: red;">
+            <%= session.getAttribute("Error").toString() %>
+          </td></tr>
+      <%
+          session.removeAttribute("Error");
+        }
+      %>
       <tr>
         <td>
           <b><u>News Title 1</u></b>

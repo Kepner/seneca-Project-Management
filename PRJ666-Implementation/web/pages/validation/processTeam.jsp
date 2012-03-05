@@ -3,6 +3,7 @@
     Created on : Jan 26, 2012, 8:36:36 PM
     Author     : matthewschranz
 --%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
@@ -411,5 +412,35 @@ else if("true".equals(request.getParameter("editMilestone"))){
   %>
   <jsp:forward page="../Team/editMilestone.jsp" />
   <%  
+}
+else if("true".equals(request.getParameter("teamRanking"))){
+  String[] rankings = request.getParameterValues("pRank"),
+           pIds = request.getParameterValues("pId");
+  
+  Calendar cal = Calendar.getInstance();
+  String s;
+  switch(cal.get(Calendar.MONTH)){
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      s = "Win" + cal.get(Calendar.YEAR);
+      break;
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+      s = "Sum" + cal.get(Calendar.YEAR);
+      break;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    default:
+      s = "Fall" + cal.get(Calendar.YEAR);
+  }
+  
+  Integer count = userBean.countSemesterTeams(s);
+  out.println(count);
 }
 %>

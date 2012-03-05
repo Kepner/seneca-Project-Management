@@ -3,15 +3,15 @@ SET FOREIGN_KEY_CHECKS=0;
 /* accounts Table COMMANDS */
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Sum2012_1', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');  
+  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Win2012_1', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');  
 
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Sum2012_2', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Win2012_2', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Sum2012_3', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Win2012_3', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
 /* password is 12345, SUPERVISOR */  
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
@@ -51,7 +51,7 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 
 /* password is 12345, TEAM LEADER */
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566Sum2012_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566Win2012_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 
 /* teams Table Commands */
