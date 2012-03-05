@@ -55,9 +55,9 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
   
 
 /* teams Table Commands */
-INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, hasRegistered, teamLogo)
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, teamLogo)
   VALUES ('mjschranz@learn.senecac.on.ca;derpina.derpin@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
-    'WE LIKE PUPPIES AND RAINBOWS', 1, 'http://senecacprj566.files.wordpress.com/2011/05/beam_solutions.png?w=274&h=108');
+    'WE LIKE PUPPIES AND RAINBOWS', 'http://senecacprj566.files.wordpress.com/2011/05/beam_solutions.png?w=274&h=108');
   
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
   VALUES ('edavlatian@learn.senecac.on.ca;bmcohen@learn.senecac.on.ca;klcaliso1@learn.senecac.on.ca', 'NRA Solutions', 'C#<br/>SQLite<br/>Apache', 2,
@@ -66,6 +66,11 @@ INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
   VALUES ('alana.marinucci@learn.senecac.on.ca;batman.batman@learn.senecac.on.ca', 'BATMAAAAAANN', 'PHP<br/>DERBY<br/>JBoss', 3,
     'RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE');
+
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, hasRegistered, teamLogo)
+  VALUES ('rachel.nichols@learn.senecac.on.ca;clint.eastwood@learn.senecac.on.ca', 'Bad Ass Mofos', 'PHP, DERBY, JBoss and Apache Server', 13,
+    'We are the most awesome. Anyone who claims otherwise is an imposter.', 1, 'http://www.millionaireplayboy.com/mpb/wp-content/uploads/2010/05/gijoe.jpg');
+
 
 /* teammember Table Commands */
 INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId, memberImage)
@@ -90,6 +95,12 @@ INSERT INTO teammember (firstName, lastName, email, description, teamLeader, tea
 
 INSERT INTO teammember (firstName, lastName, email, description, teamId)
   VALUES ('Batman', 'Batman', 'batman.batman@learn.senecac.on.ca', 'BATMAN. DUNAH NUNAH NUNAH NUNAH NUNAH NUNAH NUNAH BATMAN!', 3);
+
+INSERT INTO teammember (firstName, lastName, email, description, teamId, memberImage)
+  VALUES ('Clint', 'Eastwood', 'clint.eastwood@learn.senecac.on.ca', 'Youve got to ask yourself one question: Do I feel lucky? Well, do ya, punk?', 4, 'http://henrysheehan.com/essays/def/eastwood.jpg');
+
+INSERT INTO teammember (firstName, lastName, email, description, teamId, teamLeader, memberImage)
+  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'Model and actress Rachel Nichols is the daughter of Alison and Jim Nichols, a teacher. After graduating from high school, she attended Columbia University in New York, where she eventually graduated with a double major in math and economics.', 4, 1, 'http://media.monstersandcritics.com/people/Rachel_Nichols/images/Rachel_Nichols.jpg');
 
 
 /* company Table Commands */
