@@ -415,8 +415,7 @@ else if("true".equals(request.getParameter("editMilestone"))){
 }
 else if("true".equals(request.getParameter("teamRanking"))){
   String[] rankings = request.getParameterValues("pRank"),
-           pIds = request.getParameterValues("pId"),
-           numUsed;
+           pIds = request.getParameterValues("pId"), numUsed;
   
   int rankCount = 0;
   
@@ -470,5 +469,27 @@ else if("true".equals(request.getParameter("teamRanking"))){
   }
   
   numUsed = new String[rankCount];
+  boolean found = false;
+  for(int i = 0, len = rankCount; i < len;){
+    for(int k = 0, len2 = numUsed.length; k < len2 || found;){
+      if(numUsed[k] != null && numUsed[k].equals(rankings[i]))
+        found = true;
+      else
+        k++;
+    }
+    if(found){
+      session.setAttribute("rankFailed", "Error. Can not use the same rank twice.");
+      %>
+      <jsp:forward page="../Team/rankProjects.jsp" />
+      <% 
+    }
+    else{
+      numUsed[i] = rankings[i];
+      i++;  
+    }
+  }
+  
+  for(int i = 0; i < numUsed.length; i++)
+    out.println(numUsed[i]);
 }
 %>
