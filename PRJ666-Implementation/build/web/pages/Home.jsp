@@ -107,7 +107,7 @@
               }
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
           %>
-            <li><a href="#">Change Project Status to Past</a></li>
+            <li><a href="Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
 		        <li><a href="#">Current Semester Available Projects</a></li>
           <%
               }

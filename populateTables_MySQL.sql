@@ -125,14 +125,14 @@ UPDATE teams SET projectId = 1 WHERE teamId = 1;
 UPDATE teams SET projectId = 2 WHERE teamId = 2;
 UPDATE teams SET projectId = 3 WHERE teamId = 3;
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
+  VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5, 'PRJ666WIN2012');
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PR', 'EPIC MEAL TIMEz', 'We are going to be doing super awesome stuffb. Our project is going to be the next Wordpress! JIBERISH WOOO', 'Drupal<br/>MySQL, BUTTER', 2, 5);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
+  VALUES ('PR', 'EPIC MEAL TIMEz', 'We are going to be doing super awesome stuffb. Our project is going to be the next Wordpress! JIBERISH WOOO', 'Drupal<br/>MySQL, BUTTER', 2, 5, 'PRJ666WIN2012');
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PR', 'EPIC MEAL TIMEH', 'We are going to be doing super awesome stuffz. Our project is going to be the next Wordpress! WOOP DERP', 'Drupal<br/>MySQL, MORE DERP, POPCORN', 3, 5);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
+  VALUES ('PR', 'EPIC MEAL TIMEH', 'We are going to be doing super awesome stuffz. Our project is going to be the next Wordpress! WOOP DERP', 'Drupal<br/>MySQL, MORE DERP, POPCORN', 3, 5, 'PRJ666WIN2012');
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
@@ -151,6 +151,11 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId) 
   VALUES ('AV', 'Something', 'I have given up on the whole coming up with information part.', 'Java<br/>MySQL<br/>Apache', 4);
+
+INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId, instructorId) VALUES ('PE', 'Laboratory Project', NULL, 'Project description goes here...', 'JAVA, MYSQL, GLASSFISH, JSP', '2012-03-05 13:53:25.0', 8, NULL, NULL);
+
+INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId, instructorId) VALUES ('PR', 'Medical Project', 'PRJ666WIN2012', 'Project description', 'java, mysql', '2012-03-05 13:44:30.0', 8, NULL, NULL);
+
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)
