@@ -142,11 +142,7 @@
             <%
                     out.println("<div style='float: left'>");
                     out.println("<input type='submit' value='Change Status to Past' />");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
-                            
+                    
                     out.println("</div>");
                     out.println("<div style='float: right'>");
                     int pages = (int) Math.ceil( (double) projects.size() / items);
@@ -156,6 +152,11 @@
                     }
                     out.println("<a href='ProjectUpdate.jsp?items=" + projects.size() + "'>View All</a>");
                     out.println("</div>");
+                    out.print("<div style='clear: both'></div>");
+                    if(session.getAttribute("Error") != null) {
+                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                        session.removeAttribute("Error");
+                    }
                 } else {
                     out.println("<h1>No projects to display.</h1>");
                 }

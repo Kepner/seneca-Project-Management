@@ -79,10 +79,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-			      <li><a href="#">Pending Comments</a></li>
+			      <li><a href="PendingComments.jsp">Pending Comments</a></li>
 		        <li><a href="#">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="#">Manage Site Accounts</a></li>
+            <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -94,8 +94,13 @@
       <tr>
         <td>
           <h1>Administrator Page</h1>
-          <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-          userBean.getLoggedUser().getUserLName()%></h2> 
+          <h2>Hello, 
+              <%
+                if(userBean.getLoggedUser() != null) {
+                    out.print(userBean.getLoggedUser().getUserFName() + " " + userBean.getLoggedUser().getUserLName());
+                }
+              %>
+          </h2>
         </td>
       </tr>             
     </table>

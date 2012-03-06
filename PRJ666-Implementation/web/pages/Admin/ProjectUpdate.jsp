@@ -85,10 +85,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Pending Comments</a></li>
+			      <li><a href="PendingComments.jsp">Pending Comments</a></li>
 		        <li><a href="#">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="#">Manage Site Accounts</a></li>
+            <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -143,11 +143,7 @@
             <div style="border-style: solid; border-color: #6F93C9"> </div>
             <%
                     out.println("<div style='float: left'>");
-                    out.println("<input type='submit' value='Change Status to Past' />");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
+                    out.println("<input type='submit' value='Change Selected Project Status to Past' />");
                             
                     out.println("</div>");
                     out.println("<div style='float: right'>");
@@ -158,6 +154,11 @@
                     }
                     out.println("<a href='ProjectUpdate.jsp?items=" + projects.size() + "'>View All</a>");
                     out.println("</div>");
+                    out.print("<div style='clear: both'></div>");
+                    if(session.getAttribute("Error") != null) {
+                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                        session.removeAttribute("Error");
+                    }
                 } else {
                     out.println("<h1>No projects to display.</h1>");
                 }
