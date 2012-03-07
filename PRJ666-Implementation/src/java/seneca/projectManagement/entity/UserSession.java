@@ -231,5 +231,31 @@ public class UserSession {
   public int countSemesterTeams( String aPeriod ){
     return pc.countSemesterTeams( aPeriod ).intValue();
   }
+
+  public Comments getComments(Integer id) {
+      return pc.getComments(id);
+  }
+  
+  public List<Comments> getAllComments() {
+      return pc.getAllComments();
+  }
+  
+  public List<Comments> getAllComments(Integer projID) {
+      List<Comments> comments = new ArrayList<Comments>();
+      for(Comments c : pc.getAllComments(projID)) {
+          if(c.getCommentStatus() == 0) {
+              comments.add(c);
+          }
+      }
+      return comments;
+  }
+  
+  public boolean updateComments(Comments aComments) {
+      return pc.updateComments(aComments);
+  }
+  
+  public List<Accounts> getAllAccounts() {
+      return pc.getAllAccounts();
+  }
 }
  

@@ -96,7 +96,7 @@
       </tr>
       <tr>
         <td>
-            <h1>Archive Selected Project(s)</h1>
+            <h1>Archived Selected Project(s)</h1>
             <div style="clear: both"></div>
             <div>
             <%
@@ -121,9 +121,10 @@
                         p.setStatus("PA");
                         userBean.updateProject(p);
                     }
+                } else {
+                    session.setAttribute("Error", "No project selected!");
+                    response.sendRedirect("ProjectUpdate.jsp");
                 }
-                //session.setAttribute("Error", "No project selected!");
-                //response.sendRedirect("ProjectUpdate.jsp");
                 session.removeAttribute("First");
             %>
             </div>

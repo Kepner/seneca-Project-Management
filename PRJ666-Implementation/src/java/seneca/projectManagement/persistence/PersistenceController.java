@@ -358,4 +358,50 @@ public class PersistenceController extends EntityControllerBase {
     
     return (Number)q.getSingleResult();
   }
+
+  public Comments getComments(Integer id) {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Comments.findByCommentId")
+            .setParameter("commentId", id);
+    
+    return (Comments) q.getSingleResult();
+  }
+  
+  public List<Comments> getAllComments() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Comments.findAll" );
+    
+    return (List<Comments>) q.getResultList();
+  }
+  
+  public List<Comments> getAllComments(Integer projID) {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Comments.findByProjectId" ).setParameter("projectId", projID);
+    
+    return (List<Comments>) q.getResultList();
+  }
+  
+  public boolean updateComments( Comments aComments ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aComments );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public List<Accounts> getAllAccounts() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Accounts.findAll" );
+    
+    return (List<Accounts>) q.getResultList();
+  }
 }
+
