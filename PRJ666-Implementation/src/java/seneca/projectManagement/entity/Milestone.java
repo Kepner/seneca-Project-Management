@@ -33,12 +33,12 @@ public class Milestone implements Serializable {
   private Integer milestoneId;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 70)
+  @Size(min = 7, max = 70)
   @Column(name = "milestoneName")
   private String milestoneName;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 125)
+  @Size(min = 10, max = 125)
   @Column(name = "description")
   private String description;
   @Basic(optional = false)

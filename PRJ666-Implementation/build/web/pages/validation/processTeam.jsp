@@ -3,6 +3,7 @@
     Created on : Jan 26, 2012, 8:36:36 PM
     Author     : matthewschranz
 --%>
+<%@page import="java.text.ParseException"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -296,33 +297,22 @@ else if ("true".equals(request.getParameter("editTeamPage"))) {
     <%
   }
 }
-else if("true".equals(request.getParameter("createMilestone"))){
+else if(request.getParameter("createMilestone") != null){
+  System.out.println("in create");
   String mName = request.getParameter("milestoneName"),
          mDesc = request.getParameter("milestoneDescription"),
          mStatus = request.getParameter("milestoneStatus"),
          mDate = request.getParameter("milestoneDate");
   
-  if(!mName.matches("[A-Za-z\\s]{7,70}")){
-    session.setAttribute("createErrors", "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
-    %>
-    <jsp:forward page="../Team/createMilestone.jsp" />
-    <%  
-  }
-  else if(!mDesc.matches("[A-Za-z\\s.]{10,125}")){
-    session.setAttribute("createErrors", "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
-    %>
-    <jsp:forward page="../Team/createMilestone.jsp" />
-    <% 
-  }
   DateFormat f = new SimpleDateFormat("MM/dd/yyyy");
-  Date d = (Date) f.parse(mDate);
+  Date d = new Date();
   
-  // Date Validation
-  if(d.before(new Date())){
-    session.setAttribute("createErrors", "Error. Milestone date can't be set to the past.");
-    %>
-    <jsp:forward page="../Team/createMilestone.jsp" />
-    <%  
+  try{
+    System.out.println("in date parse");
+    d = (Date) f.parse(mDate);
+  }
+  catch(ParseException e){
+    d = null;
   }
   
   Teams team = userBean.getTeam();
@@ -335,83 +325,96 @@ else if("true".equals(request.getParameter("createMilestone"))){
   milestone.setMilestoneStatus(mStatus);
   milestone.setProjectId(proj.getProjectId());
   
-  if(!userBean.newMilestone(milestone))
-    session.setAttribute("createErrors", "Error. Milestone was not successfully added.");
-  else {
-    session.setAttribute("createSuccess", "Milestone Successfully Added.");
+  if(!mName.matches("[A-Za-z\\s]{7,70}")){
+    session.setAttribute("createErrors", "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
+    session.setAttribute("create", "sum");
+    response.sendRedirect("../Team/updateMilestone.jsp");  
   }
-  
-  response.sendRedirect("../Team/createMilestone.jsp");
+  else if(!mDesc.matches("[A-Za-z\\s.]{10,125}")){
+    session.setAttribute("createErrors", "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
+    session.setAttribute("create", "sum");
+    response.sendRedirect("../Team/updateMilestone.jsp"); 
+  }
+  else if(d == null){
+    session.setAttribute("createErrors", "Error. Milestone date must be in MM/DD/YYYY format.");
+    session.setAttribute("create", "sum");
+    response.sendRedirect("../Team/updateMilestone.jsp");
+  }
+  // Date Validation
+  else if(d.before(new Date())){
+    session.setAttribute("createErrors", "Error. Milestone date can't be set to the past.");
+    session.setAttribute("create", "sum");
+    response.sendRedirect("../Team/updateMilestone.jsp");
+  }
+  else if(!userBean.newMilestone(milestone)){
+    session.setAttribute("createErrors", "Error. Milestone was not successfully added.");
+    session.setAttribute("create", "sum");
+    response.sendRedirect("../Team/updateMilestone.jsp");
+  } 
+  else {
+    session.setAttribute("milestoneSuccess", "Milestones successfully edited.");
+    session.removeAttribute("create");
+    session.removeAttribute("createErrors");
+    response.sendRedirect("../Team/manageMilestones.jsp");
+  }
 }
-else if("true".equals(request.getParameter("editMilestone"))){
-  String[] mName = request.getParameterValues("milestoneName"),
-           mDesc = request.getParameterValues("milestoneDescription"),
-           mDate = request.getParameterValues("milestoneDate"),
-           mStatus = request.getParameterValues("milestoneStatus"),
-           mId = request.getParameterValues("milestoneId");
+else if(request.getParameter("editMilestone") != null){
+  System.out.println("in edit");
+  String mName = request.getParameter("milestoneName"),
+           mDesc = request.getParameter("milestoneDescription"),
+           mDate = request.getParameter("milestoneDate"),
+           mStatus = request.getParameter("milestoneStatus"),
+           mId = request.getParameter("milestoneId");
+  
+  DateFormat f = new SimpleDateFormat("MM/dd/yyyy");;
+  Date d = (Date) f.parse(mDate);
+  
+  Milestone m = new Milestone();
+  Teams team = userBean.getTeam();
+  Projects proj = userBean.getTeamProject(team.getTeamId());
+  
+  m.setDescription(mDesc);
+  m.setDueDate((Date) f.parse(mDate));
+  m.setMilestoneId(Integer.parseInt(mId));
+  m.setMilestoneStatus(mStatus);
+  m.setMilestoneName(mName);
+  m.setProjectId(proj.getProjectId());
   
   // Name Validation
-  for( int i = 0, len = mName.length; i < len; i++ ){
-    if(!mName[i].matches("[A-Za-z\\s]{7,70}")){
-      session.setAttribute("editErrors" + i, "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
-      %>
-      <jsp:forward page="../Team/editMilestone.jsp" />
-      <%  
-    }
+  if(!mName.matches("[A-Za-z\\s]{7,70}")){
+    session.setAttribute("editErrors", "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
+    session.setAttribute("mId", mId);
+    session.setAttribute("edit", "whatever");
+    response.sendRedirect("../Team/updateMilestone.jsp");
   }
   
   // Description Validation
-  for( int i = 0, len = mDesc.length; i < len; i++ ){
-    if(!mDesc[i].matches("[A-Za-z\\s.]{10,125}")){
-      session.setAttribute("editErrors" + i, "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
-      %>
-      <jsp:forward page="../Team/editMilestone.jsp" />
-      <% 
-    }
+  else if(!mDesc.matches("[A-Za-z\\s.]{10,125}")){
+    session.setAttribute("editErrors", "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
+    session.setAttribute("mId", mId);
+    session.setAttribute("edit", "whatever");
+    response.sendRedirect("../Team/updateMilestone.jsp");     
   }
-  
-  DateFormat f = new SimpleDateFormat("MM/dd/yyyy");;
-  Date d;
   
   // Date Validation
-  for( int i = 0, len = mDate.length; i < len; i++ ){
-   d = (Date) f.parse(mDate[i]);
-  
-    // Date Validation
-    if(d.before(new Date())){
-      session.setAttribute("editErrors" + i, "Error. Milestone date can't be set to the past.");
-      %>
-      <jsp:forward page="../Team/editMilestone.jsp" />
-      <%  
-    } 
+  else if(d.before(new Date())){
+    session.setAttribute("editErrors", "Error. Milestone date can't be set to the past.");
+    session.setAttribute("mId", mId);
+    session.setAttribute("edit", "whatever");
+    response.sendRedirect("../Team/updateMilestone.jsp");           
+  }   
+  else if(!userBean.updateMilestone(m)){
+    session.setAttribute("editErrors", "Error. Milestone couldn't be updated.");
+    session.setAttribute("mId", mId);
+    session.setAttribute("edit", "whatever");
+    response.sendRedirect("../Team/updateMilestone.jsp");
   }
-  
-  Milestone m;
-  Teams team = userBean.getTeam();
-  Projects proj = userBean.getTeamProject(team.getTeamId());
-  for( int i = 0, len = mName.length; i < len; ){
-    m = new Milestone();
-    m.setDescription(mDesc[i]);
-    m.setDueDate((Date) f.parse(mDate[i]));
-    m.setMilestoneId(Integer.parseInt(mId[i]));
-    m.setMilestoneStatus(mStatus[i]);
-    m.setMilestoneName(mName[i]);
-    m.setProjectId(proj.getProjectId());
-    
-    if(userBean.updateMilestone(m))
-      i++;
-    else {
-      session.setAttribute("editErrors" + i, "Error. Milestone couldn't be updated.");
-      %>
-      <jsp:forward page="../Team/editMilestone.jsp" />
-      <%
-    }   
-  }
-  
-  session.setAttribute("editSuccess", "Milestones successfully edited.");
-  %>
-  <jsp:forward page="../Team/editMilestone.jsp" />
-  <%  
+  else {
+    session.setAttribute("milestoneSuccess", "Milestones successfully edited.");
+    session.removeAttribute("mId");
+    session.removeAttribute("edit");
+    response.sendRedirect("../Team/manageMilestones.jsp");    
+  }     
 }
 else if("true".equals(request.getParameter("teamRanking"))){
   String[] rankings = request.getParameterValues("pRank"),

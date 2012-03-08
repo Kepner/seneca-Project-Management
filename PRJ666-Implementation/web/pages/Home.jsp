@@ -85,8 +85,7 @@
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
 			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/editMilestone.jsp">Edit Project Milestones</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage Project Milestones</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
           <%
                 }

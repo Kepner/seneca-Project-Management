@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -118,53 +119,77 @@
       </tr>
       <tr>
         <td>
+          <h1>Milestone Management</h1>
+          <form action="../Team/updateMilestone.jsp" method="post">
           <%
-            if(session.getAttribute("createSuccess") != null){
-          %>
-              <div style="float: left; color: green;">
-                <%= session.getAttribute("createSuccess").toString() %>
-              </div>
-              <br/>
-          <%
-              session.removeAttribute("createSuccess");
+            Integer beg = 0;
+            Integer items = 10;
+            Integer color = 0;
+            Teams team = userBean.getTeam();
+            Projects proj = userBean.getTeamProject(team.getTeamId());
+            List<Milestone> milestones = userBean.getProjectMilestones(proj.getProjectId());
+            Milestone m = null;
+            if(milestones.size() > 0) {
+                try {
+                    items = new Integer(request.getParameter("items"));
+                }
+                catch (Exception e) {}
+                try {
+                    beg = new Integer(request.getParameter("beg")) * items;
+                }
+                catch (Exception e) {}
+                out.println("<div style='width: 930px;'>");
+                out.println("<div style='float: left; padding: 2px; width: 30px; text-align: center'>&nbsp;</div>");
+                out.println("<div style='float: left; padding: 2px; width: 250px'>Name</div>");
+                out.println("<div style='float: left; padding: 2px; width: 150px'>Description</div>");
+                out.println("<div style='float: left; padding: 2px; width: 150px'>Status</div>");
+                out.println("<div style='float: left; padding: 2px; width: 100px'>Due Date</div>");
+                out.println("<div style='clear: both'></div>");
+                for(int i = beg; i < beg + items && i < milestones.size(); i++) {
+                    m = milestones.get(i);
+                    out.print("<div style='font-weight: bold; padding: 5px; color: white; background-color: ");
+                    if(color == 0) {
+                        out.print("#6F93C9");
+                        color = 1;
+                    } else {
+                        out.print("skyblue");
+                        color = 0;
+                    }
+                    out.println("'>");
+                        out.println("<div style='float: left; padding: 1px; width: 30px; text-align: center'>");
+                            out.println("<input type='radio' name='mId' value=" + m.getMilestoneId() + " />");
+                        out.println("</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + m.getMilestoneName() + "</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 150px'>" + m.getDescription() + "</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 150px'>" + m.getMilestoneStatus() + "</div>");
+                        out.println("<div style='float: left; padding: 2px; width: 100px'>" + new SimpleDateFormat("MM/dd/yyyy").format(m.getDueDate()) + "</div>");
+                        out.println("<div style='clear: both'></div>");
+                    out.println("</div>");
+                }
+                out.println("<div style='float: left'><input type='submit' value='Create New Milestone' name='create' /></div>");
+                out.println("<div style='float: left'><input type='submit' value='Edit Selected Milestone' name='edit' /></div>");
+                out.println("<div style='float: right'>");
+                int pages = (int) Math.ceil( (double) milestones.size() / items);
+                out.println(" Page(s): ");
+                for(int i = 0; i < pages; i++) {
+                    out.println("<a href='manageMilestones.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                }
+                out.println("<a href='manageMilestones.jsp?items=" + milestones.size() + "'>View All</a>");
+                out.println("</div>");
+                out.println("<div style='clear: both'></div>");
+                if(session.getAttribute("Error") != null) {
+                  out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                  session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("milestoneSuccess") != null){
+                  out.println("<span style='color: green'>" + session.getAttribute("milestoneSuccess") + "</span>");
+                  session.removeAttribute("Error");                 
+                }
+                out.println("</div>");
+            } else {
+                out.println("No accounts to display!");
             }
           %>
-          <form action="../validation/processTeam.jsp" method="post">
-            <div style="width: 500px; background-color: #D5E7E9; padding: 5px;">
-              Create Milestone 
-            </div>
-            <div style="width: 700px; padding: 5px">
-              <div style="float: left; width: 150px">Milestone Name: </div>
-              <div style="float: left"><input type="text" name="milestoneName" value="${param.milestoneName}" size="40"/></div>
-              <div style="clear: both"></div>
-              <div style="float: left; width: 150px">Milestone Description: </div>
-              <div style="float: left"><input type="text" name="milestoneDescription" value="${param.milestoneDescription}" size="40"/></div>
-              <div style="clear: both"></div>
-              <div style="float: left; width: 150px">Milestone Status: </div>
-              <div style="float: left"> 
-                <select name="milestoneStatus">
-                  <option value="NS" selected="selected">Not Started</option>
-                  <option value="IP">In Progress</option>
-                </select>
-              </div>
-              <div style="clear: both"></div>
-              <div style="float: left; width: 150px">Due Date: </div>
-              <div style="float: left"><input type="text" id="datepicker" name="milestoneDate" value="${param.milestoneDate}"/></div>
-              <div style="clear: both"></div>
-          <%
-            if(session.getAttribute("createErrors") != null) {
-          %>
-              <div style="float: left; color: red;">
-                <%= session.getAttribute("createErrors").toString() %>
-              </div>
-              <div style="clear: both"></div>
-              <br/>
-          <%
-              session.removeAttribute("createErrors");
-            }
-          %>
-            <button name="create">Create Milestone</button>
-            <input type="hidden" name="createMilestone" value="true" />
           </form>  
           </table>
         </td>

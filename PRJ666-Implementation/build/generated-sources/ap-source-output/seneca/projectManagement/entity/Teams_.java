@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-03-03T22:27:26")
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-03-08T15:47:31")
 @StaticMetamodel(Teams.class)
 public class Teams_ { 
 
@@ -18,5 +18,6 @@ public class Teams_ {
     public static volatile SingularAttribute<Teams, Integer> projectId;
     public static volatile SingularAttribute<Teams, String> teamConstraints;
     public static volatile SingularAttribute<Teams, Integer> teamId;
+    public static volatile SingularAttribute<Teams, Boolean> hasRanked;
 
 }
