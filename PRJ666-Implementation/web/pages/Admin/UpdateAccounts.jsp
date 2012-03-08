@@ -114,6 +114,7 @@
                     out.println("<h1>Edit Account</h1>");
                     if(s != null) {
                         a = userBean.getAccount(s);
+                        session.setAttribute("ModifyAccounts", a);
                         %>
                         <form method="POST" action="EditAccounts.jsp">
                             <div style="width: 900px">
@@ -167,7 +168,12 @@
                     out.println("<h1>Remove Account</h1>");
                     if(s != null) {
                         a = userBean.getAccount(s);
-                        out.println(a.getUserFName() + " " + a.getUserLName());
+                        if (userBean.removeAccounts(a)) {
+                            out.println(a.getUserFName() + " " + a.getUserLName() + " has been removed from the database.");
+                        } else {
+                            session.setAttribute("Error", "An unexpected error has occured while removing the account!");
+                            response.sendRedirect("ManageAccounts.jsp");
+                        }
                     } else {
                         session.setAttribute("Error", "No account selected!");
                         response.sendRedirect("ManageAccounts.jsp");

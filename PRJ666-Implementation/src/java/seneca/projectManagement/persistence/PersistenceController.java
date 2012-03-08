@@ -385,4 +385,32 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<Accounts>) q.getResultList();
   }
+  
+  public boolean removeAccounts(Accounts a) {
+      boolean ret = false;
+      em = getEntityManager();
+      try {
+          em.remove(a);
+          ret = true;
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      return ret;
+  }
+  
+  public boolean updateAccounts(Accounts a) {
+        boolean ret = false;
+        em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge( a );
+            em.getTransaction().commit();
+            em.close();
+            ret = true;
+        } catch (Exception e) {
+            e.printStackTrace();;
+        }
+
+        return ret;
+  }
 }

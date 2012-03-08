@@ -249,5 +249,13 @@ public class UserSession {
   public List<Accounts> getAllAccounts() {
       return pc.getAllAccounts();
   }
+  
+  public boolean removeAccounts(Accounts a) {
+      return pc.removeAccounts(a);
+  }
+  
+  public boolean updateAccounts(Accounts a) {
+      return pc.updateAccounts(a);
+  }
 }
  

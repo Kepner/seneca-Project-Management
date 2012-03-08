@@ -97,8 +97,38 @@
       </tr>
       <tr>
         <td>
+            <h1>Updated Accounts</h1>
             <%
+                Accounts a = (Accounts) session.getAttribute("ModifyAccounts");
                 
+                String fname = request.getParameter("id_fname");
+                String lname = request.getParameter("id_lname");
+                String email = request.getParameter("id_email");
+                String role = request.getParameter("id_role");
+                String status = request.getParameter("id_status");
+                
+                a.setUserFName(fname);
+                a.setUserLName(lname);
+                a.setUserEmail(email);
+                a.setUserRole(role);
+                a.setAccountStatus(new Integer(status));
+                
+                /*
+                out.println(a.getUserId() + " " + a.getUserIdentifier());
+                out.println("<br/> " + fname);
+                out.println("<br/> " + lname);
+                out.println("<br/> " + email);
+                out.println("<br/> " + role);
+                out.println("<br/> " + status);
+                */
+                
+                if(userBean.updateAccounts(a)) {
+                    out.println("Account for " + fname + " " + lname + " has been updated successfully");
+                } else {
+                    out.println("An unexpected error has occured while updating the account!");
+                }
+                
+                session.removeAttribute("ModifyAccounts");
                 session.removeAttribute("Second");
             %>
         </td>
