@@ -352,7 +352,7 @@ else if(request.getParameter("createMilestone") != null){
     response.sendRedirect("../Team/updateMilestone.jsp");
   } 
   else {
-    session.setAttribute("milestoneSuccess", "Milestones successfully edited.");
+    session.setAttribute("milestoneSuccess", "Milestones successfully created.");
     session.removeAttribute("create");
     session.removeAttribute("createErrors");
     response.sendRedirect("../Team/manageMilestones.jsp");
