@@ -142,7 +142,6 @@
             <%
                     out.println("<div style='float: left'>");
                     out.println("<input type='submit' value='Change Status to Past' />");
-                    
                     out.println("</div>");
                     out.println("<div style='float: right'>");
                     int pages = (int) Math.ceil( (double) projects.size() / items);

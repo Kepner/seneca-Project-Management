@@ -50,7 +50,7 @@ public class Milestone implements Serializable {
   private String milestoneStatus = "NS";
   @Column(name = "dueDate")
   @Temporal(TemporalType.TIMESTAMP)
-  private Date dueDate;
+  private Date dueDate = new Date();
 
   public Milestone() {
   }

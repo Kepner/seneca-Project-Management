@@ -1,6 +1,6 @@
 <%-- 
-    Document   : teamHome
-    Created on : Feb 1, 2012, 10:05:52 AM
+    Document   : manageMilestones
+    Created on : Mar 3, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
 
@@ -29,10 +29,27 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"/>
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Team Home</title>
+    <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script>
+      $(function() {
+		    $( "#datepicker" ).datepicker();
+	    }); 
+    </script>
+    <title>PRJ566 - Create Milestone</title>
   </head>
   <body>
+    <%
+      if(session.getAttribute("createSuccess") != null){
+        request.removeAttribute("milestoneDescription");
+        request.removeAttribute("milestoneName");
+        request.removeAttribute("milestoneDate");
+        request.removeAttribute("milestoneStatus");
+      }
+    %>
     <table> 
       <tr>
         <td colspan="2">
@@ -85,19 +102,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-<<<<<<< HEAD
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home<br/>Page</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestones</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
-=======
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Team Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
 			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/editMilestone.jsp">Edit Project Milestones</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
->>>>>>> 8836440f9489a9c32bef5ddb2604989ceb1bf472
 		      </ul>
           <div style="float: right;">
             <ul>
@@ -108,75 +118,55 @@
       </tr>
       <tr>
         <td>
-          <div style="color: green;">
           <%
-            if(session.getAttribute("editSuccess") != null) {
-              out.println(session.getAttribute("editSuccess").toString());
-              session.removeAttribute("editSuccess");              
+            if(session.getAttribute("createSuccess") != null){
+          %>
+              <div style="float: left; color: green;">
+                <%= session.getAttribute("createSuccess").toString() %>
+              </div>
+              <br/>
+          <%
+              session.removeAttribute("createSuccess");
             }
           %>
-          </div>
-          <br/>
+          <form action="../validation/processTeam.jsp" method="post">
+            <div style="width: 500px; background-color: #D5E7E9; padding: 5px;">
+              Create Milestone 
+            </div>
+            <div style="width: 700px; padding: 5px">
+              <div style="float: left; width: 150px">Milestone Name: </div>
+              <div style="float: left"><input type="text" name="milestoneName" value="${param.milestoneName}" size="40"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Milestone Description: </div>
+              <div style="float: left"><input type="text" name="milestoneDescription" value="${param.milestoneDescription}" size="40"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Milestone Status: </div>
+              <div style="float: left"> 
+                <select name="milestoneStatus">
+                  <option value="NS" selected="selected">Not Started</option>
+                  <option value="IP">In Progress</option>
+                </select>
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Due Date: </div>
+              <div style="float: left"><input type="text" id="datepicker" name="milestoneDate" value="${param.milestoneDate}"/></div>
+              <div style="clear: both"></div>
           <%
-            Teams team = userBean.getTeam();
-<<<<<<< HEAD
-            List<Teammember> members = userBean.getTeamMembers(team.getTeamId());
-=======
-            List<Teammember> members = userBean.getAllTeamMembers(team.getTeamId());
->>>>>>> 8836440f9489a9c32bef5ddb2604989ceb1bf472
-            Teammember leader = userBean.getLeader(team.getTeamId());
+            if(session.getAttribute("createErrors") != null) {
           %>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3><%= team.getTeamName() %></h3>
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
-                 style="max-width: 230px; max-height: 180px;"/>
-            <div>
-              <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
-              <br/><br/>
-              Description: <br/>
-              <%= team.getTeamDescription() %>
-              <br/><br/>
-              Constraints: <br/>
-              <%= team.getTeamConstraints() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Leader</h3> 
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
+              <div style="float: left; color: red;">
+                <%= session.getAttribute("createErrors").toString() %>
+              </div>
+              <div style="clear: both"></div>
               <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Members</h3> 
-          </div>
           <%
-            for(int i = 0, len = members.size(); i < len; i++){
-              leader = members.get(i);
+              session.removeAttribute("createErrors");
+            }
           %>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
-              <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <% } %>
+            <button name="create">Create Milestone</button>
+            <input type="hidden" name="createMilestone" value="true" />
+          </form>  
+          </table>
         </td>
       </tr>
     </table>

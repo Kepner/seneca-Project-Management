@@ -419,5 +419,50 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<Accounts>) q.getResultList();
   }
-}
+  
+  //Edouard
+  public List<Teams> getAvailableTeams(int aStatus){
+      em = getEntityManager();
+      
+      Query q = em.createNamedQuery("Teams.findByTeamStatus")
+              .setParameter( "teamStatus", aStatus );
+      
+      return (List<Teams>)q.getResultList();
+  } 
+  
+  public Teams getProjectTeam(int aId){
+      em = getEntityManager();
+      try{
+        Query q = em.createNamedQuery("Teams.findByProjectId");
+        q.setParameter( "projectId", aId );
+        return (Teams)q.getSingleResult();
+      }catch(Exception e ){
+          return null;
+      }
+  }
+  
+  public boolean updateProjectFile( Projectfile aProjectfile){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aProjectfile );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public boolean newComment( Comments aComment){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aComment );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
 
+}

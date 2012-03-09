@@ -265,5 +265,23 @@ public class UserSession {
   public List<Accounts> getAllAccounts() {
       return pc.getAllAccounts();
   }
+  
+  //Edouard
+  public List<Teams> getAvailableTeams(int aStatus){
+      return pc.getAvailableTeams(aStatus);
+  }
+  public Teams getProjectTeam(int aId){
+      return pc.getProjectTeam(aId);
+  }
+  /*
+  public List<Milestone> getUpcomingMilestones(){
+      return pc.getUpcomingMilestones();
+  }
+  */
+  public boolean updateProjectFile(Projectfile aProjectfile){
+      return pc.updateProjectFile(aProjectfile);
+  }
+  public boolean newComment(Comments aComment){
+      return pc.newComment(aComment);
+  }
 }
- 
