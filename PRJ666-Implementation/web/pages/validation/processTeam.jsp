@@ -103,202 +103,114 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
     response.sendRedirect("../Team/publishTeamPage.jsp");
   }
 }
-else if ("true".equals(request.getParameter("editTeamPage"))) {
-  String[] tmDescs = request.getParameterValues("id_tmDesc"),
-           tmImages = request.getParameterValues("id_tmImage"),
-           tmEmails = request.getParameterValues("id_tmEmail"),
-           tmLNames = request.getParameterValues("id_tmLName"),
-           tmFNames = request.getParameterValues("id_tmFName");
+else if (request.getParameter("editTeamInfo") != null){
+  String tDesc = request.getParameter("tDesc"),
+         tLogo = request.getParameter("tLogo"),
+         tName = request.getParameter("tName"),
+         tCons = request.getParameter("tCons");
   
-  String tLogo = request.getParameter("id_tLogo"),
-         tCons = request.getParameter("id_tCons"),
-         tDesc = request.getParameter("id_tDesc"),
-         tName = request.getParameter("id_tName"),
-         tlFName = request.getParameter("id_tlFName"),
-         tlLName = request.getParameter("id_tlLName"),
-         tlEmail = request.getParameter("id_tlEmail"),
-         tlImage = request.getParameter("id_tlImage"),
-         tlDesc = request.getParameter("id_tlDesc"),
-         tEmail;
+  Teams t = userBean.getTeam();
+  t.setTeamLogo(tLogo);
+  t.setTeamConstraints(tCons);
+  t.setTeamName(tName);
+  t.setTeamDescription(tDesc);
   
-  // Team Validation
-  if(tName.isEmpty() || tName.length() > 20){
-    session.setAttribute("tName", "Error. Team Name can not be empty or greater than 20 characters.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(tDesc.isEmpty() || tDesc.length() > 400){
-    session.setAttribute("tDesc", "Error. Team Description can not be empty or greater than 400 characters.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(tCons.isEmpty() || tCons.length() > 120){
-    session.setAttribute("tCons", "Error. Team Constrains can not be empty or greater than 120 characters.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
+  if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
+    session.setAttribute("editTeamFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
+    session.setAttribute("editTeam", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
   else if(tLogo.isEmpty()){
-    session.setAttribute("tLogo", "Error. Teamd Logo location can not be empty.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
+    session.setAttribute("editTeamFail" , "Error. Image can not be empty.");
+    session.setAttribute("editTeam", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
+  else if(tDesc.isEmpty() || tDesc.length() > 400){
+    session.setAttribute("editTeamFail", "Error. Description can't be empty or greater than 400 characters.");
+    session.setAttribute("editTeam", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
+  }
+  else if(tCons.isEmpty() || tCons.length() > 120){
+    session.setAttribute("editTeamFail", "Error. Constraints can't be empty or greater than 120 characters.");
+    session.setAttribute("editTeam", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
+  }
+  else if(!userBean.updateTeam(t)){
+    session.setAttribute("editTeamFail", "Error. Team couldn't successfully be saved to the database.");
+    session.setAttribute("editTeam", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
+  }
+  else{
+    session.removeAttribute("editTeam");
+    session.removeAttribute("editTeamFail");
+    session.setAttribute("teamSuccess", "Successfully edited the team info.");
+    response.sendRedirect("../Team/manageTeamPage.jsp");
+  }    
+}
+else if (request.getParameter("editMemberInfo") != null) {
+  String mDesc = request.getParameter("mDesc"),
+         mImage = request.getParameter("mImage"),
+         mEmail = request.getParameter("mEmail"),
+         mLName = request.getParameter("mLName"),
+         mFName = request.getParameter("mFName"),
+         mId = request.getParameter("memberId"),
+         mLeader = request.getParameter("teamLeader"),
+         tEmail = "";
   
-  // Team Leader Validation
-  if(!tlFName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("tlFName", "Error. Must be only alphanumeric and between 3 and 15 characters in length.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(!tlLName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("tlLName", "Error. Must be only alphanumeric and between 3 and 15 characters in length.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(!tlEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
-    session.setAttribute("tlEmail", "Error. Must end with @learn.senecac.on.ca or @senecacollege.ca");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(tlImage.isEmpty()){
-    session.setAttribute("tlImage", "Error. Team Leader Image can't be empty.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-  else if(tlDesc.isEmpty() || tlDesc.length() > 250){
-    session.setAttribute("tlDesc", "Error. Can't be empty or greater than 250 characters.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-  }
-
-  // Team Member First Name Validation
-  Pattern p = Pattern.compile("[A-Za-z\\s]{3,15}");
-  Matcher m;
+  Teams t = userBean.getTeam();
+  Teammember m = new Teammember();
+  m.setDescription(mDesc);
+  m.setEmail(mEmail);
+  m.setFirstName(mFName);
+  m.setLastName(mLName);
+  m.setMemberImage(mImage);
+  m.setMemberId(Integer.parseInt(mId));
+  m.setTeamId(t.getTeamId());
+  m.setTeamLeader(Integer.parseInt(mLeader));
   
-  for(int i = 0, len = tmFNames.length; i < len; i++){
-    m = p.matcher(tmFNames[i].toString());
-    if(!m.matches()){
-      session.setAttribute("tmFName" + i, "Error. Must be only alphanumeric and between 3 and 15 characters in length.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-    }
+  if(!mFName.matches("[A-Za-z\\s]{3,15}")){
+    session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+    session.setAttribute("editMember", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
-  
-  // Team Member Last Name Validation
-  for(int i = 0, len = tmLNames.length; i < len; i++){
-    m = p.matcher(tmLNames[i].toString());
-    if(!m.matches()){
-      session.setAttribute("tmLName" + i, "Error. Must be only alphanumeric and between 3 and 15 characters in length.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-    }
+  else if(!mLName.matches("[A-Za-z\\s]{3,15}")){
+    session.setAttribute("editMemberFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+    session.setAttribute("editMember", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
-  
-  // Team Member Email Validation
-  p = Pattern.compile("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)");
-  for(int i = 0, len = tmEmails.length; i < len; i++){
-    m = p.matcher(tmEmails[i].toString());
-    if(!m.matches()){
-      session.setAttribute("tmEmail" + i, "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-    }
+  else if(!mEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
+    session.setAttribute("editMemberFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
+    session.setAttribute("editMember", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
-  
-  // Team Member Images Validation
-  for(int i = 0, len = tmImages.length; i < len && tmImages[i] != null; i++){
-    System.out.println("in for loop");
-    if(tmImages[i].isEmpty()){
-      session.setAttribute("tmImages" + i, "Error. Must not be empty.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
-    }
+  else if(mDesc.isEmpty() || mDesc.length() > 250){
+    session.setAttribute("editMemberFail", "Error. Description can't be empty or greater than 250 characters.");
+    session.setAttribute("editMember", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
-
-  // Team Member Desc Validation
-  for(int i = 0, len = tmDescs.length; i < len; i++){
-    if(tmDescs[i].isEmpty() || tmDescs[i].length() > 250){
-      session.setAttribute("tmDesc" + i, "Error. Can't be empty or greater than 250 characters.");
-      %>
-      <jsp:forward page="../Team/editTeamPage.jsp" />
-      <%
-    }
-  }
-  
-  tEmail = tlEmail + ";";
-  for(int k = 0, len = tmEmails.length; k < len; k++){
-    tEmail += (tmEmails[k] + ";");
-  }
-  
-  Teams team = userBean.getTeam();
-  List<Teammember> members = userBean.getAllTeamMembers( team.getTeamId() );
-  team.setTeamConstraints(tCons);
-  team.setTeamDescription(tDesc);
-  team.setTeamEmail(tEmail);
-  team.setTeamLogo(tLogo);
-  team.setTeamName(tName);
-  
-  if(userBean.updateTeam(team)){
-    System.out.println("Updated the team");
-    Teammember leader = userBean.getLeader(team.getTeamId());
-    leader.setDescription(tlDesc);
-    leader.setFirstName(tlFName);
-    leader.setLastName(tlLName);
-    leader.setMemberImage(tlImage);
-    leader.setEmail(tlEmail);
-    
-    if(userBean.updateMember(leader)){
-      System.out.println("Updated the leader");
+  else if(userBean.updateMember(m)) {
+    System.out.println("updated member");
+    List<Teammember> members = userBean.getAllMembers(t.getTeamId());
       
-      for(int i = 0, len = tmFNames.length; i < len; i++){
-        leader = members.get(i);
-        
-        leader.setFirstName(tmFNames[i]);
-        leader.setLastName(tmLNames[i]);
-        leader.setDescription(tmDescs[i]);
-        leader.setEmail(tmEmails[i]);
-        leader.setMemberImage(tmImages[i]);
-        
-        if(!userBean.updateMember(leader)){
-          session.setAttribute("errors", "Error. Failed to update a team member.");
-          %>
-          <jsp:forward page="../Team/editTeamPage.jsp" />
-          <%
-        }
-      }
-      session.setAttribute("editSuccess", "You successfully updated your Team Page! WOOOOHOOOOO!");
-      %>
-      <jsp:forward page="../Team/teamHome.jsp" />
-      <%
+    for(int i = 0; i < members.size(); i++){
+      m = members.get(i);
+      tEmail += m.getEmail() + ";";
     }
-    else {
-      session.setAttribute("errors", "Error. Failed to update the Team Leader.");
-      %>
-      <jsp:forward page="../Team/editTeamPage.jsp" />
-      <%
-    }
+      
+    t.setTeamEmail(tEmail);
+    userBean.updateTeam(t);
+    session.removeAttribute("editMember");
+    session.removeAttribute("editMemberFail");
+    session.setAttribute("teamSuccess", "Successfully edited the info for " + m.getFirstName() + " " + m.getLastName() +".");
+    response.sendRedirect("../Team/manageTeamPage.jsp");
   }
-  else {
-    session.setAttribute("errors", "Error. Failed to update the team.");
-    %>
-    <jsp:forward page="../Team/editTeamPage.jsp" />
-    <%
+  else{
+    session.setAttribute("editMemberFail", "Error. Member couldn't successfully be saved to the database.");
+    session.setAttribute("editMember", "blahblah");
+    response.sendRedirect("../Team/updateMember.jsp");
   }
 }
 else if(request.getParameter("createMilestone") != null){
-  System.out.println("in create");
   String mName = request.getParameter("milestoneName"),
          mDesc = request.getParameter("milestoneDescription"),
          mStatus = request.getParameter("milestoneStatus"),
@@ -415,84 +327,5 @@ else if(request.getParameter("editMilestone") != null){
     session.removeAttribute("edit");
     response.sendRedirect("../Team/manageMilestones.jsp");    
   }     
-}
-else if("true".equals(request.getParameter("teamRanking"))){
-  String[] rankings = request.getParameterValues("pRank"),
-           pIds = request.getParameterValues("pId"), numUsed;
-  
-  int rankCount = 0;
-  
-  Calendar cal = Calendar.getInstance();
-  String s;
-  switch(cal.get(Calendar.MONTH)){
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      s = "Win" + cal.get(Calendar.YEAR);
-      break;
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-      s = "Sum" + cal.get(Calendar.YEAR);
-      break;
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    default:
-      s = "Fall" + cal.get(Calendar.YEAR);
-  }
-  
-  int teamCount = userBean.countSemesterTeams(s);
-  
-  for(int i = 0, len = rankings.length; i < len; i++){
-    if(!rankings[i].isEmpty())
-      rankCount++;
-  }
-    
-  if(rankCount < teamCount && rankCount > 0){
-    session.setAttribute("rankFailed", "Error. Can not rank less projects than there are teams this semester.");
-    %>
-    <jsp:forward page="../Team/rankProjects.jsp" />
-    <%
-  }
-  else if(teamCount > pIds.length && rankCount < pIds.length){
-    session.setAttribute("rankFailed", "Error. Must rank all projects when there are more teams than projects.");
-    %>
-    <jsp:forward page="../Team/rankProjects.jsp" />
-    <%
-  }
-  else if(rankCount == 0){
-    session.setAttribute("rankFailed", "Error. Can not rank no projects.");
-    %>
-    <jsp:forward page="../Team/rankProjects.jsp" />
-    <%
-  }
-  
-  numUsed = new String[rankCount];
-  boolean found = false;
-  for(int i = 0, len = rankCount; i < len;){
-    for(int k = 0, len2 = numUsed.length; k < len2 || found;){
-      if(numUsed[k] != null && numUsed[k].equals(rankings[i]))
-        found = true;
-      else
-        k++;
-    }
-    if(found){
-      session.setAttribute("rankFailed", "Error. Can not use the same rank twice.");
-      %>
-      <jsp:forward page="../Team/rankProjects.jsp" />
-      <% 
-    }
-    else{
-      numUsed[i] = rankings[i];
-      i++;  
-    }
-  }
-  
-  for(int i = 0; i < numUsed.length; i++)
-    out.println(numUsed[i]);
 }
 %>

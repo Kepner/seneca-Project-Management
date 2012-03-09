@@ -106,8 +106,16 @@ public class UserSession {
     return pc.addTeamMember( aMember );
   }
   
-  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
-    return pc.getAllTeamMembers( aTeamId );
+  public List<Teammember> getTeamMembers( Integer aTeamId ){
+    return pc.getTeamMembers( aTeamId );
+  }
+  
+  public List<Teammember> getAllMembers( Integer aTeamId ){
+    return pc.getAllMembers( aTeamId );
+  }
+  
+  public Teammember getMember( Integer aMemberId ){
+    return pc.getMember( aMemberId );
   }
   
   public boolean updateTeam( Teams aTeam ){

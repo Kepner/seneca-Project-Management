@@ -85,11 +85,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home Page</a></li>
-			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage Project Milestones</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home<br/>Page</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestones</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
@@ -111,7 +110,7 @@
           <br/>
           <%
             Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getAllTeamMembers(team.getTeamId());
+            List<Teammember> members = userBean.getTeamMembers(team.getTeamId());
             Teammember leader = userBean.getLeader(team.getTeamId());
           %>
           <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">

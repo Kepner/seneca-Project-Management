@@ -95,10 +95,19 @@ public class PersistenceController extends EntityControllerBase {
     return (Teammember) q.getSingleResult();
   }
   
-  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
+  public List<Teammember> getTeamMembers( Integer aTeamId ){
     em = getEntityManager();
     
     Query q = em.createQuery( "SELECT t FROM Teammember t where t.teamId = :teamId AND t.teamLeader = 0" )
+            .setParameter( "teamId", aTeamId );
+    
+    return (List<Teammember>)q.getResultList();
+  }
+  
+  public List<Teammember> getAllMembers( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT t FROM Teammember t where t.teamId = :teamId" )
             .setParameter( "teamId", aTeamId );
     
     return (List<Teammember>)q.getResultList();
@@ -114,6 +123,13 @@ public class PersistenceController extends EntityControllerBase {
     em.close();
     
     return true;
+  }
+  
+  public Teammember getMember( Integer aMemberId ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    return em.find(Teammember.class, aMemberId);
   }
   
   public boolean updateTeam( Teams aTeam ){

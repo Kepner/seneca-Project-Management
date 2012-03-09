@@ -118,12 +118,13 @@
       <tr>
         <td>
           <%
-                Milestone m = null;
+                Teammember m = null;
                 /**************************************************************
                 Create new milestone
                 **************************************************************/
-                if(request.getParameter("create") != null || session.getAttribute("create") != null) {
-                    out.println("<h1>Create Milestone</h1>");
+                if(request.getParameter("editTeam") != null || session.getAttribute("editTeam") != null) {
+                    out.println("<h1>Edit Team</h1>");
+                    Teams t = userBean.getTeam();
           %>
                     <form method="POST" action="../validation/processTeam.jsp">
                       <div style="width: 900px">
@@ -131,91 +132,84 @@
                           Milestone Information
                         </div>
                         <div style="padding: 5px">
-                          <div style="float: left; width: 150px">Milestone Name: </div>
-                          <div style="float: left"><input type="text" name="milestoneName" value="${param.milestoneName}" size="40"/></div>
+                          <div style="float: left; width: 150px">Team Name: </div>
+                          <div style="float: left"><input type="text" name="tName" size="40" value="<%= t.getTeamName() %>"/></div>
                           <div style="clear: both"></div>
-                          <div style="float: left; width: 150px">Milestone Description: </div>
-                          <div style="float: left"><input type="text" name="milestoneDescription" value="${param.milestoneDescription}" size="40"/></div>
+                          <div style="float: left; width: 150px">Team Logo: </div>
+                          <div style="float: left"><input type="text" name="tLogo" size="40" value="<%= t.getTeamLogo() %>"/></div>
                           <div style="clear: both"></div>
-                          <div style="float: left; width: 150px">Milestone Status: </div>
+                          <div style="float: left; width: 150px">Team Description: </div>
                           <div style="float: left">
-                            <select name="milestoneStatus">
-                              <option value="NS" selected>Not Started</option>
-                              <option value="IP">In Progress</option>           
-                            </select>
-                          </div>
+                            <textarea rows="10" cols="70" name="tDesc"><%= t.getTeamDescription() %></textarea></div>
                           <div style="clear: both"></div>
-                          <div style="float: left; width: 150px">Due Date: </div>
+                          <div style="float: left; width: 150px">Team Constraints: </div>
                           <div style="float: left">
-                            <input type="text" id="datepicker" name="milestoneDate" value="${param.milestoneDate}"/> 
-                          </div>
+                            <textarea rows="10" cols="70" name="tCons"><%= t.getTeamConstraints() %></textarea></div>
                           <div style="clear: both"></div>
                           <%
-                              if(session.getAttribute("createErrors") != null){
+                              if(session.getAttribute("editTeamFail") != null){
                                 out.println("<div style='float: left; color: red;'>");
-                                out.println(session.getAttribute("createErrors").toString());
+                                out.println(session.getAttribute("editTeamFail").toString());
                                 out.println("</div><div style='clear: both'></div>");
-                                session.removeAttribute("createErrors");
+                                session.removeAttribute("editTeamFail");
                               }
                           %>
                         </div>
                         <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
-                          <input type="submit" name="createMilestone" value="Create Milestone">
+                          <input type="submit" name="editTeamInfo" value="Edit Team">
                         </div>
                       </div>
                     </form>
            <%
                 /**************************************************************
-                Edit Milestone
+                Edit Member
                 **************************************************************/
-                } else if (request.getParameter("edit") != null || session.getAttribute("edit") != null) {
-                    out.println("<h1>Edit Milestone</h1>");
+                } else if (request.getParameter("editMember") != null || session.getAttribute("editMember") != null) {
+                    out.println("<h1>Edit Member</h1>");
                         String s = request.getParameter("mId") != null ? request.getParameter("mId") : session.getAttribute("mId").toString();
-                        m = userBean.getMilestone(Integer.parseInt(s));
+                        m = userBean.getMember(Integer.parseInt(s));
                         %>
                         <form method="POST" action="../validation/processTeam.jsp">
                         <div style="width: 900px">
                           <div style="padding: 5px; background-color: #D5E7E9">
-                            Milestone Information
+                            Team Member Info
                           </div>
                           <div style="padding: 5px">
-                            <div style="float: left; width: 150px">Milestone Name: </div>
-                            <div style="float: left"><input type="text" name="milestoneName" value="<%= m.getMilestoneName() %>" size="40"/></div>
+                            <div style="float: left; width: 150px">First Name: </div>
+                            <div style="float: left"><input type="text" name="mFName" value="<%= m.getFirstName() %>" size="40"/></div>
                             <div style="clear: both"></div>
-                            <div style="float: left; width: 150px">Milestone Description: </div>
-                            <div style="float: left"><input type="text" name="milestoneDescription" value="<%= m.getDescription() %>" size="40"/></div>
+                            <div style="float: left; width: 150px">Last Name: </div>
+                            <div style="float: left"><input type="text" name="mLName" value="<%= m.getLastName() %>" size="40"/></div>
                             <div style="clear: both"></div>
-                            <div style="float: left; width: 150px">Milestone Status: </div>
+                            <div style="float: left; width: 150px">Email: </div>
+                            <div style="float: left"><input type="text" name="mEmail" value="<%= m.getEmail() %>" size="40"/></div>
+                            <div style="clear: both"></div>
+                             <div style="float: left; width: 150px">Image: </div>
+                            <div style="float: left"><input type="text" name="mImage" value="<%= m.getMemberImage() %>" size="40"/></div>
+                            <div style="clear: both"></div>
+                            <div style="float: left; width: 150px">Description: </div>
                             <div style="float: left">
-                              <select name="milestoneStatus">
-                                <option value="NS" selected>Not Started</option>
-                                <option value="IP">In Progress</option>           
-                              </select>
-                            </div>
-                            <div style="clear: both"></div>
-                            <div style="float: left; width: 150px">Due Date: </div>
-                            <div style="float: left">
-                              <input type="text" id="datepicker" name="milestoneDate" 
-                                     value="<%= new SimpleDateFormat("MM/dd/yyyy").format(m.getDueDate()) %>"/> </div>
+                              <textarea rows="10" cols="70" name="mDesc"><%= m.getDescription() %></textarea></div>
                             <div style="clear: both"></div>
                             <%
-                              if(session.getAttribute("editErrors") != null){
+                              if(session.getAttribute("editMemberFail") != null){
                                 out.println("<div style='float: left; color: red;'>");
-                                out.println(session.getAttribute("editErrors").toString());
+                                out.println(session.getAttribute("editMemberFail").toString());
                                 out.println("</div><div style='clear: both'></div>");
-                                session.removeAttribute("editErrors");
+                                session.removeAttribute("editMemberFail");
                               }
                             %>
-                            <input type="hidden" name="milestoneId" value="<%= m.getMilestoneId() %>" />
+                            <input type="hidden" name="memberId" value="<%= m.getMemberId() %>" />
+                            <input type="hidden" name="teamLeader" value="<%= m.getTeamLeader() %>"/>
                           </div>
-                          <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
-                            <input type="submit" name="editMilestone" value="Edit Milestone">
+                          <div style="background-color: #D5E7E9; padding: 5px; text-align: right;">
+                            <input type="submit" name="editMemberInfo" value="Edit Member">
                           </div>
                         </div>
                       </form>
                         <%
                 } else {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Team/manageMilestones.jsp");
+                    response.sendRedirect("/PRJ666-Implementation/pages/Team/manageTeamPage.jsp");
                 }
             %>
         </td>
