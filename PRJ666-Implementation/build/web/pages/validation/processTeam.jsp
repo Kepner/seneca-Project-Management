@@ -220,7 +220,6 @@ else if(request.getParameter("createMilestone") != null){
   Date d = new Date();
   
   try{
-    System.out.println("in date parse");
     d = (Date) f.parse(mDate);
   }
   catch(ParseException e){

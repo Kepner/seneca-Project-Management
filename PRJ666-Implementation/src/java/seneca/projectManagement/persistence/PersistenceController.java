@@ -288,7 +288,7 @@ public class PersistenceController extends EntityControllerBase {
   public List<Projects> getAvailableProjects( String aStatus ){
     em = getEntityManager();
     
-    Query q = em.createNamedQuery( "SELECT p FROM projects p WHERE p.status = :status ORDER BY p.projectId ASC")
+    Query q = em.createQuery( "SELECT p FROM Projects p WHERE p.status = :status ORDER BY p.projectId ASC")
             .setParameter( "status", aStatus );
     
     return (List<Projects>)q.getResultList();

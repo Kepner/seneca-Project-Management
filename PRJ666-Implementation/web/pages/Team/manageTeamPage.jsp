@@ -88,7 +88,7 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestone.jsp">Manage<br/>Project<br/>Milestone</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestone</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
 		      </ul>
           <div style="float: right;">
