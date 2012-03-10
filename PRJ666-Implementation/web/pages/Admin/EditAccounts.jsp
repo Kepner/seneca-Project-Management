@@ -23,7 +23,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Administrator Home</title>
+    <title>Administrator</title>
     <style type="text/css">
         input[type=text], textArea, input[type=password] {
             width: 300px;

@@ -9,8 +9,8 @@
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
     if(userBean.isLogged() == true) {
-        if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
-            session.setAttribute("Error", "You don't have permission to access the administrator page.");
+        if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
+            session.setAttribute("Error", "You don't have permission to access the supervisor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
@@ -29,7 +29,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Administrator</title>
+    <title>Supervisor</title>
     <script language="JavaScript">
         function collapse(x, y) {
             if(x.value == "Collapse") {
@@ -93,12 +93,10 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
+        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-			      <li><a href="PendingComments.jsp">Pending Comments</a></li>
-		        <li><a href="AvailableProjects.jsp">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
+            <li><a href="AvailableProjects.jsp">Current Semester Available Projects</a></li>
           </ul>
           <div style="float: right;">
             <ul>
