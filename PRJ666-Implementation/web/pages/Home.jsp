@@ -4,6 +4,7 @@
     Author     : KepneR
 --%>
 
+<%@page import="seneca.projectManagement.utils.CryptoUtil"%>
 <%@page import="seneca.projectManagement.utils.Validation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
@@ -228,7 +229,8 @@
             R<br/>
             E<br/>
             <a href="#">Test Link</a></br>
-            <% out.print(Validation.getSemesterToday()); %>
+            <%= Validation.getSemesterToday() %><br/>
+            <%= CryptoUtil.generateRandomPassword() %><br/>
           </p>
           <hr/>
         </td>

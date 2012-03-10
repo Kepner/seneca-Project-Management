@@ -31,6 +31,18 @@
             width: 300px;
         }
     </style>
+    <script language="javascript">
+        function validateFormEmail() {
+            var ret = false;
+            var rx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            ret = rx.test(document.forms["form1"]["id_email"].value);
+            
+            if(ret == false) {
+                document.getElementById('errorEmail').innerHTML = "Invalid email address!";
+            }
+            return ret;
+        }
+    </script>
   </head>
   <body>
     <table> 
@@ -86,7 +98,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="PendingComments.jsp">Pending Comments</a></li>
-            <li><a href="#">Available Projects</a></li>
+            <li><a href="AvailableProjects.jsp">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
             <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>
@@ -106,7 +118,7 @@
                 Create new account
                 **************************************************************/
                 if(request.getParameter("create") != null) {
-                    out.println("<h1>Create Account</h1>");
+                    response.sendRedirect("CreateAccounts.jsp");
                 /**************************************************************
                 Edit account
                 **************************************************************/
@@ -116,7 +128,7 @@
                         a = userBean.getAccount(s);
                         session.setAttribute("ModifyAccounts", a);
                         %>
-                        <form method="POST" action="EditAccounts.jsp">
+                        <form name="form1" method="POST" action="EditAccounts.jsp" onsubmit="return validateFormEmail()">
                             <div style="width: 900px">
                                 <div style="padding: 5px; background-color: #D5E7E9">
                                     Account Information
@@ -129,7 +141,10 @@
                                     <div style="float: left"><input type="text" name="id_lname" value="<%= a.getUserLName() %>" /></div>
                                     <div style="clear: both"></div>
                                     <div style="float: left; width: 150px">Email:</div>
-                                    <div style="float: left"><input type="text" name="id_email" value="<%= a.getUserEmail() %>" /></div>
+                                    <div style="float: left">
+                                        <input type="text" name="id_email" id="id_email" value="<%= a.getUserEmail() %>" />
+                                        <span style="color: red" id="errorEmail"></span>
+                                    </div>
                                     <div style="clear: both"></div>
                                     <div style="float: left; width: 150px">Role:</div>
                                     <div style="float: left">
@@ -165,7 +180,7 @@
                 Remove account
                 **************************************************************/
                 } else if (request.getParameter("remove") != null) {
-                    out.println("<h1>Remove Account</h1>");
+                    out.println("<h1>Removed Account</h1>");
                     if(s != null) {
                         a = userBean.getAccount(s);
                         if (userBean.removeAccounts(a)) {

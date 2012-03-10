@@ -90,8 +90,16 @@ public class UserSession {
       return pc.getAccount(userIdentifier);
   }
   
+  public Accounts getAccount(Integer id) {
+      return pc.getAccount(id);
+  }
+  
   public Teams getTeam(){
     return pc.getTeam( loggedUser.getUserId() );
+  }
+  
+  public Teams getTeam(Integer id) {
+      return pc.getTeam(id);
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -236,6 +244,16 @@ public class UserSession {
       List<Comments> comments = new ArrayList<Comments>();
       for(Comments c : pc.getAllComments(projID)) {
           if(c.getCommentStatus() == 0) {
+              comments.add(c);
+          }
+      }
+      return comments;
+  }
+  
+  public List<Comments> getAllActiveComments(Integer projID) {
+      List<Comments> comments = new ArrayList<Comments>();
+      for(Comments c : pc.getAllComments(projID)) {
+          if(c.getCommentStatus() == 1) {
               comments.add(c);
           }
       }
