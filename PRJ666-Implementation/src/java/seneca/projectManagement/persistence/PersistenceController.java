@@ -20,12 +20,16 @@ public class PersistenceController extends EntityControllerBase {
   public boolean addAccount( Accounts aAccount ){
     em = getEntityManager();
     
-    em.getTransaction().begin();
-    em.persist( aAccount );
-    em.getTransaction().commit();
-    em.close();
-  
-    return true;
+    try{
+      em.getTransaction().begin();
+      em.persist( aAccount );
+      em.getTransaction().commit();
+      em.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
   }
   
   public boolean addTeam( Accounts aAccount ){
@@ -85,6 +89,13 @@ public class PersistenceController extends EntityControllerBase {
     
     return (Accounts) q.getSingleResult();
   }
+  
+  public Accounts getAccount(Integer id) {
+    em = getEntityManager();   
+    Query q = em.createNamedQuery( "Accounts.findByUserId" ).setParameter( "userId", 
+            id );   
+    return (Accounts) q.getSingleResult();
+  } 
   
   public Teammember getLeader( int aTeamId ){
     em = getEntityManager();
@@ -465,7 +476,7 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-    public List<Accounts> getAllAccounts() {
+  public List<Accounts> getAllAccounts() {
     em = getEntityManager();
     
     Query q = em.createNamedQuery( "Accounts.findAll" );
@@ -503,5 +514,4 @@ public class PersistenceController extends EntityControllerBase {
 
         return ret;
   }
-
 }
