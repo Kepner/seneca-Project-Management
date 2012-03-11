@@ -87,12 +87,20 @@ public class UserSession {
   }
   
   public Accounts getAccount(String userIdentifier) {
-      return pc.getAccount(userIdentifier);
+    return pc.getAccount(userIdentifier);
   }
+  
+  public Accounts getAccount(Integer id) {
+    return pc.getAccount(id);
+  } 
   
   public Teams getTeam(){
     return pc.getTeam( loggedUser.getUserId() );
   }
+  
+  public Teams getTeam(Integer id) {
+    return pc.getTeam(id);
+  } 
   
   public Teammember getLeader( int aTeamId ){
     return pc.getLeader( aTeamId );
@@ -258,6 +266,16 @@ public class UserSession {
       return comments;
   }
   
+  public List<Comments> getAllActiveComments(Integer projID) {
+    List<Comments> comments = new ArrayList<Comments>();
+    for(Comments c : pc.getAllComments(projID)) {
+      if(c.getCommentStatus() == 1) {
+        comments.add(c);
+      }
+    }
+    return comments;
+  } 
+  
   public boolean updateComments(Comments aComments) {
       return pc.updateComments(aComments);
   }
@@ -265,6 +283,14 @@ public class UserSession {
   public List<Accounts> getAllAccounts() {
       return pc.getAllAccounts();
   }
+  
+  public boolean removeAccounts(Accounts a) {
+    return pc.removeAccounts(a);
+  }  
+
+  public boolean updateAccounts(Accounts a) {
+    return pc.updateAccounts(a);
+  } 
   
   //Edouard
   public List<Teams> getAvailableTeams(int aStatus){
