@@ -476,14 +476,6 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-  public List<Accounts> getAllAccounts() {
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Accounts.findAll" );
-    
-    return (List<Accounts>) q.getResultList();
-  }
-  
   public boolean removeAccounts(Accounts a) {
       boolean ret = false;
       em = getEntityManager();
