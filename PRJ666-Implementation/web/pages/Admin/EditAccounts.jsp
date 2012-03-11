@@ -23,7 +23,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Administrator Home</title>
+    <title>Administrator</title>
     <style type="text/css">
         input[type=text], textArea, input[type=password] {
             width: 300px;
@@ -84,7 +84,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="PendingComments.jsp">Pending Comments</a></li>
-            <li><a href="#">Available Projects</a></li>
+            <li><a href="AvailableProjects.jsp">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
             <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>
@@ -97,8 +97,38 @@
       </tr>
       <tr>
         <td>
+            <h1>Updated Accounts</h1>
             <%
+                Accounts a = (Accounts) session.getAttribute("ModifyAccounts");
                 
+                String fname = request.getParameter("id_fname");
+                String lname = request.getParameter("id_lname");
+                String email = request.getParameter("id_email");
+                String role = request.getParameter("id_role");
+                String status = request.getParameter("id_status");
+                
+                a.setUserFName(fname);
+                a.setUserLName(lname);
+                a.setUserEmail(email);
+                a.setUserRole(role);
+                a.setAccountStatus(new Integer(status));
+                
+                /*
+                out.println(a.getUserId() + " " + a.getUserIdentifier());
+                out.println("<br/> " + fname);
+                out.println("<br/> " + lname);
+                out.println("<br/> " + email);
+                out.println("<br/> " + role);
+                out.println("<br/> " + status);
+                */
+                
+                if(userBean.updateAccounts(a)) {
+                    out.println("Account for " + fname + " " + lname + " has been updated successfully");
+                } else {
+                    out.println("An unexpected error has occured while updating the account!");
+                }
+                
+                session.removeAttribute("ModifyAccounts");
                 session.removeAttribute("Second");
             %>
         </td>

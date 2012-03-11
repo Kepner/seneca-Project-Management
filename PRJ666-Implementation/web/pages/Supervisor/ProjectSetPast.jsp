@@ -29,7 +29,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Supervisor Home</title>
+    <title>Supervisor</title>
   </head>
   <body>
     <table> 
@@ -85,7 +85,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
                 <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-                <li><a href="#">Current Semester Available Projects</a></li>
+                <li><a href="AvailableProjects.jsp">Current Semester Available Projects</a></li>
           </ul>
           <div style="float: right;">
             <ul>

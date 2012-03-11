@@ -90,8 +90,16 @@ public class UserSession {
       return pc.getAccount(userIdentifier);
   }
   
+  public Accounts getAccount(Integer id) {
+      return pc.getAccount(id);
+  }
+  
   public Teams getTeam(){
     return pc.getTeam( loggedUser.getUserId() );
+  }
+  
+  public Teams getTeam(Integer id) {
+      return pc.getTeam(id);
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -106,16 +114,8 @@ public class UserSession {
     return pc.addTeamMember( aMember );
   }
   
-  public List<Teammember> getTeamMembers( Integer aTeamId ){
-    return pc.getTeamMembers( aTeamId );
-  }
-  
-  public List<Teammember> getAllMembers( Integer aTeamId ){
-    return pc.getAllMembers( aTeamId );
-  }
-  
-  public Teammember getMember( Integer aMemberId ){
-    return pc.getMember( aMemberId );
+  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
+    return pc.getAllTeamMembers( aTeamId );
   }
   
   public boolean updateTeam( Teams aTeam ){
@@ -232,14 +232,6 @@ public class UserSession {
     return pc.updateMilestone( aMilestone );
   }
   
-  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
-    return pc.getTeamProjectRankings( aTeamId );
-  }
-  
-  public int countSemesterTeams( String aPeriod ){
-    return pc.countSemesterTeams( aPeriod ).intValue();
-  }
-
   public Comments getComments(Integer id) {
       return pc.getComments(id);
   }
@@ -258,6 +250,16 @@ public class UserSession {
       return comments;
   }
   
+  public List<Comments> getAllActiveComments(Integer projID) {
+      List<Comments> comments = new ArrayList<Comments>();
+      for(Comments c : pc.getAllComments(projID)) {
+          if(c.getCommentStatus() == 1) {
+              comments.add(c);
+          }
+      }
+      return comments;
+  }
+  
   public boolean updateComments(Comments aComments) {
       return pc.updateComments(aComments);
   }
@@ -266,7 +268,15 @@ public class UserSession {
       return pc.getAllAccounts();
   }
   
-  //Edouard
+  public boolean removeAccounts(Accounts a) {
+      return pc.removeAccounts(a);
+  }
+  
+  public boolean updateAccounts(Accounts a) {
+      return pc.updateAccounts(a);
+  }
+  
+    //Edouard
   public List<Teams> getAvailableTeams(int aStatus){
       return pc.getAvailableTeams(aStatus);
   }

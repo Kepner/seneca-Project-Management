@@ -24,7 +24,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Administrator Home</title>
+    <title>Administrator</title>
   </head>
   <body>
     <table> 
@@ -80,7 +80,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
 			      <li><a href="PendingComments.jsp">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
+		        <li><a href="AvailableProjects.jsp">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
             <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>
