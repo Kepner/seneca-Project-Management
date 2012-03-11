@@ -47,3 +47,11 @@ button {
   background-repeat: repeat; 
   font-weight: bold;
 }
+
+body a:link, a:visited{
+  text-decoration: none;
+}
+
+.teamHeaders{
+  font-weight: bold;
+}

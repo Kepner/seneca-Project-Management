@@ -368,15 +368,6 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "SELECT m from Teamprojectranking m WHERE m.teamId = :teamId ORDER BY m.projectId ASC")
-            .setParameter( "teamId", aTeamId );
-    
-    return (List<Teamprojectranking>) q.getResultList();
-  }
-  
   public Number countSemesterTeams( String aPeriod ){
     em = getEntityManager();
     

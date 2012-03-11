@@ -1,6 +1,6 @@
 <%-- 
-    Document   : teamHome
-    Created on : Feb 1, 2012, 10:05:52 AM
+    Document   : memberPage
+    Created on : Mar 11, 2012, 12:36:49 PM
     Author     : matthewschranz
 --%>
 
@@ -101,30 +101,20 @@
       <tr>
         <td>
           <%
-            Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getAllMembers(team.getTeamId());
-            Teammember m = null;
+            Integer mId = Integer.parseInt(request.getParameter("id"));
+            Teammember m = userBean.getMember(mId);
           %>
-          <div style="text-align: center;">
-            <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
+          <div style="float: left;">
+            <img src="<%= m.getMemberImage() %>" style="max-height: 300px; max-width: 230px"/>
           </div>
-          <%
-            for(int i = 0, len = members.size(); i < len; i++){
-              m = members.get(i);
-              %>
-              <div style="text-align: center;">
-                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"<img src="<%= m.getMemberImage() %>" alt="Member Image" 
-                                                                       style="max-height: 150px; max-width: 120px;"/></a>
-                <br/>
-                <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
-                <br/>
-                <a href="mailto:<%= m.getEmail() %>">Email</a>
-                <br/>
-                <%= m.getFirstName() + " " + m.getLastName() %>
-              </div>
-              <%
-            }
-          %>
+          <div style="float: right;">
+            <span class="teamHeaders">Name:&nbsp;</span><%= m.getFirstName() + " " + m.getLastName() %>
+            <br/>
+            <a href="mailto:<%= m.getEmail() %>">Email Me</a>
+            <br/>
+            <span class="teamHeaders">Description:&nbsp;</span><br/>
+            <p style="max-width: 300px;"><%= m.getDescription() %></p>
+          </div>
         </td>
       </tr>
     </table>

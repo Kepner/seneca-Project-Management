@@ -89,6 +89,7 @@
 		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestones</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
@@ -99,71 +100,31 @@
       </tr>
       <tr>
         <td>
-          <div style="color: green;">
-          <%
-            if(session.getAttribute("editSuccess") != null) {
-              out.println(session.getAttribute("editSuccess").toString());
-              session.removeAttribute("editSuccess");              
-            }
-          %>
-          </div>
-          <br/>
           <%
             Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getTeamMembers(team.getTeamId());
-            Teammember leader = userBean.getLeader(team.getTeamId());
+            List<Teammember> members = userBean.getAllMembers(team.getTeamId());
+            Teammember m = null;
           %>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3><%= team.getTeamName() %></h3>
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
-                 style="max-width: 230px; max-height: 180px;"/>
-            <div>
-              <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
-              <br/><br/>
-              Description: <br/>
-              <%= team.getTeamDescription() %>
-              <br/><br/>
-              Constraints: <br/>
-              <%= team.getTeamConstraints() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Leader</h3> 
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
-              <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Members</h3> 
+          <div style="text-align: center;">
+            <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
           </div>
           <%
             for(int i = 0, len = members.size(); i < len; i++){
-              leader = members.get(i);
+              m = members.get(i);
+              %>
+              <div style="text-align: center;">
+                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"<img src="<%= m.getMemberImage() %>" alt="Member Image" 
+                                                                       style="max-height: 150px; max-width: 120px;"/></a>
+                <br/>
+                <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
+                <br/>
+                <a href="mailto:<%= m.getEmail() %>">Email</a>
+                <br/>
+                <%= m.getFirstName() + " " + m.getLastName() %>
+              </div>
+              <%
+            }
           %>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
-              <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <% } %>
         </td>
       </tr>
     </table>

@@ -104,17 +104,6 @@ CREATE TABLE teammember (
   CONSTRAINT fk_MemberTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId)
 );
 
-CREATE TABLE teamprojectranking (
-  rankId int AUTO_INCREMENT PRIMARY KEY,
-  teamId INT NOT NULL,
-  projectId INT NOT NULL,
-  whoRanked varchar(1) NOT NULL,
-  ranking INT NOT NULL,
-  whenRanked varchar(3),
-  CONSTRAINT fk_RankingTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId),
-  CONSTRAINT fk_RankingProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
-);
-
 CREATE TABLE projectfile (
   fileId int AUTO_INCREMENT PRIMARY KEY,
   fileName varchar(40) NOT NULL,

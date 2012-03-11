@@ -118,27 +118,27 @@ else if (request.getParameter("editTeamInfo") != null){
   if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
     session.setAttribute("editTeamFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
     session.setAttribute("editTeam", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tLogo.isEmpty()){
     session.setAttribute("editTeamFail" , "Error. Image can not be empty.");
     session.setAttribute("editTeam", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tDesc.isEmpty() || tDesc.length() > 400){
     session.setAttribute("editTeamFail", "Error. Description can't be empty or greater than 400 characters.");
     session.setAttribute("editTeam", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tCons.isEmpty() || tCons.length() > 120){
     session.setAttribute("editTeamFail", "Error. Constraints can't be empty or greater than 120 characters.");
     session.setAttribute("editTeam", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(!userBean.updateTeam(t)){
     session.setAttribute("editTeamFail", "Error. Team couldn't successfully be saved to the database.");
     session.setAttribute("editTeam", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else{
     session.removeAttribute("editTeam");
@@ -171,22 +171,22 @@ else if (request.getParameter("editMemberInfo") != null) {
   if(!mFName.matches("[A-Za-z\\s]{3,15}")){
     session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(!mLName.matches("[A-Za-z\\s]{3,15}")){
     session.setAttribute("editMemberFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(!mEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
     session.setAttribute("editMemberFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
     session.setAttribute("editMember", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(mDesc.isEmpty() || mDesc.length() > 250){
     session.setAttribute("editMemberFail", "Error. Description can't be empty or greater than 250 characters.");
     session.setAttribute("editMember", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(userBean.updateMember(m)) {
     System.out.println("updated member");
@@ -207,7 +207,7 @@ else if (request.getParameter("editMemberInfo") != null) {
   else{
     session.setAttribute("editMemberFail", "Error. Member couldn't successfully be saved to the database.");
     session.setAttribute("editMember", "blahblah");
-    response.sendRedirect("../Team/updateMember.jsp");
+    response.sendRedirect("../Team/updateTeam.jsp");
   }
 }
 else if(request.getParameter("createMilestone") != null){

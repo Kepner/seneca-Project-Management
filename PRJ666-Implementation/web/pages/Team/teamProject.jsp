@@ -1,9 +1,10 @@
 <%-- 
-    Document   : teamHome
-    Created on : Feb 1, 2012, 10:05:52 AM
+    Document   : teamProject
+    Created on : Mar 11, 2012, 1:11:43 PM
     Author     : matthewschranz
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -101,30 +102,43 @@
       <tr>
         <td>
           <%
-            Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getAllMembers(team.getTeamId());
-            Teammember m = null;
-          %>
-          <div style="text-align: center;">
-            <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
-          </div>
-          <%
-            for(int i = 0, len = members.size(); i < len; i++){
-              m = members.get(i);
-              %>
-              <div style="text-align: center;">
-                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"<img src="<%= m.getMemberImage() %>" alt="Member Image" 
-                                                                       style="max-height: 150px; max-width: 120px;"/></a>
-                <br/>
-                <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
-                <br/>
-                <a href="mailto:<%= m.getEmail() %>">Email</a>
-                <br/>
-                <%= m.getFirstName() + " " + m.getLastName() %>
-              </div>
-              <%
+            Teams t = userBean.getTeam();
+            Projects p = userBean.getTeamProject(t.getTeamId());
+            
+            if(p != null){
+              Company c = userBean.getCompanyByID(p.getCompanyId());
+              List<Projectfile> pfs = userBean.getProfileFiles(p.getProjectId());
+              Projectfile pf = null;
+            %>
+            <h3 class="title">Company Info</h3>
+            <br/>
+            <span class="teamHeaders">Company Name:&nbsp;</span><%= c.getCompanyName() %> <br/>
+            <span class="teamHeaders">Email:&nbsp;</span>LOL WE DON'T HAVE A COMPANY EMAIL RIGHT NOW FOR SOME REASON <br/>
+            <br/>
+            <br/>
+            <h3 class="title">Project Info</h3>
+            <br/>
+            <span class="teamHeaders">Name:&nbsp;</span><%= p.getPrjName() %><br/>
+            <span class="teamHeaders">Matched Date:&nbsp;</span><%= new SimpleDateFormat("MM/dd/yyyy").format(p.getAgreementDate()) %><br/>
+            <span class="teamHeaders">Status:&nbsp;</span><%= p.getStatus() %><br/>
+            <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %><br/>
+            <span class="teamHeaders">Description:&nbsp;</span><p class="description"><%= p.getDescription() %><br/>
+            <br/>
+            <br/>
+            <h3 class="title">Project Files</h3><br/>
+            <%
+              for(int i = 0; i < pfs.size(); i++){
+                pf = pfs.get(i);
+                out.println("<a href='" + pf.getTheFile() + "' target='_blank'>" + pf.getFileName() + "</a><br/>");
+              }
+            %>
+            <%
+            }
+            else {
+              out.println("<h3>Your team does not have a project associated with it! :(</h3>");
             }
           %>
+          
         </td>
       </tr>
     </table>
