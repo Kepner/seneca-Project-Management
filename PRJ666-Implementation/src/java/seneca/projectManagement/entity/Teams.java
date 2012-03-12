@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Teams.findByTeamLogo", query = "SELECT t FROM Teams t WHERE t.teamLogo = :teamLogo"),
   @NamedQuery(name = "Teams.findByProjectId", query = "SELECT t FROM Teams t WHERE t.projectId = :projectId"),
   @NamedQuery(name = "Teams.findByHasRegistered", query = "SELECT t FROM Teams t WHERE t.hasRegistered = :hasRegistered"),
-  @NamedQuery(name = "Teams.findByHasRanked", query = "SELECT t FROM Teams t WHERE t.hasRanked = :hasRanked"),
   @NamedQuery(name = "Teams.findByUserId", query = "SELECT t FROM Teams t WHERE t.userId = :userId")})
 public class Teams implements Serializable {
   private static final long serialVersionUID = 1L;
