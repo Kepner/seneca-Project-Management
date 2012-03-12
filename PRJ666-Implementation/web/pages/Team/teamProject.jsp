@@ -12,7 +12,7 @@
                scope="session" />
   <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("TL")) {
           if(userBean.getTeam().getHasRegistered() != 1)
             response.sendRedirect("publishTeamPage.jsp");
@@ -108,12 +108,14 @@
             
             if(p != null){
               Company c = userBean.getCompanyByID(p.getCompanyId());
+              Accounts a = userBean.getAccount(c.getUserId());
               List<Projectfile> pfs = userBean.getProfileFiles(p.getProjectId());
               Projectfile pf = null;
             %>
             <h3 class="title">Company Info</h3>
             <span class="teamHeaders">Company Name:&nbsp;</span><%= c.getCompanyName() %> <br/>
-            <span class="teamHeaders">Email:&nbsp;</span>LOL WE DON'T HAVE A COMPANY EMAIL RIGHT NOW FOR SOME REASON <br/>
+            <span class="teamHeaders">Email:&nbsp;</span><%= a.getUserEmail() %><br/>
+            <span class="teamHeaders">Contact Person:&nbsp;</span><%= a.getUserFName() + " " + a.getUserLName() %><br/>
             <br/>
             <h3 class="title">Project Info</h3>
             <span class="teamHeaders">Name:&nbsp;</span><%= p.getPrjName() %><br/>

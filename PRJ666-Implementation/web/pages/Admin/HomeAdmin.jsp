@@ -7,7 +7,7 @@
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
             session.setAttribute("Error", "You don't have permission to access the administrator page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");

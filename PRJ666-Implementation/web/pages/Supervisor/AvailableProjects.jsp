@@ -12,7 +12,7 @@
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
     session.setAttribute("First", 1);
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
             session.setAttribute("Error", "You don't have permission to access the supervisor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");

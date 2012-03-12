@@ -6,7 +6,7 @@
 
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
-    if(userBean.getLoggedUser() != null) {
+    if(userBean.getLoggedUser() != null && userBean != null) {
         response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
     }
 %>

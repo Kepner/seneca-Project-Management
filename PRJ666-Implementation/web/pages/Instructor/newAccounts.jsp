@@ -18,7 +18,7 @@
     a.setAccountStatus(0);
     boolean errorFound = false;
 
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("IN") == false) {
             session.setAttribute("Error", "You don't have permission to access the instructor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");

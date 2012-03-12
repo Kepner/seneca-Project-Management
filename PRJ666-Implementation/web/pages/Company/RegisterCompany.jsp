@@ -23,7 +23,7 @@
     account.setUserRole("");
     boolean errorFound = false;
     
-    if(session.getAttribute("agreed") == null) {
+    if(session.getAttribute("agreed") == null && userBean != null) {
         session.setAttribute("AgreementError", "You have not agreed to the agreement form.");
         response.sendRedirect("AgreementForm.jsp");
     } else {

@@ -6,7 +6,7 @@
 
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
-    if(userBean.getLoggedUser() != null) {
+    if(userBean.getLoggedUser() != null && userBean != null) {
         response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
     }
 %>
@@ -41,6 +41,7 @@
           <br/>
           <img src="/PRJ666-Implementation/pages/resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
