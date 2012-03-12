@@ -49,6 +49,7 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {

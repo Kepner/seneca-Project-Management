@@ -1,3 +1,4 @@
+<%@page import="seneca.projectManagement.utils.CryptoUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
@@ -48,6 +49,7 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -101,17 +103,25 @@
             <%
                 Accounts a = (Accounts) session.getAttribute("ModifyAccounts");
                 
+                boolean showNewPass = false;
                 String fname = request.getParameter("id_fname");
                 String lname = request.getParameter("id_lname");
                 String email = request.getParameter("id_email");
                 String role = request.getParameter("id_role");
                 String status = request.getParameter("id_status");
+                String sType = request.getParameter("sType");
+                String pass = CryptoUtil.generateRandomPassword();
                 
                 a.setUserFName(fname);
                 a.setUserLName(lname);
                 a.setUserEmail(email);
                 a.setUserRole(role);
                 a.setAccountStatus(new Integer(status));
+                
+                if(sType.equals("Reset Password") == true){
+                    a.setPasswordHashed(pass);
+                    showNewPass = true;
+                }
                 
                 /*
                 out.println(a.getUserId() + " " + a.getUserIdentifier());
@@ -124,6 +134,12 @@
                 
                 if(userBean.updateAccounts(a)) {
                     out.println("Account for " + fname + " " + lname + " has been updated successfully");
+                    if(showNewPass == true) {
+                        out.println("<div style='padding: 10px; background-color: skyblue;'>");
+                        out.println("Username: <b>" + a.getUserIdentifier() + "</b><br/>");
+                        out.println("Password: <b>" + pass + "</b></div>");
+                        out.println("<div style='color: red'>IMPORTANT: Please write down or keep a backup of your account information.</div>");
+                    }
                 } else {
                     out.println("An unexpected error has occured while updating the account!");
                 }

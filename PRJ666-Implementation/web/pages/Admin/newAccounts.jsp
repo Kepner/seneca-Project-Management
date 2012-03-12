@@ -126,6 +126,7 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -180,7 +181,13 @@
                 if(errorFound != true) {
                     String pass = CryptoUtil.generateRandomPassword();
                     a.setPasswordHashed(pass);
-                    if(userBean.addAccount(a) == true) {
+                    boolean result = false;
+                    if(a.getUserRole().equals("TL") == true) {
+                        result = userBean.addTeam(a);
+                    } else {
+                        result = userBean.addAccount(a);
+                    }
+                    if(result == true) {
                         out.println("Account for " + a.getUserFName() + " " + a.getUserLName() + " has been successfully created.<br/>");
                         out.println("<div style='padding: 10px; background-color: skyblue;'>");
                         out.println("Username: <b>" + a.getUserIdentifier() + "</b><br/>");

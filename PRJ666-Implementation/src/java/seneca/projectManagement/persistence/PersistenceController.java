@@ -82,12 +82,17 @@ public class PersistenceController extends EntityControllerBase {
   }
   
   public Accounts getAccount( String aUserIdentifier ){
-    em = getEntityManager();
+    Accounts value = null;
+    try {
+        em = getEntityManager();
+        Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
+                aUserIdentifier );
+        value = (Accounts) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     
-    Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
-            aUserIdentifier );
-    
-    return (Accounts) q.getSingleResult();
+    return value;
   }
   
   public Accounts getAccount(Integer id) {

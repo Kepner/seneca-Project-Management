@@ -62,6 +62,7 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -134,6 +135,12 @@
                                     Account Information
                                 </div>
                                 <div style="padding: 5px">
+                                    <div style="float: left; width: 150px">Username:</div>
+                                    <div style="float: left"><%= a.getUserIdentifier() %></div>
+                                    <div style="clear: both"></div>
+                                    <div style="float: left; width: 150px">Password:</div>
+                                    <div style="float: left"><input type="submit" value="Reset Password" name="sType" /></div>
+                                    <div style="clear: both"><br/></div>
                                     <div style="float: left; width: 150px">First Name:</div>
                                     <div style="float: left"><input type="text" name="id_fname" value="<%= a.getUserFName() %>" /></div>
                                     <div style="clear: both"></div>
@@ -167,7 +174,7 @@
                                     <div style="clear: both"></div>
                                 </div>
                                 <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
-                                    <input type="submit" value="Modify">
+                                    <input type="submit" value="Modify" name="sType" />
                                 </div>
                             </div>
                         </form>

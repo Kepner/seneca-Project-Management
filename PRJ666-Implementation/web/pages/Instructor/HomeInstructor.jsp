@@ -24,7 +24,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Instructor Home</title>
+    <title>Instructor</title>
   </head>
   <body>
     <table> 
@@ -44,6 +44,7 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%@include file="/pages/validation/showWhosLogin.jsp" %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -80,12 +81,12 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li style="width: 7%;"><a href="../Home.jsp">Home<br/>Page</a></li>
-			      <li style="width:11%;"><a href="#">Create<br/>Team<br/>Accounts</a></li>
+            <li style="width:11%;"><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li style="width:11%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
-		        <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
+            <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
             <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
-		        <li style="width:11%;"><a href="#">Pending Projects</a></li>
-            <li style="width:11%;"><a href="#">Approved Projects</a></li>
+            <li style="width:11%;"><a href="PendingProjects.jsp">Pending Projects</a></li>
+            <li style="width:11%;"><a href="ApprovedProjects.jsp">Approved Projects</a></li>
             <li style="width:11%;"><a href="#">Proceed Projects</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
