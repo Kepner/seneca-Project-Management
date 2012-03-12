@@ -58,8 +58,6 @@ public class Teams implements Serializable {
   private Integer projectId;
   @Column(name = "hasRegistered")
   private Integer hasRegistered = 0;
-  @Column(name = "hasRanked")
-  private Boolean hasRanked = false;
   @Basic(optional = false)
   @NotNull
   @Column(name = "userId")
@@ -148,14 +146,6 @@ public class Teams implements Serializable {
 
   public void setHasRegistered(Integer hasRegistered) {
     this.hasRegistered = hasRegistered;
-  }
-
-  public Boolean getHasRanked() {
-    return hasRanked;
-  }
-
-  public void setHasRanked(Boolean hasRanked) {
-    this.hasRanked = hasRanked;
   }
 
   public int getUserId() {

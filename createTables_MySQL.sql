@@ -9,7 +9,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 /* DROP ALL TABLES */
 DROP TABLE projectfile;
-DROP TABLE teamprojectranking;
 DROP TABLE teammember;
 DROP TABLE comments;
 DROP TABLE milestone;
@@ -40,7 +39,6 @@ CREATE TABLE teams (
   teamLogo varchar(200),
   projectId int,
   hasRegistered int DEFAULT 0,
-  hasRanked boolean DEFAULT false,
   userId int NOT NULL,
   CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId),
   CONSTRAINT fk_TeamProject FOREIGN KEY (projectId) REFERENCES projects (projectId) 

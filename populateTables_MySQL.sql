@@ -55,9 +55,9 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
   
 
 /* teams Table Commands */
-INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, teamLogo)
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, teamLogo, hasRegistered)
   VALUES ('mjschranz@learn.senecac.on.ca;derpina.derpin@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
-    'WE LIKE PUPPIES AND RAINBOWS', 'http://senecacprj566.files.wordpress.com/2011/05/beam_solutions.png?w=274&h=108');
+    'WE LIKE PUPPIES AND RAINBOWS', 'http://senecacprj566.files.wordpress.com/2011/05/beam_solutions.png?w=274&h=108', 1);
   
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
   VALUES ('edavlatian@learn.senecac.on.ca;bmcohen@learn.senecac.on.ca;klcaliso1@learn.senecac.on.ca', 'NRA Solutions', 'C#<br/>SQLite<br/>Apache', 2,

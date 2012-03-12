@@ -92,9 +92,9 @@ public class PersistenceController extends EntityControllerBase {
   
   public Accounts getAccount(Integer id) {
     em = getEntityManager();   
-    Query q = em.createNamedQuery( "Accounts.findByUserId" ).setParameter( "userId", 
-            id );   
-    return (Accounts) q.getSingleResult();
+    em.getTransaction().begin();
+    
+    return em.find(Accounts.class, id);
   } 
   
   public Teammember getLeader( int aTeamId ){
