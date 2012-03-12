@@ -107,12 +107,12 @@
           <div style="float: left;">
             <img src="<%= m.getMemberImage() %>" style="max-height: 300px; max-width: 230px"/>
           </div>
-          <div style="float: right;">
+          <div style="float: left;">
             <span class="teamHeaders">Name:&nbsp;</span><%= m.getFirstName() + " " + m.getLastName() %>
             <br/>
             <a href="mailto:<%= m.getEmail() %>">Email Me</a>
-            <br/>
-            <span class="teamHeaders">Description:&nbsp;</span><br/>
+            <br/><br/>
+            <span class="teamHeaders">Description:&nbsp;</span>
             <p style="max-width: 300px;"><%= m.getDescription() %></p>
           </div>
         </td>

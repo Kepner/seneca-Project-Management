@@ -113,8 +113,8 @@
               m = members.get(i);
               %>
               <div style="text-align: center;">
-                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"<img src="<%= m.getMemberImage() %>" alt="Member Image" 
-                                                                       style="max-height: 150px; max-width: 120px;"/></a>
+                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"><img src="<%= m.getMemberImage() %>" alt="Member Image" 
+                                                                        style="max-height: 200px; max-width: 150px;"/></a>
                 <br/>
                 <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
                 <br/>
@@ -122,6 +122,7 @@
                 <br/>
                 <%= m.getFirstName() + " " + m.getLastName() %>
               </div>
+              <br/>
               <%
             }
           %>

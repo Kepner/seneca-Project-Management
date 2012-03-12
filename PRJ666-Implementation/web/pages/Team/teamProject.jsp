@@ -31,7 +31,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Team Home</title>
+    <title>PRJ566 - Team Project</title>
   </head>
   <body>
     <table> 
@@ -111,21 +111,17 @@
               Projectfile pf = null;
             %>
             <h3 class="title">Company Info</h3>
-            <br/>
             <span class="teamHeaders">Company Name:&nbsp;</span><%= c.getCompanyName() %> <br/>
             <span class="teamHeaders">Email:&nbsp;</span>LOL WE DON'T HAVE A COMPANY EMAIL RIGHT NOW FOR SOME REASON <br/>
             <br/>
-            <br/>
             <h3 class="title">Project Info</h3>
-            <br/>
             <span class="teamHeaders">Name:&nbsp;</span><%= p.getPrjName() %><br/>
             <span class="teamHeaders">Matched Date:&nbsp;</span><%= new SimpleDateFormat("MM/dd/yyyy").format(p.getAgreementDate()) %><br/>
-            <span class="teamHeaders">Status:&nbsp;</span><%= p.getStatus() %><br/>
-            <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %><br/>
+            <span class="teamHeaders">Status:&nbsp;</span><%= p.getStatus() %><br/><br/>
+            <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %><br/><br/>
             <span class="teamHeaders">Description:&nbsp;</span><p class="description"><%= p.getDescription() %><br/>
             <br/>
-            <br/>
-            <h3 class="title">Project Files</h3><br/>
+            <h3 class="title">Project Files</h3>
             <%
               for(int i = 0; i < pfs.size(); i++){
                 pf = pfs.get(i);
