@@ -249,8 +249,11 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByTeamId")
             .setParameter( "teamId", aTeamId );
-    
-    return (Projects) q.getSingleResult();
+    try {
+      return (Projects) q.getSingleResult();
+    } catch (Exception e) {
+      return null; 
+    }
   }
   
   public List<Projectfile> getProjectFiles( Integer aProjectId ){
