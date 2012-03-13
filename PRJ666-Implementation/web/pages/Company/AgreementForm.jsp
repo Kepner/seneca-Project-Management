@@ -4,6 +4,8 @@
     Author     : KepneR
 --%>
 
+<%@page import="seneca.projectManagement.entity.Company"%>
+<%@page import="seneca.projectManagement.entity.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
     if(userBean.getLoggedUser() != null && userBean != null) {
@@ -41,7 +43,17 @@
           <br/>
           <img src="/PRJ666-Implementation/pages/resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
-          <%@include file="/pages/validation/showWhosLogin.jsp" %>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {

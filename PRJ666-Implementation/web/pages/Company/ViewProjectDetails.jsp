@@ -3,6 +3,8 @@
     Created on : Feb 29, 2012, 4:39:22 PM
     Author     : Edouard
 --%>
+<%@page import="seneca.projectManagement.entity.Company"%>
+<%@page import="seneca.projectManagement.entity.Accounts"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="seneca.projectManagement.entity.Teams"%>
@@ -66,7 +68,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
-          <%@include file="/pages/validation/showWhosLogin.jsp" %>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
