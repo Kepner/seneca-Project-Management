@@ -96,13 +96,13 @@
               }
               else if(userBean.getLoggedUser().getUserRole().equals("IN")){
           %>
-            <li><a href="#">Create Team Accounts</a></li>
-            <li><a href="#">Deactivate Team Accounts</a></li>
-		        <li style="width:10%;"><a href="#">Match Teams<br/>Projects</a></li>
-            <li style="width:10%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
-		        <li><a href="#">Pending Projects</a></li>
-            <li><a href="#">Approved Projects</a></li>
-            <li><a href="#">Proceed Projects</a></li>
+            <li style="width: 10%;"><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
+            <li style="width: 10%;"><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li style="width: 10%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
+            <li style="width: 10%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
+		        <li style="width: 10%;"><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li style="width: 10%;"><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li style="width: 10%;"><a href="#">Proceed Projects</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   

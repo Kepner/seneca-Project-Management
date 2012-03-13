@@ -81,13 +81,12 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li style="width: 7%;"><a href="../Home.jsp">Home<br/>Page</a></li>
-            <li style="width:11%;"><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li style="width:11%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
-            <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
-            <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
-            <li style="width:11%;"><a href="PendingProjects.jsp">Pending Projects</a></li>
-            <li style="width:11%;"><a href="ApprovedProjects.jsp">Approved Projects</a></li>
-            <li style="width:11%;"><a href="#">Proceed Projects</a></li>
+            <li style="width: 10%;"><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li style="width: 10%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
+            <li style="width: 10%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
+		        <li style="width: 10%;"><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li style="width: 10%;"><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li style="width: 10%;"><a href="#">Proceed Projects</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
