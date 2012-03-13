@@ -86,7 +86,7 @@
             <li style="width: 10%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
 		        <li style="width: 10%;"><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li style="width: 10%;"><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li style="width: 10%;"><a href="#">Proceed Projects</a></li>
+            <li style="width: 10%;"><a href="#">Change<br/>Project<br/>Status</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
