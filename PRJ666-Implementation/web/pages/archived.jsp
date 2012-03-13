@@ -13,8 +13,9 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
+        <script type="text/javascript" src="resources/js/twitter.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>List of Archived Projects</title>
+        <title>LPRJ566 - Archived Projects</title>
         <script language="JavaScript">
             function setProject(x) {
                 document.form1.Project.value = x;
