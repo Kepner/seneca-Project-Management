@@ -93,6 +93,7 @@
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="Home.jsp">Home Page</a></li>
+            <li><a href="archived.jsp">Archived Projects</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -103,8 +104,8 @@
               <%
                 } else {
               %>
-              <li><a href="archived.jsp">Archived Projects</a></li>
               <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
+              <li><a href="login.jsp">Login</a></li>
              <% } %>
             </ul>
           </div>
@@ -175,39 +176,6 @@
                         <div>Has not yet been assigned to an Instructor!</div>
                         <% } %>
                     </div>
-
-                    <div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>
-                        <div style="float: left">Team Information:</div>
-                        <div style="float: right"><input type="button" value="Expand" name="btnProject" onclick="collapse(this, '_4')" /></div>
-                        <div style="clear: both"></div>
-                    </div>
-                    <div style='background-color: skyblue; padding: 10px; display: none' id="_4">
-                        <% 
-                            if(p.getTeamId() != null) {
-                                Teams team = userBean.getTeam(p.getTeamId());
-                        %>
-                        <div style="float: left; width: 150px"><b>Team Name:</b></div>
-                            <div style="float: left; width: 730px"><%= team.getTeamName() %></div>
-                            <div style="clear: both"></div>
-                        <div style="float: left; width: 150px"><b>Description:</b></div>
-                            <div style="float: left; width: 730px"><%= team.getTeamDescription() %></div>
-                            <div style="clear: both"></div>
-                        <div style="float: left; width: 150px"><b>Constraints:</b></div>
-                            <div style="float: left; width: 730px"><%= team.getTeamConstraints() %></div>
-                            <div style="clear: both"></div>
-                        <div style="float: left; width: 150px"><b>Team Email:</b></div>
-                            <div style="float: left; width: 730px">
-                                <%
-                                    out.print("<a href='mailto:" + team.getTeamEmail() + "'>Send Email</a>");
-                                %>
-                            </div>
-                            <div style="clear: both"></div>
-                        <% } else { %>
-                        <div>Has not yet been assigned to a Team!</div>
-                        <% } %>
-                    </div>
-
-
                     <% 
                         List<Comments> cs = userBean.getAllActiveComments(p.getProjectId());
                     %>

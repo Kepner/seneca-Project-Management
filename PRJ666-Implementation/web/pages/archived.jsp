@@ -40,6 +40,28 @@
           <br/>
           <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              if(temp_a.getUserRole().equals("AD")) {
+                out.print("Hello Administrator, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              } else if(temp_a.getUserRole().equals("CR")) {
+                Company temp_c = userBean.getCompany();
+                out.print("Hello, Company " + temp_c.getCompanyName());
+              } else if(temp_a.getUserRole().equals("IN")) {
+                out.print("Hello Instructor, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              } else if(temp_a.getUserRole().equals("SU")) {
+                out.print("Hello Supervisor, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              } else if(temp_a.getUserRole().equals("TL")) {
+                Teams temp_t = userBean.getTeam();
+                out.print("Hello, Team " + temp_t.getTeamName());
+              }
+              out.println("<hr width='95%' align='left'/>");
+            }	
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -76,6 +98,7 @@
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="Home.jsp">Home Page</a></li>
+            <li><a href="archived.jsp">Archived Projects</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -86,8 +109,8 @@
               <%
                 } else {
               %>
-              <li><a href="archived.jsp">Archived Projects</a></li>
               <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
+              <li><a href="login.jsp">Login</a></li>
              <% } %>
             </ul>
           </div>
