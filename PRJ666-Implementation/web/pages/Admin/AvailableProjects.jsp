@@ -33,7 +33,7 @@
     <script language="JavaScript">
         function setProject(x) {
             document.form1.Project.value = x;
-            form1.submit();
+            document.form1.submit();
         }
     </script>
   </head>
