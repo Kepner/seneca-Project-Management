@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
         <script type="text/javascript" src="resources/js/twitter.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>LPRJ566 - Archived Projects</title>
+        <title>PRJ566 - Archived Projects</title>
         <script language="JavaScript">
             function setProject(x) {
                 document.form1.Project.value = x;
@@ -101,20 +101,66 @@
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="Home.jsp">Home Page</a></li>
-            <li><a href="archived.jsp">Archived Projects</a></li>
+          <% 
+            if(userBean.isLogged()) {
+              if(userBean.getLoggedUser().getUserRole().equals("CR")){
+          %>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="#">Create New Project</a></li>
+            <li><a href="Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="#">Upcoming Milestones</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
+                if(userBean.getTeam().getHasRegistered() == 1){
+          %>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestones</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+          <%
+                }
+                else {
+                  response.sendRedirect("Team/publishTeamPage.jsp");  
+                }
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
+          %>
+            <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
+            <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
+          %>
+            <li><a href="Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
+		        <li><a href="#">Current Semester Available Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
+		      %>
+            <li><a href="#">Pending Comments</a></li>
+		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Change Project Status to Past</a></li>
+            <li><a href="#">Manage Site Accounts</a></li>
+          <%
+              }
+          %>
           </ul>
           <div style="float: right;">
             <ul>
-              <%
-                if(userBean.isLogged()){
-              %>
               <li><a href="logout.jsp">Logout</a></li>
-              <%
-                } else {
-              %>
-              <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
+          <%
+            }
+            else {
+          %>
               <li><a href="login.jsp">Login</a></li>
-             <% } %>
+              <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+          <% } %>
             </ul>
           </div>
         </td>
@@ -122,9 +168,6 @@
       <tr>
         <td>
             <h1>List of Archived Projects</h1>
-            <%
-                if(!userBean.isLogged()) {
-            %>
                 <form name="form1" method="POST" action="ProjectDetails.jsp">
                 <%
                     session.setAttribute("First", 1);
@@ -190,41 +233,6 @@
                     }
                 %>
                 </form>
-            <%
-                    if(session.getAttribute("Error") != null) {
-                            out.print("<font color=\"red\">" + session.getAttribute("Error").toString() + "</font>");
-                            userBean.logout();
-                            session.invalidate();
-                    }
-                } else {
-                    if(session.getAttribute("Error") != null) {
-                        out.print("<font color=\"red\">" + session.getAttribute("Error").toString() + "</font><br/>");
-                    }
-                    String roleFilter = userBean.getLoggedUser().getUserRole();
-
-                    if(roleFilter.equals("AD")) {
-                    response.sendRedirect("Admin/HomeAdmin.jsp");
-                    }
-                    else if(roleFilter.equals("CR")) {
-                    response.sendRedirect("Company/HomeCompany.jsp");
-                    }
-                    else if(roleFilter.equals("IN")) {
-                    response.sendRedirect("Instructor/HomeInstructor.jsp");
-                    }
-                    else if(roleFilter.equals("SU")) {
-                    response.sendRedirect("Supervisor/HomeSupervisor.jsp");
-                    }
-                    else if(roleFilter.equals("TL")) {
-                        Teams team = userBean.getTeam();
-                        if(team.getHasRegistered() == 0) {
-                            response.sendRedirect("Team/publishTeamPage.jsp");
-                        }
-                        else {
-                            response.sendRedirect("Team/teamHome.jsp");
-                        }
-                    }
-                }
-            %>
         </td>
       </tr>          
     </table>

@@ -125,7 +125,7 @@
           %>
             <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
             <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li><a href="Intructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+            <li><a href="Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
 		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
