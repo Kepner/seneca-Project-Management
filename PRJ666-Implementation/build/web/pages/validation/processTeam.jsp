@@ -154,11 +154,11 @@ else if (request.getParameter("editMemberInfo") != null) {
          mLName = request.getParameter("mLName"),
          mFName = request.getParameter("mFName"),
          mId = request.getParameter("memberId"),
-         mLeader = request.getParameter("teamLeader"),
-         tEmail = "";
+         tEmail = "",
+         mLeader = request.getParameter("mLeader");
   
   Teams t = userBean.getTeam();
-  Teammember m = new Teammember();
+  Teammember m = new Teammember(), leader = userBean.getLeader(t.getTeamId());
   m.setDescription(mDesc);
   m.setEmail(mEmail);
   m.setFirstName(mFName);
@@ -168,28 +168,40 @@ else if (request.getParameter("editMemberInfo") != null) {
   m.setTeamId(t.getTeamId());
   m.setTeamLeader(Integer.parseInt(mLeader));
   
+  System.out.println(mLeader);
+  
   if(!mFName.matches("[A-Za-z\\s]{3,15}")){
     session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
+    session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(!mLName.matches("[A-Za-z\\s]{3,15}")){
     session.setAttribute("editMemberFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
+    session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(!mEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
     session.setAttribute("editMemberFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
     session.setAttribute("editMember", "blahblah");
+    session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(mDesc.isEmpty() || mDesc.length() > 250){
     session.setAttribute("editMemberFail", "Error. Description can't be empty or greater than 250 characters.");
     session.setAttribute("editMember", "blahblah");
+    session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
+  else if(leader != null && Integer.parseInt(mLeader) == 1){
+    session.setAttribute("editMemberFail", "Error. Can't set multiple members as leader. Please change the leader to a normal member first.");
+    session.setAttribute("editMember", "blahblah");
+    session.setAttribute("mId", mId);
+    response.sendRedirect("../Team/updateTeam.jsp");  
+  }
   else if(userBean.updateMember(m)) {
-    System.out.println("updated member");
+    System.out.println("DERP");
     List<Teammember> members = userBean.getAllMembers(t.getTeamId());
       
     for(int i = 0; i < members.size(); i++){
@@ -209,122 +221,5 @@ else if (request.getParameter("editMemberInfo") != null) {
     session.setAttribute("editMember", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-}
-else if(request.getParameter("createMilestone") != null){
-  String mName = request.getParameter("milestoneName"),
-         mDesc = request.getParameter("milestoneDescription"),
-         mStatus = request.getParameter("milestoneStatus"),
-         mDate = request.getParameter("milestoneDate");
-  
-  DateFormat f = new SimpleDateFormat("MM/dd/yyyy");
-  Date d = new Date();
-  
-  try{
-    d = (Date) f.parse(mDate);
-  }
-  catch(ParseException e){
-    d = null;
-  }
-  
-  Teams team = userBean.getTeam();
-  Projects proj = userBean.getTeamProject(team.getTeamId());
-  
-  Milestone milestone = new Milestone();
-  milestone.setDescription(mDesc);
-  milestone.setDueDate(d);
-  milestone.setMilestoneName(mName);
-  milestone.setMilestoneStatus(mStatus);
-  milestone.setProjectId(proj.getProjectId());
-  
-  if(!mName.matches("[A-Za-z\\s]{7,70}")){
-    session.setAttribute("createErrors", "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
-    session.setAttribute("create", "sum");
-    response.sendRedirect("../Team/updateMilestone.jsp");  
-  }
-  else if(!mDesc.matches("[A-Za-z\\s.]{10,125}")){
-    session.setAttribute("createErrors", "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
-    session.setAttribute("create", "sum");
-    response.sendRedirect("../Team/updateMilestone.jsp"); 
-  }
-  else if(d == null){
-    session.setAttribute("createErrors", "Error. Milestone date must be in MM/DD/YYYY format.");
-    session.setAttribute("create", "sum");
-    response.sendRedirect("../Team/updateMilestone.jsp");
-  }
-  // Date Validation
-  else if(d.before(new Date())){
-    session.setAttribute("createErrors", "Error. Milestone date can't be set to the past.");
-    session.setAttribute("create", "sum");
-    response.sendRedirect("../Team/updateMilestone.jsp");
-  }
-  else if(!userBean.newMilestone(milestone)){
-    session.setAttribute("createErrors", "Error. Milestone was not successfully added.");
-    session.setAttribute("create", "sum");
-    response.sendRedirect("../Team/updateMilestone.jsp");
-  } 
-  else {
-    session.setAttribute("milestoneSuccess", "Milestones successfully created.");
-    session.removeAttribute("create");
-    session.removeAttribute("createErrors");
-    response.sendRedirect("../Team/manageMilestones.jsp");
-  }
-}
-else if(request.getParameter("editMilestone") != null){
-  System.out.println("in edit");
-  String mName = request.getParameter("milestoneName"),
-           mDesc = request.getParameter("milestoneDescription"),
-           mDate = request.getParameter("milestoneDate"),
-           mStatus = request.getParameter("milestoneStatus"),
-           mId = request.getParameter("milestoneId");
-  
-  DateFormat f = new SimpleDateFormat("MM/dd/yyyy");;
-  Date d = (Date) f.parse(mDate);
-  
-  Milestone m = new Milestone();
-  Teams team = userBean.getTeam();
-  Projects proj = userBean.getTeamProject(team.getTeamId());
-  
-  m.setDescription(mDesc);
-  m.setDueDate((Date) f.parse(mDate));
-  m.setMilestoneId(Integer.parseInt(mId));
-  m.setMilestoneStatus(mStatus);
-  m.setMilestoneName(mName);
-  m.setProjectId(proj.getProjectId());
-  
-  // Name Validation
-  if(!mName.matches("[A-Za-z\\s]{7,70}")){
-    session.setAttribute("editErrors", "Error. Milestone name must be between 7 and 70 alphanumeric characters.");
-    session.setAttribute("mId", mId);
-    session.setAttribute("edit", "whatever");
-    response.sendRedirect("../Team/updateMilestone.jsp");
-  }
-  
-  // Description Validation
-  else if(!mDesc.matches("[A-Za-z\\s.]{10,125}")){
-    session.setAttribute("editErrors", "Error. Milestone description must be between 10 and 125 alphanumeric characters.");
-    session.setAttribute("mId", mId);
-    session.setAttribute("edit", "whatever");
-    response.sendRedirect("../Team/updateMilestone.jsp");     
-  }
-  
-  // Date Validation
-  else if(d.before(new Date())){
-    session.setAttribute("editErrors", "Error. Milestone date can't be set to the past.");
-    session.setAttribute("mId", mId);
-    session.setAttribute("edit", "whatever");
-    response.sendRedirect("../Team/updateMilestone.jsp");           
-  }   
-  else if(!userBean.updateMilestone(m)){
-    session.setAttribute("editErrors", "Error. Milestone couldn't be updated.");
-    session.setAttribute("mId", mId);
-    session.setAttribute("edit", "whatever");
-    response.sendRedirect("../Team/updateMilestone.jsp");
-  }
-  else {
-    session.setAttribute("milestoneSuccess", "Milestones successfully edited.");
-    session.removeAttribute("mId");
-    session.removeAttribute("edit");
-    response.sendRedirect("../Team/manageMilestones.jsp");    
-  }     
 }
 %>

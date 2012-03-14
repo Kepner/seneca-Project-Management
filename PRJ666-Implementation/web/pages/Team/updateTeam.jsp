@@ -40,7 +40,7 @@
 		    $( "#datepicker" ).datepicker();
 	    }); 
     </script>
-    <title>PRJ566 - Create/Edit Milestones</title>
+    <title>PRJ566 - Update Team/Team Members</title>
   </head>
   <body>
     <%
@@ -116,7 +116,6 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestone</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>
 		      </ul>
@@ -132,7 +131,7 @@
           <%
                 Teammember m = null;
                 /**************************************************************
-                Create new milestone
+                Update Team Information
                 **************************************************************/
                 if(request.getParameter("editTeam") != null || session.getAttribute("editTeam") != null) {
                     out.println("<h1>Edit Team</h1>");
@@ -141,7 +140,7 @@
                     <form method="POST" action="../validation/processTeam.jsp">
                       <div style="width: 900px">
                         <div style="padding: 5px; background-color: #D5E7E9">
-                          Milestone Information
+                          Team Information
                         </div>
                         <div style="padding: 5px">
                           <div style="float: left; width: 150px">Team Name: </div>
@@ -196,8 +195,16 @@
                             <div style="float: left; width: 150px">Email: </div>
                             <div style="float: left"><input type="text" name="mEmail" value="<%= m.getEmail() %>" size="40"/></div>
                             <div style="clear: both"></div>
-                             <div style="float: left; width: 150px">Image: </div>
+                            <div style="float: left; width: 150px">Image: </div>
                             <div style="float: left"><input type="text" name="mImage" value="<%= m.getMemberImage() %>" size="40"/></div>
+                            <div style="clear: both"></div>
+                            <div style="float: left; width: 150px">Leader: </div>
+                            <div style="float: left">
+                              <select name="mLeader">
+                                <option value="1" <%= m.getTeamLeader() == 1 ? "selected" : "" %>>Yes</option>
+                                <option value="0" <%= m.getTeamLeader() == 0 ? "selected" : "" %>>No</option>
+                              </select>
+                            </div>
                             <div style="clear: both"></div>
                             <div style="float: left; width: 150px">Description: </div>
                             <div style="float: left">
@@ -212,7 +219,6 @@
                               }
                             %>
                             <input type="hidden" name="memberId" value="<%= m.getMemberId() %>" />
-                            <input type="hidden" name="teamLeader" value="<%= m.getTeamLeader() %>"/>
                           </div>
                           <div style="background-color: #D5E7E9; padding: 5px; text-align: right;">
                             <input type="submit" name="editMemberInfo" value="Edit Member">

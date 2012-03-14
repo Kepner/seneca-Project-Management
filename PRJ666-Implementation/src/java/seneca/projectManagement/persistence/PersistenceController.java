@@ -103,12 +103,17 @@ public class PersistenceController extends EntityControllerBase {
   } 
   
   public Teammember getLeader( int aTeamId ){
-    em = getEntityManager();
+    try{
+      em = getEntityManager();
     
-    Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
-            .setParameter("teamId", aTeamId);
+      Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
+              .setParameter("teamId", aTeamId);
     
-    return (Teammember) q.getSingleResult();
+      return (Teammember) q.getSingleResult();
+    }
+    catch (Exception e){
+      return null;
+    }
   }
   
   public List<Teammember> getTeamMembers( Integer aTeamId ){
