@@ -26,7 +26,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -94,6 +96,7 @@
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg')">
           <ul>
+            <li><a href="archived.jsp">Archived<br/>Projects</a></li>
           <% 
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
@@ -120,13 +123,12 @@
               }
               else if(userBean.getLoggedUser().getUserRole().equals("IN")){
           %>
-            <li style="width: 10%;"><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
-            <li style="width: 10%;"><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li style="width: 10%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
-            <li style="width: 10%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
-		        <li style="width: 10%;"><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li style="width: 10%;"><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li style="width: 10%;"><a href="#">Proceed Projects</a></li>
+            <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
+            <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="Intructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
@@ -153,8 +155,7 @@
             else {
           %>
               <li><a href="login.jsp">Login</a></li>
-              <li><a href="archived.jsp">Archived Projects</a></li>
-              <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
+              <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
           <% } %>
             </ul>
           </div>
@@ -172,103 +173,9 @@
       %>
       <tr>
         <td>
-          <b><u>News Title 1</u></b>
-          <p> 
-            Insert News Here.................................................................................<br/>
-            N<br/>
-            S<br/>
-            E<br/>
-            R<br/>
-            T<br/>
-            <br/>
-            N<br/>
-            E<br/>
-            W<br/>
-            S<br/>
-            <br/>
-            H<br/>
-            E<br/>
-            R<br/>
-	          E<br/>
-          </p>
-          <hr/>
+          NEWS FEATURE WILL BE APPEARING HERE!
         </td>
       </tr>
-      <tr>
-        <td>
-          <b><u>News Title 2</u></b>
-          <p>
-            Insert News Here.................................................................................<br/>
-            N<br/>
-            S<br/>
-            E<br/>
-            R<br/>
-            T<br/>
-            <br/>
-            N<br/>
-            E<br/>
-            W<br/>
-            S<br/>
-            <br/>
-            H<br/>
-            E<br/>
-            R<br/>
-            E<br/>
-          </p>
-          <hr/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b><u>News Title 3</u></b>
-          <p>
-            Insert News Here.................................................................................<br/>
-            N<br/>
-            S<br/>
-            E<br/>
-            R<br/>
-            T<br/>
-            <br/>
-            N<br/>
-            E<br/>
-            W<br/>
-            S<br/>
-            <br/>
-            H<br/>
-            E<br/>
-            R<br/>
-            E<br/>
-          </p>
-          <hr/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b><u>News Title 4</u></b>
-          <p>
-            Insert News Here.................................................................................<br/>
-            N<br/>
-            S<br/>
-            E<br/>
-            R<br/>
-            T<br/>
-            <br/>
-            N<br/>
-            E<br/>
-            W<br/>
-            S<br/>
-            <br/>
-            H<br/>
-            E<br/>
-            R<br/>
-            E<br/>
-            <a href="#">Test Link</a></br>
-            <%= Validation.getSemesterToday() %><br/>
-            <%= CryptoUtil.generateRandomPassword() %><br/>
-          </p>
-          <hr/>
-        </td>
-      </tr>             
     </table>
   </body>
 </html>

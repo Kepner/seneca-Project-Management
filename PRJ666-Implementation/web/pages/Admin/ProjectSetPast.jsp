@@ -38,7 +38,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -132,6 +134,10 @@
                         out.println("</div>");
                         p.setStatus("PA");
                         userBean.updateProject(p);
+                        Teams t = userBean.getTeam(p.getTeamId());
+                        Accounts a = userBean.getAccount(t.getUserId());
+                        a.setAccountStatus(0);
+                        userBean.updateAccounts(a);
                     }
                 } else {
                     session.setAttribute("Error", "No project(s) selected!");
