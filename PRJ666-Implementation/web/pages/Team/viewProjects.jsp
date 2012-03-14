@@ -31,6 +31,12 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
+    <script language="JavaScript">
+      function setProject(x) {
+        document.form1.Project.value = x;
+        document.form1.submit();
+      }
+    </script>
     <title>PRJ566 - Team View Available Projects</title>
   </head>
   <body>
@@ -112,40 +118,72 @@
         </td>
       </tr>
       <tr>
-        <td><h3 class="title">Available Projects</h3></td>
-      </tr>
-      <tr>
         <td>
-        <%
-          List<Projects> projects = userBean.getAvailableProjects( "AV" );
-          Company comp;
-        
-          if( !projects.isEmpty() ) {
-            for( int i = 0, len = projects.size(); i < len; i++){
-              Projects proj = projects.get( i );
-              comp = userBean.getCompanyByID( proj.getCompanyId() );
-        %>
-              <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-                <h3><%= proj.getPrjName() %></h3>
-              </div>
-              <div style="width: 700px; padding: 5px;">
-                Company Name: <%= comp.getCompanyName() %> <br/>
-                Company Description: <p class="description"><%= comp.getCompanyDescription() %></p> <br/>
-                Business Areas: <p class="description"><%= comp.getBusinessAreas() %></p> <br/>
-                <button onclick='displayDetails( this )'>Show Details</button>
-                <div style='display: none'>
-                  Project Description: <p class="description"><%= proj.getDescription() %></p> <br/>
-                  Project Constraints: <p class="description"><%= proj.getPrjConstraints() %></p>
-                </div>
-              </div>
-        <%
-            }
-          }
-          else{ %>
-            <p class="projects">There were no available projects.</p>
-        <%
-          }
-        %>
+          <h3 class="title">Available Projects</h3>
+            <form name="form1" method="POST" action="ProjectDetails.jsp">
+            <%
+              Projects p = null;
+              Company c = null;
+              //List<Projects> projects = userBean.getAllProjects();
+              List<Projects> projects = userBean.getAllProjects("AV");
+                if(projects.size() > 0) {
+                  Integer beg = 0;
+                  Integer items = 5;
+                  
+                  try {
+                    items = new Integer(request.getParameter("items"));
+                  }
+                  catch (Exception e) {}
+                  
+                  try {
+                    beg = new Integer(request.getParameter("beg")) * items;
+                  }
+                  catch (Exception e) {}
+                  
+                  for(int i = beg; i < beg + items && i < projects.size() ; i++) {
+                    p = projects.get(i);
+                    c = userBean.getCompanyByID(p.getCompanyId());
+                    out.print("<div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>");
+                      out.println("<div style='float: left'>");
+                        out.println(p.getPrjName());
+                      out.print("</div>");
+                      out.println("<div style='float: right'>");
+                        out.println("<input type='button' value='View Project Details' onclick='setProject(" + p.getProjectId() + ")' />");
+                      out.print("</div>");
+                      out.print("<div style='clear: both'></div>");
+                    out.print("</div>");
+                    out.println("<div style='background-color: skyblue; padding: 10px'>");
+                      out.println("<div style='float: left; width: 150px'><b>Company Name:</b></div>");
+                      out.println("<div style='float: left; width: 750px'>" + c.getCompanyName() + "</div>");
+                      out.print("<div style='clear: both'></div>");
+                      out.println("<div style='float: left; width: 150px'><b>Project Name:</b></div>");
+                      out.println("<div style='float: left; width: 750px'>" + p.getPrjName() + "</div>");
+                      out.print("<div style='clear: both'></div>");
+                    out.println("</div>");
+                  }
+                %>
+                <div style="border-style: solid; border-color: #6F93C9"> </div>
+                <%
+                  out.println("<div style='float: left'><input type='hidden' name='Project' /></div>");
+                  out.println("<div style='float: right'>");
+                  int pages = (int) Math.ceil( (double) projects.size() / items);
+                  out.println(" Page(s): ");
+                  for(int i = 0; i < pages; i++) {
+                  out.println("<a href='archived.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                }
+                out.println("<a href='archived.jsp?items=" + projects.size() + "'>View All</a>");
+                out.println("</div>");
+                out.print("<div style='clear: both'></div>");
+                
+                if(session.getAttribute("Error") != null) {
+                  out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                    session.removeAttribute("Error");
+                }
+              } else {
+                out.println("<h1>No projects to display.</h1>");
+              }
+            %>
+          </form>
         </td>
       </tr>
     </table>
