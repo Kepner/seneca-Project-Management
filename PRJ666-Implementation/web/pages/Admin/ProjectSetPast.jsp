@@ -133,10 +133,13 @@
                         out.println(p.getPrjName());
                         out.println("</div>");
                         p.setStatus("PA");
-                        userBean.updateProject(p);
-                        Teams t = userBean.getTeam(p.getTeamId());
+                        
+                        Teams t = userBean.getTeamById(p.getTeamId());
+                        t.setTeamStatus(0);
                         Accounts a = userBean.getAccount(t.getUserId());
                         a.setAccountStatus(0);
+                        userBean.updateProject(p);
+                        userBean.updateTeam(t);
                         userBean.updateAccounts(a);
                     }
                 } else {

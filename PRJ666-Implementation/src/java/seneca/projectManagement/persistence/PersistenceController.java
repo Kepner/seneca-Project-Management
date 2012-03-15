@@ -81,6 +81,13 @@ public class PersistenceController extends EntityControllerBase {
     return (Teams) q.getSingleResult();
   }
   
+  public Teams getTeamById( Integer aTeamId ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    return em.find(Teams.class, aTeamId);
+  }
+  
   public Accounts getAccount( String aUserIdentifier ){
     Accounts value = null;
     try {
@@ -339,48 +346,6 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-  public List<Milestone> getProjectMilestones( Integer aProjectId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Milestone.findByProjectId" )
-            .setParameter( "projectId", aProjectId );
-    
-    return (List<Milestone>)q.getResultList();
-  }
-
-  public boolean newMilestone( Milestone aMilestone ){
-    em = getEntityManager();
-    
-    em.getTransaction().begin();
-    em.persist( aMilestone );
-    em.getTransaction().commit();
-    
-    em.close();
-    
-    return true;
-  }
-  
-  public Milestone getMilestone( Integer aMilestoneId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Milestone.findByMilestoneId" )
-            .setParameter( "milestoneId", aMilestoneId );
-    
-    return (Milestone)q.getSingleResult();
-  }
-  
-  public boolean updateMilestone( Milestone aMilestone ){
-    em = getEntityManager();
-    
-    em.getTransaction().begin();
-    em.merge( aMilestone );
-    em.getTransaction().commit();
-    
-    em.close();
-    
-    return true;
-  }
-  
   public Number countSemesterTeams( String aPeriod ){
     em = getEntityManager();
     
@@ -436,7 +401,7 @@ public class PersistenceController extends EntityControllerBase {
   }
   
   //Edouard
-  public List<Teams> getAvailableTeams(int aStatus){
+  public List<Teams> getSemesterTeams( Integer aStatus){
       em = getEntityManager();
       
       Query q = em.createNamedQuery("Teams.findByTeamStatus")

@@ -169,9 +169,9 @@
                   int pages = (int) Math.ceil( (double) projects.size() / items);
                   out.println(" Page(s): ");
                   for(int i = 0; i < pages; i++) {
-                  out.println("<a href='archived.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                  out.println("<a href='viewProjects.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
                 }
-                out.println("<a href='archived.jsp?items=" + projects.size() + "'>View All</a>");
+                out.println("<a href='viewProjects.jsp?items=" + projects.size() + "'>View All</a>");
                 out.println("</div>");
                 out.print("<div style='clear: both'></div>");
                 

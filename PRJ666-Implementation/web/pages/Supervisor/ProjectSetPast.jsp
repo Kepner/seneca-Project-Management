@@ -131,7 +131,14 @@
                         out.println(p.getPrjName());
                         out.println("</div>");
                         p.setStatus("PA");
+                        
+                        Teams t = userBean.getTeamById(p.getTeamId());
+                        t.setTeamStatus(0);
+                        Accounts a = userBean.getAccount(t.getUserId());
+                        a.setAccountStatus(0);
                         userBean.updateProject(p);
+                        userBean.updateTeam(t);
+                        userBean.updateAccounts(a);
                     }
                 } else {
                     session.setAttribute("Error", "No project selected!");

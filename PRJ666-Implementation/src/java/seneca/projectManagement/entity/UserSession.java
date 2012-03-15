@@ -102,6 +102,10 @@ public class UserSession {
     return pc.getTeam(id);
   } 
   
+  public Teams getTeamById( Integer aTeamId ){
+    return pc.getTeamById(aTeamId);
+  }
+  
   public Teammember getLeader( int aTeamId ){
     return pc.getLeader( aTeamId );
   }
@@ -224,22 +228,6 @@ public class UserSession {
     return pc.updateProject(p);
   }
   
-  public List<Milestone> getProjectMilestones( Integer aProjectId ){
-    return pc.getProjectMilestones( aProjectId ); 
-  }
-  
-  public boolean newMilestone( Milestone aMilestone ){
-    return pc.newMilestone( aMilestone );
-  }
-  
-  public Milestone getMilestone( Integer aMilestoneId ){
-    return pc.getMilestone( aMilestoneId );
-  }
-  
-  public boolean updateMilestone( Milestone aMilestone ){
-    return pc.updateMilestone( aMilestone );
-  }
-  
   public Comments getComments(Integer id) {
       return pc.getComments(id);
   }
@@ -285,8 +273,8 @@ public class UserSession {
   } 
   
   //Edouard
-  public List<Teams> getAvailableTeams(int aStatus){
-      return pc.getAvailableTeams(aStatus);
+  public List<Teams> getSemesterTeams( Integer aStatus ){
+      return pc.getSemesterTeams(aStatus);
   }
   public Teams getProjectTeam(int aId){
       return pc.getProjectTeam(aId);

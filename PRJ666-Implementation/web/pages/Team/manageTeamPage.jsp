@@ -163,9 +163,9 @@
                 int pages = (int) Math.ceil( (double) members.size() / items);
                 out.println(" Page(s): ");
                 for(int i = 0; i < pages; i++) {
-                    out.println("<a href='manageMilestones.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                    out.println("<a href='manageTeamPage.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
                 }
-                out.println("<a href='manageMilestones.jsp?items=" + members.size() + "'>View All</a>");
+                out.println("<a href='manageTeamPage.jsp?items=" + members.size() + "'>View All</a>");
                 out.println("</div>");
                 out.println("<div style='clear: both'></div>");
                 if(session.getAttribute("Error") != null) {
