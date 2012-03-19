@@ -98,7 +98,6 @@
 			      <li><a href="#">Current Semester Teams</a></li>
 		        <li><a href="#">Create New Project</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           <%
               }
@@ -106,7 +105,6 @@
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
             <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="#">View Projects</a></li>
             <li><a href="#">Manage Team Page</a></li>
           <%

@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="seneca.projectManagement.utils.ProjectSorting"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
@@ -89,8 +90,8 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageMilestones.jsp">Manage<br/>Project<br/>Milestones</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Team<br/>Project</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -110,27 +111,16 @@
                     if(p == null)
                         return;
                     Company c = userBean.getCompanyByID(p.getCompanyId());
+                    Accounts a = userBean.getAccount(c.getUserId());
                 %>
-                <h1><%= p.getPrjName() %> Project Details</h1>
-                <form name="form1">
-                <div style="width: 900px">
-                    <div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>
-                        <div style="float: left">Project Information:</div>
-                        <div style="clear: both"></div>
-                    </div>
-                    <div style='background-color: skyblue; padding: 10px' id="_0">
-                        <div style="float: left; width: 150px"><b>Project Name:</b></div>
-                            <div style="float: left; width: 730px"><%= p.getPrjName() %></div>
-                            <div style="clear: both"></div>
-                        <div style="float: left; width: 150px"><b>Description:</b></div>
-                            <div style="float: left; width: 730px"><%= p.getDescription() %></div>
-                            <div style="clear: both"></div>
-                        <div style="float: left; width: 150px"><b>Constraints:</b></div>
-                            <div style="float: left; width: 730px"><%= p.getPrjConstraints() %></div>
-                            <div style="clear: both"></div>
-                    </div>
-                </div>
-                </form>
+                <h3 class="title">Company Info</h3>
+                <span class="teamHeaders">Company Name:&nbsp;</span><%= c.getCompanyName() %> <br/>
+                <span class="teamHeaders">Contact Person:&nbsp;</span><%= a.getUserFName() + " " + a.getUserLName() %><br/>
+                <span class="teamHeaders">Business Areas:&nbsp;</span><p class="description"><%= c.getBusinessAreas() %></p>
+                <h3 class="title">Project Info</h3>
+                <span class="teamHeaders">Name:&nbsp;</span><%= p.getPrjName() %><br/>
+                <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %></p>
+                <span class="teamHeaders">Description:&nbsp;</span><p class="description"><%= p.getDescription() %></p>
         </td>
       </tr>          
     </table>

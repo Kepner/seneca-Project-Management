@@ -11,7 +11,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE projectfile;
 DROP TABLE teammember;
 DROP TABLE comments;
-DROP TABLE milestone;
 DROP TABLE projects;
 DROP TABLE teams;
 DROP TABLE company;
@@ -71,16 +70,6 @@ CREATE TABLE projects (
 );
 
 ALTER TABLE teams ADD CONSTRAINT fk_ProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId);
-
-CREATE TABLE milestone (
-  milestoneId int AUTO_INCREMENT PRIMARY KEY,
-  milestoneName varchar(70) NOT NULL,
-  description varchar(125) NOT NULL,
-  projectId INTEGER NOT NULL,
-  milestoneStatus char(2) DEFAULT 'NS',
-  dueDate TIMESTAMP DEFAULT NOW(),
-  CONSTRAINT fk_MilestoneProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId) 
-);
 
 CREATE TABLE comments (
   commentId int AUTO_INCREMENT PRIMARY KEY,

@@ -225,7 +225,6 @@
             <li><a href="#">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">

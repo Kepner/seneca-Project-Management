@@ -216,10 +216,6 @@ public class UserSession {
     return pc.getCompanyProjects( aCompany.getCompanyId() );
   }
   
-  public List<Projects> getAvailableProjects( String aStatus ){
-    return pc.getAvailableProjects( aStatus );
-  }
-  
   public List<Projects> getInstructorProjects( Accounts aAccount ){
     return pc.getCompanyProjects( aAccount.getUserId() );
   }
@@ -272,21 +268,18 @@ public class UserSession {
     return pc.updateAccounts(a);
   } 
   
-  //Edouard
-  public List<Teams> getSemesterTeams( Integer aStatus ){
-      return pc.getSemesterTeams(aStatus);
+  public List<Teams> getUnMatchedTeams( Integer aStatus ){
+      return pc.getUnMatchedTeams(aStatus);
   }
+  
   public Teams getProjectTeam(int aId){
       return pc.getProjectTeam(aId);
   }
-  /*
-  public List<Milestone> getUpcomingMilestones(){
-      return pc.getUpcomingMilestones();
-  }
-  */
+
   public boolean updateProjectFile(Projectfile aProjectfile){
       return pc.updateProjectFile(aProjectfile);
   }
+  
   public boolean newComment(Comments aComment){
       return pc.newComment(aComment);
   }

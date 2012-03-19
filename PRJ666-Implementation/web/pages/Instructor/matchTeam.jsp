@@ -1,9 +1,10 @@
 <%-- 
-    Document   : matching
-    Created on : Mar 13, 2012, 8:44:31 PM
+    Document   : matchTeam
+    Created on : Mar 18, 2012, 9:53:22 AM
     Author     : matthewschranz
 --%>
 
+<%@page import="seneca.projectManagement.entity.Projects"%>
 <%@page import="seneca.projectManagement.entity.Teammember"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="seneca.projectManagement.entity.Teams"%>
@@ -30,12 +31,6 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <title>Instructor - Matching</title>
-    <script>
-      function setTeam(x) {
-        document.form1.Team.value = x;
-        document.form1.submit();
-      }
-    </script>
   </head>
   <body>
     <table> 
@@ -103,6 +98,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="HomeInstructor.jsp">Instructor<br/>Home</a></li>
+            <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
             <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
 		        <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
@@ -113,68 +109,52 @@
       </tr>
       <tr>
         <td>
-          <h3 class="title">Current Active Semester Teams</h3>
-          <form name="form1" method="POST" action="matchTeam.jsp">
-            <%
-                Teams t = null;
-                List<Teams> tms = userBean.getUnMatchedTeams(1);
-                Teammember leader = null;
-                if(tms.size() > 0) {
-                    Integer beg = 0;
-                    Integer items = 8;
-                    try {
-                        items = new Integer(request.getParameter("items"));
-                    }
-                    catch (Exception e) {}
-                    try {
-                        beg = new Integer(request.getParameter("beg")) * items;
-                    }
-                    catch (Exception e) {}
-                    for(int i = beg; i < beg + items && i < tms.size() ; i++) {
-                        t = tms.get(i);
-                        leader = userBean.getLeader(t.getTeamId());
-                        out.print("<div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>");
-                          out.println("<div style='float: left'>");
-                            out.println(t.getTeamName());
-                          out.print("</div>");
-                          out.println("<div style='float: right'>");
-                            out.println("<input type='button' value='Match This Team' onclick='setTeam(" + t.getTeamId() + ")' />");
-                          out.print("</div>");
-                          out.print("<div style='clear: both'></div>");
-                        out.print("</div>");
-                        out.println("<div style='background-color: skyblue; padding: 10px'>");
-                          out.println("<div style='float: left; width: 150px'><b>Team Leader:</b></div>");
-                          out.println("<div style='float: left; width: 750px'>" + leader.getFirstName() +
-                                  " " + leader.getLastName() + "</div>");
-                          out.print("<div style='clear: both'></div>");
-                        out.println("</div>");
-                    }
-            %>
-            <div style="border-style: solid; border-color: #6F93C9"> </div>
-            <%
-                    out.println("<div style='float: left'><input type='hidden' name='Team' /></div>");
-                    out.println("<div style='float: right'>");
-                    int pages = (int) Math.ceil( (double) tms.size() / items);
-                    out.println(" Page(s): ");
-                    for(int i = 0; i < pages; i++) {
-                        out.println("<a href='matching.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
-                    }
-                    out.println("<a href='matching.jsp?items=" + tms.size() + "'>View All</a>");
-                    out.println("</div>");
-                    out.print("<div style='clear: both'></div>");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
-                    else if(session.getAttribute("matchSuccess") != null){
-                      out.println("<span style='color: green'>" + session.getAttribute("matchSuccess") + "</span>");
-                      session.removeAttribute("matchSuccess");                 
-                    }
-                } else {
-                    out.println("<h1>No projects to display.</h1>");
-                }
-            %>
-            </form>
+          <%
+            
+            String tId = request.getParameter("Team") != null ? request.getParameter("Team") : session.getAttribute("Team").toString();
+            Teams t = userBean.getTeam(Integer.parseInt(tId));
+            List<Projects> projects = userBean.getAllProjects("AV");
+            
+            if(projects != null){
+              Projects p = null;
+          %>
+          <h3 class="title">Select a Project for Team <%= t.getTeamName() %></h3>
+          <form name="form1" method="POST" action="../validation/processInstructor.jsp">
+            <div style="width: 500px">
+              <div>
+                <div style="float: left; width: 150px">Team Name: </div>
+                <div style="float: left">
+                  <select name="selectedProject">
+                    <option value="0" selected>Please Select a Project</option>
+                    <%
+                      for(int i = 0, len = projects.size(); i < len; i++){
+                        p = projects.get(i);
+                        out.println("<option value='" + p.getProjectId() + "'>" + p.getPrjName() + "</option>");
+                      }
+                    %>
+                  </select>
+                </div>
+                <div style="clear: both"></div>
+                <%
+                  if(session.getAttribute("matchFail") != null){
+                    out.println("<div style='float: left; color: red;'>");
+                    out.println(session.getAttribute("matchFail").toString());
+                    out.println("</div><div style='clear: both'></div>");
+                    session.removeAttribute("matchFail");
+                  }
+                %>
+              </div>
+              <div style="background-color: #D5E7E9; padding: 5px; text-align: right;">
+                <input type="hidden" name="teamId" value="<%= tId %>" />
+                <input type="submit" name="matchTeam" value="Match Team with Project" />
+              </div>
+            </div>
+          </form>
+          <%
+          } else {
+            out.println("<h3>There are no available projects currently.</h3>");
+          }
+          %>
         </td>
       </tr>             
     </table>

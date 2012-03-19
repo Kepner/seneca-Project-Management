@@ -161,7 +161,6 @@
             <li><a href="../Company/ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="../Company/ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="../Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="../Company/UpcomingMilestones.jsp">Upcoming Milestones</a></li>
             <li><a href="../Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">

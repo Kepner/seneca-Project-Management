@@ -315,15 +315,6 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<Projects>)q.getResultList();
   }
-  
-  public List<Projects> getAvailableProjects( String aStatus ){
-    em = getEntityManager();
-    
-    Query q = em.createQuery( "SELECT p FROM Projects p WHERE p.status = :status ORDER BY p.projectId ASC")
-            .setParameter( "status", aStatus );
-    
-    return (List<Projects>)q.getResultList();
-  }
 
   public List<Projects> getInstructorProjects( Integer aInstructorId ){
     em = getEntityManager();
@@ -401,11 +392,11 @@ public class PersistenceController extends EntityControllerBase {
   }
   
   //Edouard
-  public List<Teams> getSemesterTeams( Integer aStatus){
+  public List<Teams> getUnMatchedTeams( Integer aStatus ){
       em = getEntityManager();
       
-      Query q = em.createNamedQuery("Teams.findByTeamStatus")
-              .setParameter( "teamStatus", aStatus );
+      Query q = em.createQuery("SELECT t FROM Teams t WHERE t.projectId IS NULL AND t.teamStatus = :status")
+              .setParameter( "status", aStatus );
       
       return (List<Teams>)q.getResultList();
   } 

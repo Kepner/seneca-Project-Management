@@ -3,15 +3,15 @@ SET FOREIGN_KEY_CHECKS=0;
 /* accounts Table COMMANDS */
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Fall2011_1', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');  
+  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566FALL2011_1', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');  
 
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Fall2011_2', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566FALL2011_2', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, TEAM LEADER*/
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Fall2011_3', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566FALL2011_3', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
 /* password is 12345, SUPERVISOR */  
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
@@ -51,7 +51,7 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 
 /* password is 12345, TEAM LEADER */
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566Fall2011_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566FALL2011_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 
 /* teams Table Commands */
@@ -123,18 +123,14 @@ INSERT INTO company (companyName, companyPhone, businessAreas, companyDescriptio
   VALUES ('Buckles', '123-356-7879', 'Robotic Industries.', 'Basically going to take over the world. You are either with us or against us.',11);
   
 /* projects Table Commands */
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('MA', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('AV', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4);
   
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('MA', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('AV', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3);
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('MA', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
-
-UPDATE teams SET projectId = 1 WHERE teamId = 1;
-UPDATE teams SET projectId = 2 WHERE teamId = 2;
-UPDATE teams SET projectId = 3 WHERE teamId = 3;
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('AV', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
   VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5, 'PRJ666WIN2012');
@@ -142,8 +138,10 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
   VALUES ('PR', 'EPIC MEAL TIMEz', 'We are going to be doing super awesome stuffb. Our project is going to be the next Wordpress! JIBERISH WOOO', 'Drupal<br/>MySQL, BUTTER', 2, 5, 'PRJ666WIN2012');
 
-INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier)
-  VALUES ('PR', 'EPIC MEAL TIMEH', 'We are going to be doing super awesome stuffz. Our project is going to be the next Wordpress! WOOP DERP', 'Drupal<br/>MySQL, MORE DERP, POPCORN', 3, 5, 'PRJ666WIN2012');
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, prjIdentifier, teamId)
+  VALUES ('PR', 'EPIC MEAL TIMEH', 'We are going to be doing super awesome stuffz. Our project is going to be the next Wordpress! WOOP DERP', 'Drupal<br/>MySQL, MORE DERP, POPCORN', 3, 5, 'PRJ666WIN2012', 4);
+
+UPDATE teams SET projectId = 6 WHERE teamId = 4;
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
@@ -165,6 +163,11 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
 
 INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId, instructorId) VALUES ('PE', 'Laboratory Project', NULL, 'Project description goes here...', 'JAVA, MYSQL, GLASSFISH, JSP', '2012-03-05 13:53:25.0', 8, NULL, NULL);
 
+INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId) VALUES ('PE', 'Pending Project', NULL, 'this is a description of a sample project.', 'MSSql, C#.NET, ASP.NET,', '2012-03-12 13:26:13.0', 2, NULL);
+INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId) VALUES ('PE', '2nd Pending', NULL, 'test', 'test', '2012-03-12 13:34:09.0', 2, NULL);
+INSERT INTO projects (status, prjName, prjIdentifier, description, prjConstraints, agreementDate, companyId, teamId, instructorId) VALUES ('AP', 'Testing Approve', NULL, 'This project has been approved', 'Nothing', '2012-03-13 08:23:31.0', 2, NULL, 5);
+
+
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)
@@ -178,32 +181,6 @@ INSERT INTO comments (projectId, commentDescription, commentStatus)
   
 INSERT INTO comments (projectId, commentDescription, commentStatus)
   VALUES (4, 'This is a comment. Your groups work was awesome. Have my babies.', 1);
-
- 
-/* milestone Table Commands */
-INSERT INTO milestone (description, projectId, milestoneName)
-  VALUES ('Design Underway', 1, 'Design Start');
-  
-INSERT INTO milestone (description, projectId, milestoneName)
-  VALUES ('Design Underway', 2, 'Design Start');
-  
-INSERT INTO milestone (description, projectId, milestoneName)
-  VALUES ('Design Underway', 3, 'Design Start');
-  
-INSERT INTO milestone (description, projectId, milestoneName)
-  VALUES ('Design Underway', 4, 'Design Start');
-  
-INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
-  VALUES ('PID Completion', 'CO', 1, 'Project Completion');
-  
-INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
-  VALUES ('PID Completion', 'CO', 2, 'Project Completion');
-  
-INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
-  VALUES ('PID Completion', 'CO', 3, 'Project Completion');
-  
-INSERT INTO milestone (description, milestoneStatus, projectId, milestoneName)
-  VALUES ('PID Completion', 'CO', 4, 'Project Completion');
   
   
 /* projectfile Table Commands */

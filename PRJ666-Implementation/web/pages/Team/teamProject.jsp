@@ -132,8 +132,8 @@
             <span class="teamHeaders">Name:&nbsp;</span><%= p.getPrjName() %><br/>
             <span class="teamHeaders">Matched Date:&nbsp;</span><%= new SimpleDateFormat("MM/dd/yyyy").format(p.getAgreementDate()) %><br/>
             <span class="teamHeaders">Status:&nbsp;</span><%= p.getStatus() %><br/><br/>
-            <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %><br/><br/>
-            <span class="teamHeaders">Description:&nbsp;</span><p class="description"><%= p.getDescription() %><br/>
+            <span class="teamHeaders">Constraints:&nbsp;</span><p class="description"><%= p.getPrjConstraints() %></p>
+            <span class="teamHeaders">Description:&nbsp;</span><p class="description"><%= p.getDescription() %></p>
             <br/>
             <h3 class="title">Project Files</h3>
             <%

@@ -9,7 +9,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="seneca.projectManagement.entity.Teams"%>
 <%@page import="seneca.projectManagement.entity.Projects"%>
-<%@page import="seneca.projectManagement.entity.Milestone"%>
 <%@page import="seneca.projectManagement.entity.Projectfile"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
@@ -27,7 +26,6 @@
     String id = request.getParameter("id");
     Projects proj =  new Projects();
     Teams team = new Teams();
-    List<Milestone> projMilestones;
     List<Projectfile> projFiles;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
@@ -120,7 +118,6 @@
             <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="UpcomingMilestones.jsp">Upcoming Milestones</a></li>
             <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
@@ -133,7 +130,6 @@
       <tr>
         <td>       
         <% if(id!=""){
-           projMilestones = userBean.getProjectMilestones(proj.getProjectId());
            projFiles = userBean.getProfileFiles(proj.getProjectId());
    %>
         <h1><%=proj.getPrjName()%></h1>
@@ -176,37 +172,9 @@
         <%}else{%>
         <p><strong>Currently no team assigned</strong></p>
         <%}
-        if(!projMilestones.isEmpty()){
-            %>
-            <table id="milestone_table">
-              <tr>
-                <th colspan="3">Milestones</th>
-              </tr>
-              <tr>
-                  <th>Status</th>
-                  <th>Description</th>
-                  <th>Due Date</th>
-              </tr>
-              <%
-              for(int i = 0; i < projMilestones.size(); i++){
-               Milestone temp = new Milestone();
-               temp = projMilestones.get(i);
-               String s = new SimpleDateFormat("yyyy/MM/dd").format(temp.getDueDate());
-                %><tr>
-                    <td><%=temp.getMilestoneStatus()%></td>
-                    <td><%=temp.getDescription()%></td>
-                    <td><%=s%></td>
-                  </tr><%
-            }
-            %>
-            </table>
-            <%
-        }else{
-            %><p>Currently there are no milestones associated with this project</p><%
-        }
-            if(proj.getStatus().equals("PA")){
-            %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
-            }
+          if(proj.getStatus().equals("PA")){
+        %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
+          }
         }else{
         %><h1>This project does not appear to be valid or does not exist.</h1><%
         }

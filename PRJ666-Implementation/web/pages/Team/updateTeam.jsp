@@ -1,5 +1,5 @@
 <%-- 
-    Document   : manageMilestones
+    Document   : updateTeam
     Created on : Mar 3, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
@@ -43,14 +43,6 @@
     <title>PRJ566 - Update Team/Team Members</title>
   </head>
   <body>
-    <%
-      if(session.getAttribute("createSuccess") != null){
-        request.removeAttribute("milestoneDescription");
-        request.removeAttribute("milestoneName");
-        request.removeAttribute("milestoneDate");
-        request.removeAttribute("milestoneStatus");
-      }
-    %>
     <table> 
       <tr>
         <td colspan="2">

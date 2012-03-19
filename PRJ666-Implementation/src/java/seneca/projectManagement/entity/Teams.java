@@ -40,7 +40,7 @@ public class Teams implements Serializable {
   @Column(name = "teamEmail")
   private String teamEmail;
   @Column(name = "teamStatus")
-  private Integer teamStatus;
+  private Integer teamStatus = 1;
   @Size(max = 20)
   @Column(name = "teamName")
   private String teamName;
