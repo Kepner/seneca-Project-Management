@@ -115,7 +115,6 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
             <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>

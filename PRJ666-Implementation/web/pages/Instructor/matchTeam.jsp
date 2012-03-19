@@ -100,7 +100,7 @@
             <li><a href="HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
             <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-		        <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="../logout.jsp">Logout</a></li>

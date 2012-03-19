@@ -164,13 +164,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li style="width: 10%;"><a href="InstructorHome.jsp">Instructor<br/>Home</a></li>
-            <li style="width: 10%;"><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li style="width: 10%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
-            <li style="width: 10%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
-		        <li style="width: 10%;"><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li style="width: 10%;"><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li style="width: 10%;"><a href="#">Change<br/>Project<br/>Status</a></li>
+            <li><a href="HomeInstructor.jsp">Instructor<br/>Home</a></li>
+            <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+            <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>

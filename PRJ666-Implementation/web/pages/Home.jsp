@@ -96,7 +96,7 @@
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="archived.jsp">Archived<br/>Projects</a></li>
+            <li><a href="Home.jsp">Home</a></li>
           <% 
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
@@ -125,7 +125,7 @@
             <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
             <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li><a href="Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
           <%
@@ -154,7 +154,8 @@
             else {
           %>
               <li><a href="login.jsp">Login</a></li>
-              <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+              <li><a href="archived.jsp">Archived Projects</a></li>
+              <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
           <% } %>
             </ul>
           </div>
