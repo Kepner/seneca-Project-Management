@@ -105,7 +105,7 @@
           %>
           </ul>    
           <div style="float: right;">
-            <ul><li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
+            <ul><li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
             </ul>
           </div>
         </td>
