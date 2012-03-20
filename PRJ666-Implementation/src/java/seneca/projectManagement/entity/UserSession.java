@@ -291,4 +291,25 @@ public class UserSession {
   public boolean removeMember(Teammember aMember){
     return pc.removeMember(aMember);
   }
+
+  //Edouard
+  public boolean updateCompany(Company aCompany){
+      return pc.updateCompany(aCompany);
+  }
+  //Edouard
+  public boolean removeProjectFile(Projectfile file){
+      return pc.removeProjectFile(file);
+  }
+  //Edouard
+  public Number checkProjectComments(int id){
+      return pc.checkProjectComments(id);
+  }
+  //Edouard
+  public List<Company> getAllCompanies(){
+      return pc.getAllCompanies();
+  }
+  //Edouard
+  public List<Teams> getAllTeams(){
+      return pc.getAllTeams();
+  }
 }

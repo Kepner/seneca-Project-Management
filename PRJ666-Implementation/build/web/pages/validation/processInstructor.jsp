@@ -76,6 +76,7 @@ if(request.getParameter("matchTeam") != null){
     }
   }
 }
+<<<<<<< HEAD
 else if(request.getParameter("createTeamMember") != null){
   String tId = request.getParameter("mTeam"),
          mFName = request.getParameter("mFName"),
@@ -122,4 +123,6 @@ else if(request.getParameter("createTeamMember") != null){
     }
   }
 }
+=======
+>>>>>>> 0e006c4517caccc778eb9b91bcb02a878deedc0b
 %>

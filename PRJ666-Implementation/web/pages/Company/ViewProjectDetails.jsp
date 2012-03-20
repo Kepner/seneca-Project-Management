@@ -3,13 +3,9 @@
     Created on : Feb 29, 2012, 4:39:22 PM
     Author     : Edouard
 --%>
-<%@page import="seneca.projectManagement.entity.Company"%>
-<%@page import="seneca.projectManagement.entity.Accounts"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="seneca.projectManagement.entity.Teams"%>
-<%@page import="seneca.projectManagement.entity.Projects"%>
-<%@page import="seneca.projectManagement.entity.Projectfile"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
@@ -129,8 +125,32 @@
       <tr>
         <td>       
         <% if(id!=""){
-           projFiles = userBean.getProfileFiles(proj.getProjectId());
+           projFiles = userBean.getProfileFiles(proj.getProjectId());  
    %>
+            <strong style="color:red;">
+                <%
+                    if(request.getParameter("commentsubmit")!=null){
+                        if(request.getParameter("commentsubmit").equals("yes")){
+                            %>A comment was submitted for approval.<%
+                        }
+                    }
+                    if(request.getParameter("fileadded")!=null){
+                        if(request.getParameter("fileadded").equals("yes")){
+                            %>File was successfully added.<%
+                        }
+                    }
+                    if(request.getParameter("fileupdated")!=null){
+                        if(request.getParameter("fileupdated").equals("yes")){
+                            %>File was successfully updated.<%
+                        }
+                    }    
+                    if(request.getParameter("fileremoved")!=null){
+                        if(request.getParameter("fileremoved").equals("yes")){
+                            %>File was successfully removed.<%
+                        }
+                    }                   
+                %>                               
+            </strong>    
         <h1><%=proj.getPrjName()%></h1>
         <h2>Status: <%=proj.getStatus()%></h2>
         <p>Description: <%=proj.getDescription()%></p>
@@ -143,6 +163,7 @@
                     <th>Description</th>
                     <th>The File</th>
                     <th>Edit</th>
+                    <th>Remove</th>
                 </tr>
                 <%
                 for(int i=0; i < projFiles.size(); i++){
@@ -153,6 +174,7 @@
                         <td><%=temp.getFileDescription()%></td>
                         <td><a href="<%=temp.getTheFile()%>"><%=temp.getFileName()%></a></td>
                         <td><a href="ManageProjectFile.jsp?id=<%=temp.getFileId()%>">EDIT</a></td>
+                        <td><a href="RemoveProjectFile.jsp?id=<%=temp.getFileId()%>">DELETE</a></td>
                     </tr>
                     <%
                 }
@@ -163,11 +185,14 @@
             </table>
                <%    
         }else{
-            %><p> There are no files associated with this project</p><%
+            %><p> There are no files associated with this project</p>
+             <% if(!proj.getStatus().equals("PA")){%>
+            <a href="AddProjectFile.jsp?id=<%=id%>">Add Project File</a></p>
+            <%}            
         }
         %>
         <% if(team!=null && team.getTeamId()!=0){%>
-        <p>Assigned Team: <a href="../Team/TeamPage.jsp?id=<%=team.getTeamId()%>"><%=team.getTeamName()%></a></p>
+        <p>Assigned Team: <a href="#"><%=team.getTeamName()%></a></p>
         <%}else{%>
         <p><strong>Currently no team assigned</strong></p>
         <%}

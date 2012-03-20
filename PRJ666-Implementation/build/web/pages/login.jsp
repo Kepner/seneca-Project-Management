@@ -78,7 +78,11 @@
                 } else {
               %>
                 <li><a href="archived.jsp">Archived Projects</a></li>
+<<<<<<< HEAD
                 <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
+=======
+                <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+>>>>>>> 0e006c4517caccc778eb9b91bcb02a878deedc0b
              <% } %>
             </ul>
           </div>

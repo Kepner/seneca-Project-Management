@@ -27,13 +27,23 @@
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj!= null && proj.getProjectId() > 0){
             if(proj.getStatus().equals("PA")){
-                comment = new Comments();
-                comment.setProjectId(proj.getProjectId());
-                comment.setCommentStatus(0);
-                comment.setCommentDescription("");
-            }else{id="x";}
-        }else{id="";}
-    }else{id="";}
+                if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
+                    id="z"; //Comments already exist.
+                }else{
+                    comment = new Comments();
+                    comment.setProjectId(proj.getProjectId());
+                    comment.setCommentStatus(0);
+                    comment.setCommentDescription(""); 
+                }
+            }else{
+                id="x"; //Project is not yet in PA status.
+            }
+        }else{
+            id="q"; // Project does not exist.
+        }
+    }else{
+        id=""; // The id is either null or empty.
+    }
     
 %>
 
@@ -124,17 +134,49 @@
         </td>
       </tr>
       <tr>
-        <td>
-            <%
+        <td><%
             if(id.equals("x")){
-                %><h1>This project is not yet available for commentary.</h1><%
+                %>
+                <h1>This project is not yet available for commentary.</h1>
+                <%
+            }else if(id.equals("q")){
+                %>
+                <h1>The project used to get to this page is not valid.</h1>
+                <%
+            }else if(id.equals("z")){
+                 %>
+                 <h1>A comment has already been submitted for this project.</h1>
+                 <%
             }else if(id.equals("")){
-                %><h1>This comment is not associated with a valid project.</h1><%
+                %>
+                <h1>Cant add a comment to this project.</h1>
+                <%                
             }else{
                 %>
                 <h2>Please enter a comment bellow for:<br /> <%=proj.getPrjName()%></h2>
+                <strong style="color:red;">
+                    <%
+                        if(request.getParameter("commentfail")!=null){
+                            if(request.getParameter("commentfail").equals("1")){
+                                %>There was an error when submitting the comment.<%
+                            }
+                        }
+                    %>                               
+                </strong>
+                <p><%=userBean.checkProjectComments(proj.getProjectId())%></p>
                 <form action="../validation/processOther.jsp" method="post">
                     <textarea name="commentDescription" rows="8" cols="50"></textarea>
+                    <strong style="color:red;">
+                        <%
+                            if(request.getParameter("cdesc")!=null){
+                                if(request.getParameter("cdesc").equals("1")){
+                                    %>Comment Field cant be empty!!<%
+                                }else if (request.getParameter("cdesc").equals("2")){
+                                    %>Comment cant exceed 500 characters in length!<%
+                                }
+                            }
+                        %>                               
+                    </strong>
                     <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
                     <input type="hidden" name="AddComment" value="true" /><br />
                     <input type="submit" value="Submit for Approval" />

@@ -107,6 +107,9 @@
           <h1>Instructor Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
           userBean.getLoggedUser().getUserLName()%></h2>  
+          <p><a href="ViewClients.jsp">Clients</a></p>
+          <p><a href="ViewProjects.jsp">Projects</a></p>
+          <p><a href="ViewTeams.jsp">Teams</a></p>       
         </td>
       </tr>             
     </table>

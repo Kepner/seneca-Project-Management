@@ -1,37 +1,42 @@
 <%-- 
-    Document   : HomeAdmin.jsp
-    Created on : Feb 7, 2012, 3:32:57 PM
-    Author     : KepneR
+    Document   : RemoveProjectFile
+    Created on : Mar 19, 2012, 12:23:42 PM
+    Author     : win7user
 --%>
 
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true && userBean != null) {
-        if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
-            session.setAttribute("Error", "You don't have permission to access the administrator page.");
+        if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
+            session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
-        }
+        }            
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
     
-    if(session.getAttribute("First") == null) {
-        response.sendRedirect("ProjectUpdate.jsp");
-    }
-%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>  
+    String id = request.getParameter("id");
+    Projectfile projFile = new Projectfile();
+    if( id!=null && !id.equals("")){
+        projFile = userBean.getAProjectFile(Integer.parseInt(id));
+        if( projFile != null && projFile.getProjectId() > 0){
+            //Something Goes here
+        }else{ id=""; }                         
+    }else{ id=""; }
+ %>
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Administrator</title>
-  </head>
-  <body>
+        <title>Manage Project File: <%=projFile.getFileName()%></title>
+    </head>
+    <body>
     <table> 
       <tr>
         <td colspan="2">
@@ -56,7 +61,8 @@
             if(userBean.isLogged() == true) {
               Accounts temp_a = userBean.getLoggedUser();
               out.println("<hr width='95%' align='left'/>");
-              out.print("Hello Administrator, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
               out.println("<hr width='95%' align='left'/>");
             }
           }
@@ -93,14 +99,13 @@
 		          } ).render().setUser( "Seneca_College" ).start();
 		        </script>
 		      </div>
-        </td>
+        </td>      
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="HomeAdmin.jsp">Administrator Home</a></li>
-            <li><a href="PendingComments.jsp">Pending Comments</a></li>
-            <li><a href="AvailableProjects.jsp">Available Projects</a></li>
-            <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -110,48 +115,27 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <h1>Archived Selected Project(s)</h1>
-            <div style="clear: both"></div>
-            <div>
-            <%
-                String[] s =  request.getParameterValues("projects");
-                Integer id;
-                Integer color = 0;
-                if(s != null) {
-                    for(String s1 : s) {
-                        id = new Integer(s1);
-                        Projects p = userBean.getProject(id);
-                        out.print("<div style='font-weight: bold; width: 100%; padding: 5px; color: white; background-color: ");
-                        if(color == 0) {
-                            out.print("#6F93C9");
-                            color = 1;
-                        } else {
-                            out.print("skyblue");
-                            color = 0;
+        <td>        
+            <h1>Delete Project File?</h1>
+            <p>If you are sure you want to delete the file below, please click the delete button. <br />Otherwise you may navigate elsewhere.</p>
+            <strong>File: <a href="<%=projFile.getTheFile() %>"><%=projFile.getFileName() %></a></strong><br />
+            <strong>Description: </strong><em><%=projFile.getFileDescription() %></em> <br /><br />
+            <strong style="color:red;">
+                <%
+                    if(request.getParameter("filefailed")!=null){
+                        if(request.getParameter("filefailed").equals("1")){
+                            %>There was an error when removing the file.<%
                         }
-                        out.println("'>");
-                        out.println(p.getPrjName());
-                        out.println("</div>");
-                        p.setStatus("PA");
-                        
-                        Teams t = userBean.getTeamById(p.getTeamId());
-                        t.setTeamStatus(0);
-                        Accounts a = userBean.getAccount(t.getUserId());
-                        a.setAccountStatus(0);
-                        userBean.updateProject(p);
-                        userBean.updateTeam(t);
-                        userBean.updateAccounts(a);
                     }
-                } else {
-                    session.setAttribute("Error", "No project(s) selected!");
-                    response.sendRedirect("ProjectUpdate.jsp");
-                }
-                session.removeAttribute("First");
-            %>
-            </div>
+                %>                               
+            </strong> 
+            <form method="post" action="../validation/processFile.jsp">
+                <input type="hidden" name="fileId" value="<%=projFile.getFileId()%>" />
+                <input type="hidden" name="RemoveProjectFile" value="true" />            
+                <input type="submit" value="Delete" />
+            </form>
         </td>
-      </tr>             
-    </table>
-  </body>
+      </tr>
+    </table>        
+    </body>
 </html>

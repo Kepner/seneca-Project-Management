@@ -490,7 +490,7 @@ public class PersistenceController extends EntityControllerBase {
             em.close();
             ret = true;
         } catch (Exception e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         }
 
         return ret;
@@ -506,4 +506,59 @@ public class PersistenceController extends EntityControllerBase {
     
     return true;
   }
+
+//Edouard
+  public boolean updateCompany(Company aCompany){
+    boolean ret = false;
+    em = getEntityManager();
+    try{
+        em.getTransaction().begin();
+        em.merge( aCompany );
+        em.getTransaction().commit();
+        em.close();
+        ret = true;
+    } catch (Exception e){
+        e.printStackTrace();
+    }
+    return ret;
+  }
+//Edouard
+  public boolean removeProjectFile(Projectfile file) {
+      boolean ret = false;
+      em = getEntityManager();
+      try {
+          em.getTransaction().begin();
+          em.remove(em.merge(file));
+          em.getTransaction().commit();
+          ret = true;
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      em.close();
+      return ret;
+  }
+  //Edouard
+  public Number checkProjectComments(int id){
+      em = getEntityManager();
+      Query q = em.createQuery( "SELECT COUNT(a.projectId) FROM Comments a WHERE a.projectId=:id ")
+            .setParameter( "id", id );
+
+      return (Number)q.getSingleResult();
+  }
+  //Edouard
+  public List<Company> getAllCompanies(){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Company.findAll" );
+    
+    return (List<Company>) q.getResultList();
+  }
+  //Edouard
+  public List<Teams> getAllTeams(){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Teams.findAll" );
+    
+    return (List<Teams>) q.getResultList();
+  }  
 }
