@@ -66,7 +66,7 @@
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="Home.jsp">Home Page</a></li>
+            <li><a href="Home.jsp">Home</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -78,7 +78,7 @@
                 } else {
               %>
                 <li><a href="archived.jsp">Archived Projects</a></li>
-                <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+                <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
              <% } %>
             </ul>
           </div>
