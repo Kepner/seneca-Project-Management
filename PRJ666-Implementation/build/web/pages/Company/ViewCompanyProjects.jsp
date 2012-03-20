@@ -3,9 +3,9 @@
     Created on : Feb 15, 2012, 9:34:22 AM
     Author     : Edouard
 --%>
-<%@page import="seneca.projectManagement.entity.Accounts"%>
+    
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.Company"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
@@ -128,7 +128,6 @@
                 <td><%= proj.getStatus() %></td>
                 <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
                 <td><%= proj.getDescription() %></td>
-                <!--<td><%//=proj.getPrjConstraints() %></td>-->
         </tr>
         <%
             }

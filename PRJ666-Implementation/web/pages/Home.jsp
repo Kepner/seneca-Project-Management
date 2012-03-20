@@ -96,7 +96,6 @@ Document   : Home
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="Home.jsp">Home</a></li>
           <% 
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
@@ -159,7 +158,6 @@ Document   : Home
               <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
           <% } %>
             </ul>
-          </div>
         </td>
       </tr>
       <%

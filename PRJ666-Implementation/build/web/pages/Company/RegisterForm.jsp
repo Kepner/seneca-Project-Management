@@ -112,14 +112,12 @@
 		      </div>
         </td>
         <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
-          <div>
             <ul>
               <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home</a></li>
               <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
               <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived Projects</a></li>
               <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
             </ul>
-          </div>
         </td>
       </tr>
       <tr>

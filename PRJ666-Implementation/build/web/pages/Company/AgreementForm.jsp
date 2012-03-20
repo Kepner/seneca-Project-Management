@@ -90,12 +90,22 @@
 		      </div>
         </td>
         <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
-          <div>
-            <ul>
-              <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home</a></li>
-              <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
-              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived Projects</a></li>
-              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
+          <ul>
+          <% 
+            if(userBean.isLogged()) {
+              if(userBean.getLoggedUser().getUserRole().equals("CR")){
+          %>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="#">Create New Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          <%
+          }
+          }
+          %>
+          </ul>    
+          <div style="float: right;">
+            <ul><li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
             </ul>
           </div>
         </td>

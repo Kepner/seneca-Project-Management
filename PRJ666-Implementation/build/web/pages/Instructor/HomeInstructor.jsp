@@ -92,20 +92,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-<<<<<<< HEAD
             <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
-=======
-            <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-            <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
->>>>>>> 0e006c4517caccc778eb9b91bcb02a878deedc0b
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
@@ -115,12 +107,9 @@
           <h1>Instructor Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
           userBean.getLoggedUser().getUserLName()%></h2>  
-<<<<<<< HEAD
-=======
           <p><a href="ViewClients.jsp">Clients</a></p>
           <p><a href="ViewProjects.jsp">Projects</a></p>
-          <p><a href="ViewTeams.jsp">Teams</a></p>          
->>>>>>> 0e006c4517caccc778eb9b91bcb02a878deedc0b
+          <p><a href="ViewTeams.jsp">Teams</a></p>       
         </td>
       </tr>             
     </table>
