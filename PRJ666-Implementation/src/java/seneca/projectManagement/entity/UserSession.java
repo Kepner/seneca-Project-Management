@@ -126,6 +126,10 @@ public class UserSession {
     return pc.getAllMembers( aTeamId );
   }
   
+  public List<Teammember> getActiveTeamMembers(){
+    return pc.getActiveTeamMembers();
+  }
+  
   public Teammember getMember( Integer aMemberId ){
     return pc.getMember(aMemberId);
   }
@@ -282,5 +286,9 @@ public class UserSession {
   
   public boolean newComment(Comments aComment){
       return pc.newComment(aComment);
+  }
+  
+  public boolean removeMember(Teammember aMember){
+    return pc.removeMember(aMember);
   }
 }

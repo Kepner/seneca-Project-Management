@@ -122,12 +122,13 @@
               }
               else if(userBean.getLoggedUser().getUserRole().equals("IN")){
           %>
-            <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
-            <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li><a href="Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
