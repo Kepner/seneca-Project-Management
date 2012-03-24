@@ -155,6 +155,7 @@
               <li><a href="login.jsp">Login</a></li>
               <li><a href="archived.jsp">Archived Projects</a></li>
               <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
+              <li><a href="About.jsp">About</a></li>
           <% } %>
             </ul>
           </div>
