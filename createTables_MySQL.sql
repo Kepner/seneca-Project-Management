@@ -8,7 +8,7 @@ DROP TABLE projects;
 DROP TABLE teams;
 DROP TABLE company;
 DROP TABLE accounts;
-
+DROP TABLE news;
 
 CREATE TABLE accounts (
   userId int AUTO_INCREMENT PRIMARY KEY,
@@ -19,6 +19,15 @@ CREATE TABLE accounts (
   userRole varchar(2) NOT NULL,
   password varchar(50) NOT NULL,
   accountStatus int DEFAULT 1
+);
+
+CREATE TABLE news (
+  postId int AUTO_INCREMENT PRIMARY KEY,
+  postDate TIMESTAMP DEFAULT NOW(),
+  postTitle varchar(50) NOT NULL,
+  postText TEXT NOT NULL,
+  instructorId int NOT NULL,
+  CONSTRAINT fk_InstructorId FOREIGN KEY (instructorId) REFERENCES accounts(userId)
 );
 
 CREATE TABLE teams (

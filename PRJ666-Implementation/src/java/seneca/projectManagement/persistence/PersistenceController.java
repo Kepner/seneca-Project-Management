@@ -569,4 +569,13 @@ public class PersistenceController extends EntityControllerBase {
     
     return q.getResultList() != null ? (List<Projects>)q.getResultList() : null;
   }
+  
+  public List<News> getRecentNews(){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT n FROM News n ORDER BY n.postDate DESC" );
+    q.setMaxResults(5);
+    
+    return (List<News>)q.getResultList();
+  }
 }

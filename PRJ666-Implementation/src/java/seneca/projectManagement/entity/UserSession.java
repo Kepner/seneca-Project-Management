@@ -316,4 +316,8 @@ public class UserSession {
   public List<Projects> getApprovedMatchedProjects(){
     return pc.getApprovedMatchedProjects();
   }
+  
+  public List<News> getRecentNews(){
+    return pc.getRecentNews();
+  }
 }

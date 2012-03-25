@@ -38,8 +38,8 @@
         <td colspan="2">
           <table width="100%">
             <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+              <td width="400" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
                 <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
               </td>
             </tr>
@@ -98,7 +98,6 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home<br/>Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>

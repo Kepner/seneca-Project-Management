@@ -276,7 +276,6 @@ else if (request.getParameter("editMemberInfo") != null) {
     response.sendRedirect("../Team/updateTeam.jsp");  
   }
   else if(userBean.updateMember(m)) {
-    System.out.println("DERP");
     List<Teammember> members = userBean.getAllMembers(t.getTeamId());
       
     for(int i = 0; i < members.size(); i++){

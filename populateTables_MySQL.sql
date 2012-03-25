@@ -52,7 +52,14 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 /* password is 12345, TEAM LEADER */
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
   VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566FALL2011_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
-  
+
+
+/* News Table Commands */
+INSERT INTO news (postTitle, postText, instructorId)
+  VALUES ("PRJ566 - Project Planning and Management","In this course students are required to select a project that involves developing a computer system. Students learn project management concepts while carrying out requirements gathering, analysis, design, and implementation planning for the identified system. Project management concepts learned include scope development and management, creation of work breakdown structures including task dependencies, and cost benefit analysis using return on investment and payback. Students create dialogue maps and mock-ups of user interfaces for their systems, and use a modeling tool to create detailed software models which they then go on to implement in PRJ666.", 5);
+
+INSERT INTO news (postTitle, postText, instructorId)
+  VALUES ("PRJ666 - Project Implementation","This is the final course in the systems' stream in which students complete the development and implementation phase of a project. As part of a team, students will plan and manage the development of an actual system using project planning, system design, system implementation, and unit and system testing methodologies. Students will also integrate and apply the object-oriented concepts, tools and techniques learned in previous courses, and create appropriate documentation for the completed system.", 5);
 
 /* teams Table Commands */
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription, teamLogo, hasRegistered)
