@@ -99,27 +99,31 @@
       <tr>
         <td>
           <h3 class="title">Add News Post</h3>
-          <div style="padding: 5px">
-            <div style="float: left; width: 150px">Post Title: </div>
-            <div style="float: left"><input type="text" name="pTitle" size="40" value="${param.pTitle}"/></div>
-            <div style="clear: both"></div>
-            <div style="float: left; width: 150px">Post Text: </div>
-            <div style="float: left">
-              <textarea rows="15" cols="100" name="pText">${param.pText}</textarea>
+          <form method="POST" action="../validation/processInstructor.jsp"> 
+            <div style="padding: 5px">
+              <span style="font-weight: bold; text-decoration: italic;">*NOTE* You must type &#60br&#47;&#62; to represent a new line currently.</span>
+              <br/>
+              <div style="float: left; width: 150px">Post Title: </div>
+              <div style="float: left"><input type="text" name="pTitle" size="40" value="${param.pTitle}"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Post Text: </div>
+              <div style="float: left">
+                <textarea rows="15" cols="150" name="pText">${param.pText}</textarea>
+              </div>
+              <div style="clear: both"></div>
+              <%
+                if(session.getAttribute("newsPostFail") != null){
+                  out.println("<div style='float: left; color: red;'>");
+                  out.println(session.getAttribute("newsPostFail").toString());
+                  out.println("</div><div style='clear: both'></div>");
+                  session.removeAttribute("newsPostFail");
+                }
+              %>
             </div>
-            <div style="clear: both"></div>
-            <%
-              if(session.getAttribute("newsPostFail") != null){
-                out.println("<div style='float: left; color: red;'>");
-                out.println(session.getAttribute("newsPostFail").toString());
-                out.println("</div><div style='clear: both'></div>");
-                session.removeAttribute("newsPostFail");
-              }
-            %>
-          </div>
-          <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
-            <input type="submit" name="publishNewsPost" value="Publish Post">
-          </div>
+            <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
+              <input type="submit" name="publishNewsPost" value="Publish Post">
+            </div>
+          </form>
         </td>
       </tr>             
     </table>

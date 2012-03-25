@@ -62,10 +62,6 @@ public class News implements Serializable {
     return postDate;
   }
 
-  public void setPostDate(Date postDate) {
-    this.postDate = postDate;
-  }
-
   public String getPostTitle() {
     return postTitle;
   }

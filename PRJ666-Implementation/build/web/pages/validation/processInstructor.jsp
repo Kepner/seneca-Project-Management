@@ -158,6 +158,35 @@ else if(request.getParameter("proceedProject") != null){
   }
 }
 else if(request.getParameter("publishNewsPost") != null){
+  String pTitle = request.getParameter("pTitle"),
+         pText = request.getParameter("pText");
   
+  if(!pTitle.matches("[^0-9]{5,55}")){
+    session.setAttribute("newsPostFail", "Error. Title can not contain any digits, at least 5 characters long and no longer than 55 characters.");
+    request.getRequestDispatcher("../Instructor/postNews.jsp").forward(request, response);
+  }
+  else if(pText.isEmpty()){
+    session.setAttribute("newsPostFail", "Error. Post Text can not be empty.");
+    request.getRequestDispatcher("../Instructor/postNews.jsp").forward(request, response);
+  }
+  else {
+    News n = new News();
+    
+    for(int i = 0; i < pText.length(); i++){
+      System.out.println(pText.charAt(i));
+    }
+    
+    n.setInstructorId(userBean.getLoggedUser().getUserId());
+    n.setPostTitle(pTitle);
+    n.setPostText(pText);
+    
+    if(!userBean.addNewsPost(n)){
+      session.setAttribute("newsPostFail", "Error. Couldn't add post to database. Please try manually.");
+      request.getRequestDispatcher("../Instructor/postNews.jsp").forward(request, response);
+    }
+    else {
+      response.sendRedirect("../Instructor/HomeInstructor.jsp");
+    }
+  }
 }
 %>

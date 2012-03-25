@@ -102,9 +102,9 @@
           <h1>Instructor Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
           userBean.getLoggedUser().getUserLName()%></h2>  
-          <p><a href="ViewClients.jsp">Clients</a></p>
-          <p><a href="ViewProjects.jsp">Projects</a></p>
-          <p><a href="ViewTeams.jsp">Teams</a></p>       
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewClients.jsp">Clients</a></p>
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewProjects.jsp">Projects</a></p>
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewTeams.jsp">Teams</a></p>       
         </td>
       </tr>             
     </table>
