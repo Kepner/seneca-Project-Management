@@ -122,4 +122,39 @@ else if(request.getParameter("createTeamMember") != null){
     }
   }
 }
+else if(request.getParameter("proceedProject") != null){
+  System.out.println("proceeding project");
+  String period = request.getParameter("semesterPeriod"),
+         year = request.getParameter("year"),
+         pId = request.getParameter("pId");
+  
+  if(year.equals("0")){
+    session.setAttribute("proceedFail", "Error. Must select a year to proceed the project.");
+    session.setAttribute("Project", pId);
+    request.getRequestDispatcher("../Instructor/changeProjectStatus.jsp").forward(request, response);
+  }
+  else if(period.equals("0")){
+    session.setAttribute("proceedFail", "Error. Must select a time period to proceed the project.");
+    session.setAttribute("Project", pId);
+    request.getRequestDispatcher("../Instructor/changeProjectStatus.jsp").forward(request, response);
+  }
+  else {
+    String identifier = "PRJ666" + period + year;
+    Projects p = userBean.getProject(new Integer(pId));
+    
+    p.setPrjIdentifier(identifier);
+    p.setStatus("PR");
+    
+    if(userBean.updateProject(p)){
+      session.setAttribute("updateSuccess", "Successfully proceeded project " + p.getPrjName() + " to " + identifier + ".");
+      session.removeAttribute("Project");
+      response.sendRedirect("../Instructor/updateProjects.jsp");
+    }
+    else {
+      session.setAttribute("updateFail", "Couldn't update the project. Please try doing so manually.");
+      session.removeAttribute("Project");
+      response.sendRedirect("../Instructor/updateProjects.jsp");
+    }
+  }
+}
 %>

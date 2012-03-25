@@ -312,4 +312,8 @@ public class UserSession {
   public List<Teams> getAllTeams(){
       return pc.getAllTeams();
   }
+  
+  public List<Projects> getApprovedMatchedProjects(){
+    return pc.getApprovedMatchedProjects();
+  }
 }

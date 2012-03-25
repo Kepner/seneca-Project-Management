@@ -560,5 +560,13 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createNamedQuery( "Teams.findAll" );
     
     return (List<Teams>) q.getResultList();
-  }  
+  }
+  
+  public List<Projects> getApprovedMatchedProjects(){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "Select p FROM Projects p WHERE p.status = 'MA' OR p.status = 'AP'");
+    
+    return q.getResultList() != null ? (List<Projects>)q.getResultList() : null;
+  }
 }
