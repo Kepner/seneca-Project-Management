@@ -578,4 +578,16 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<News>)q.getResultList();
   }
+  
+  public boolean addNewsPost( News aPost ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist(aPost);
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
 }

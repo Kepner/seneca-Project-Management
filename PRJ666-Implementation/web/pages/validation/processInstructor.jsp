@@ -157,4 +157,7 @@ else if(request.getParameter("proceedProject") != null){
     }
   }
 }
+else if(request.getParameter("publishNewsPost") != null){
+  
+}
 %>
