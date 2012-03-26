@@ -35,9 +35,9 @@ CREATE TABLE teams (
   teamEmail varchar(400) NOT NULL,
   teamStatus int DEFAULT 1,
   teamName varchar(20),
-  teamConstraints varchar(120),
-  teamDescription varchar(400),
-  teamLogo varchar(200),
+  teamConstraints TEXT,
+  teamDescription TEXT,
+  teamLogo TEXT,
   projectId int,
   hasRegistered int DEFAULT 0,
   userId int NOT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE company (
   companyId int AUTO_INCREMENT PRIMARY KEY,
   companyName varchar(25) NOT NULL,
   companyPhone varchar(12) NOT NULL,
-  businessAreas varchar(200),
-  companyDescription varchar(600),
+  businessAreas TEXT,
+  companyDescription TEXT,
   userId int NOT NULL,
   CONSTRAINT fk_CompanyAccount FOREIGN KEY (userId) REFERENCES accounts (userId)
 );
@@ -60,8 +60,8 @@ CREATE TABLE projects (
   status varchar(2) NOT NULL,
   prjName varchar(20) NOT NULL UNIQUE,
   prjIdentifier varchar(25),
-  description varchar(500) NOT NULL,
-  prjConstraints varchar(250) NOT NULL,
+  description TEXT NOT NULL,
+  prjConstraints TEXT NOT NULL,
   agreementDate TIMESTAMP DEFAULT NOW(),
   companyId int NOT NULL,
   teamId int UNIQUE,
@@ -76,7 +76,7 @@ ALTER TABLE teams ADD CONSTRAINT fk_ProjectId FOREIGN KEY (projectId) REFERENCES
 CREATE TABLE comments (
   commentId int AUTO_INCREMENT PRIMARY KEY,
   commentStatus INT DEFAULT 0,
-  commentDescription varchar(500) NOT NULL,
+  commentDescription TEXT NOT NULL,
   projectId INT NOT NULL,
   CONSTRAINT fk_CommentProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
 );
@@ -86,8 +86,8 @@ CREATE TABLE teammember (
   firstName varchar(15) NOT NULL,
   lastName varchar(15) NOT NULL,
   email varchar(50) NOT NULL,
-  memberImage varchar(300),
-  description varchar(250),
+  memberImage TEXT,
+  description TEXT,
   teamLeader INT DEFAULT 0,
   teamId INTEGER NOT NULL,
   CONSTRAINT fk_MemberTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId)
@@ -96,8 +96,8 @@ CREATE TABLE teammember (
 CREATE TABLE projectfile (
   fileId int AUTO_INCREMENT PRIMARY KEY,
   fileName varchar(40) NOT NULL,
-  fileDescription varchar(120) NOT NULL,
-  theFile varchar(500) NOT NULL,
+  fileDescription TEXT NOT NULL,
+  theFile TEXT NOT NULL,
   projectId INT NOT NULL,
   CONSTRAINT fk_FileProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
 );
