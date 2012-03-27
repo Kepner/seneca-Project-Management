@@ -1,10 +1,8 @@
 <%-- 
-    Document   : ManageProjectFile
-    Created on : Feb 29, 2012, 5:52:30 PM
+    Document   : EditProjectInfo
+    Created on : Mar 20, 2012, 4:41:05 PM
     Author     : Edouard
 --%>
-
-<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
@@ -18,26 +16,29 @@
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-    
     String id = request.getParameter("id");
-    Projectfile projFile = new Projectfile();
+    Projects proj =  new Projects();
     if( id!=null && !id.equals("")){
-        projFile = userBean.getAProjectFile(Integer.parseInt(id));
-        if( projFile != null && projFile.getProjectId() > 0){
-            Projects proj = userBean.getProject(projFile.getProjectId());
-            if(userBean.getCompany().getCompanyId()!=proj.getCompanyId()){
+        proj = userBean.getProject(Integer.parseInt(id));
+        if( proj != null && proj.getProjectId() > 0){
+            if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
                 id="x";
             }
-        }else{ id=""; }                         
-    }else{ id=""; }
- %>
+        }else{
+            id="";
+        }
+    }else{
+        id="";
+    }
+        
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Manage Project File</title>
+        <title>Manage Pending Project</title>
     </head>
     <body>
     <table> 
@@ -112,37 +113,26 @@
         </td>
       </tr>
       <tr>
-        <td>   
+        <td>
         <%if(id.equals("x")){
             %><h1>You do not have permission to access this page.</h1><%
          }else if(!id.equals("")){%>
-        <h1>Make Changes Below:</h1>
-        <p><strong>Please note:</strong><br/> Files are not hosted on our servers and must be hosted at your leisure 
-            somewhere appropriate.<br/> If files contain sensitive information considering encrypting them.</p>
-            <strong style="color:red;">
-                <%
-                    if(request.getParameter("filefailed")!=null){
-                        if(request.getParameter("filefailed").equals("1")){
-                            %>There was an error when saving the changes.<%
-                        }
-                    }
-                %>                               
-            </strong>        
-        <form method="post" action="../validation/processFile.jsp">
-            <input type="hidden" name="fileId" value="<%=projFile.getFileId()%>" />
-            <input type="hidden" name="UpdateProjectFile" value="true" />            
+         <h1>Make changes below:</h1>
+         <form method="post" action="../validation/processOther.jsp">
+            <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
+            <input type="hidden" name="UpdateProject" value="true" />            
             <table>
                 <tr style="vertical-align: top;">
-                    <td>File Name:</br><em style="color: gray; font-size: 12px;">Database Connection Info</em></td>
-                    <td><input style="vertical-align: top;" type="text" size="40" name="projectfileName" value="<%=projFile.getFileName()%>"/></td>
+                    <td>Project Name:</br><em style="color: gray; font-size: 12px;">Hours of Service</em></td>
+                    <td><input style="vertical-align: top;" type="text" size="40" name="projectName" value="<%=proj.getPrjName()%>"/></td>
                     <td>
                         <strong style="color:red;">
                             <%
-                                if(request.getParameter("fname")!=null){
-                                    if(request.getParameter("fname").equals("1")){
-                                        %>File name field cant be empty!<%
-                                    }else if (request.getParameter("fname").equals("2")){
-                                        %>File name cant exceed 40 characters in length!<%
+                                if(request.getParameter("pname")!=null){
+                                    if(request.getParameter("pname").equals("1")){
+                                        %>Project name field cant be empty!<%
+                                    }else if (request.getParameter("pname").equals("2")){
+                                        %>Project name cant exceed 25 characters in length!<%
                                     }
                                 }
                             %>                               
@@ -150,16 +140,16 @@
                     </td>                 
                 </tr>
                 <tr style="vertical-align: top;">
-                    <td>Description:</br><em style="color: gray; font-size: 12px;">Contains database connection <br/>information for our prj system.</em></td>
-                    <td><textarea rows="3" cols="40" name="projectfileDescription" style="vertical-align: top;" /><%= projFile.getFileDescription()%></textarea></td>
+                    <td>Description:</br><em style="color: gray; font-size: 12px;">This project will track<br/>the hours of service. Etc..</em></td>
+                    <td><textarea rows="10" cols="40" name="projectDescription" style="vertical-align: top;" /><%=proj.getDescription()%></textarea></td>
                     <td>
                         <strong style="color:red;">
                             <%
-                                if(request.getParameter("fdesc")!=null){
-                                    if(request.getParameter("fdesc").equals("1")){
+                                if(request.getParameter("pdesc")!=null){
+                                    if(request.getParameter("pdesc").equals("1")){
                                         %>Description field cant be empty!<%
-                                    }else if (request.getParameter("fdesc").equals("2")){
-                                        %>Description cant exceed 120 characters in length!<%
+                                    }else if (request.getParameter("pdesc").equals("2")){
+                                        %>Description cant exceed 500 characters in length!<%
                                     }
                                 }
                             %>
@@ -167,35 +157,35 @@
                     </td>                
                 </tr>
                 <tr style="vertical-align: top;">
-                    <td>File Location:</br><em style="color: gray; font-size: 12px;">The full URL of the file.<br/>http://web.com/files/conn.doc</em></td>
-                    <td style="vertical-align: top;"><input type="text" size="40" name="projectfileTheFile" value="<%=projFile.getTheFile()%>"/></td>
+                    <td>Constraints:</br><em style="color: gray; font-size: 12px;">List of technologies:<br/>MySQL<br />Java</em></td>
+                    <td><textarea rows="5" cols="40" name="projectConstraints" style="vertical-align: top;" /><%=proj.getPrjConstraints()%></textarea></td>
                     <td>
                         <strong style="color:red;">
                             <%
-                                if(request.getParameter("ffile")!=null){
-                                    if(request.getParameter("ffile").equals("1")){
-                                        %>File Location field cant be empty!<%
-                                    }else if (request.getParameter("ffile").equals("2")){
-                                        %>File Location field cant exceed 500 characters in length!<%
+                                if(request.getParameter("pcons")!=null){
+                                    if(request.getParameter("pcons").equals("1")){
+                                        %>Constraints field cant be empty!<%
+                                    }else if (request.getParameter("pcons").equals("2")){
+                                        %>Constraints cant exceed 250 characters in length!<%
                                     }
                                 }
-                            %>                                
+                            %>
                         </strong>
-                    </td>                 
+                    </td>                
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <input type="submit" value="Save Changes" />
                     </td>
-                </tr>
+                </tr>                
             </table>
-        </form>
+         </form>
         <%
          }else{
-            %><h1>This file does not appear to be valid or does not exist.</h1><%
-         }%>
+            %><h1>This project does not appear to be valid or does not exist.</h1><%
+         }%>    
        </td>
       </tr>             
-    </table>        
+    </table>
     </body>
 </html>

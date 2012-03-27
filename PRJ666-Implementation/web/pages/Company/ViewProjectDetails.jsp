@@ -27,6 +27,9 @@
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj != null && proj.getProjectId() > 0){
             team = userBean.getProjectTeam(Integer.parseInt(id));
+            if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
+                id="x";
+            }
         }else{
             id="";
         }
@@ -42,7 +45,11 @@
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
+<<<<<<< HEAD
         <title>Project #<%=id%></title>
+=======
+        <title>Project Page</title>
+>>>>>>> 77130e942551fd40cce5d15e6f5fe06bb9c41cf4
     </head>
     <body>
     <table> 
@@ -118,9 +125,17 @@
       </tr>
       <tr>
         <td>       
+<<<<<<< HEAD
         <% if(id!=""){
            projFiles = userBean.getProfileFiles(proj.getProjectId());  
    %>
+=======
+        <% if(id.equals("x")){
+            %><h1>You do not have permission to access this page.</h1><%
+         }else if(!id.equals("")){
+           projFiles = userBean.getProfileFiles(proj.getProjectId());  
+        %>
+>>>>>>> 77130e942551fd40cce5d15e6f5fe06bb9c41cf4
             <strong style="color:red;">
                 <%
                     if(request.getParameter("commentsubmit")!=null){
@@ -142,12 +157,34 @@
                         if(request.getParameter("fileremoved").equals("yes")){
                             %>File was successfully removed.<%
                         }
+<<<<<<< HEAD
                     }                   
+=======
+                    } 
+                    if(request.getParameter("updatedproject")!=null){
+                        if(request.getParameter("updatedproject").equals("yes")){
+                            %>Project was successfully updated.<%
+                        }
+                    }                             
+>>>>>>> 77130e942551fd40cce5d15e6f5fe06bb9c41cf4
                 %>                               
             </strong>    
         <h1><%=proj.getPrjName()%></h1>
         <h2>Status: <%=proj.getStatus()%></h2>
+<<<<<<< HEAD
         <p>Description: <%=proj.getDescription()%></p>
+=======
+        <%
+        if(proj.getStatus().equals("PE")){
+            %>
+            <p><strong style="color:red;">This project has not yet been approved.<br/>You are able to edit the project details before it is approved</strong></p>
+            <a href="EditProjectInfo.jsp?id=<%=proj.getProjectId()%>">Click here to edit</a><br/>
+            <a href="RemoveProject.jsp?id=<%=proj.getProjectId()%>">Click here to delete</a>            
+            <%
+        }
+        %>        
+        <p><strong>Description:</strong> <%=proj.getDescription()%></p>
+>>>>>>> 77130e942551fd40cce5d15e6f5fe06bb9c41cf4
         <p><strong>Constraints:</strong> <%=proj.getPrjConstraints()%></p>
         <%if(!projFiles.isEmpty()){
             %>

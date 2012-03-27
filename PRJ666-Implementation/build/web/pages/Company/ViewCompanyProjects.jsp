@@ -102,6 +102,15 @@
       </tr>
       <tr>
         <td> 
+            <strong style="color:red;">
+                <%
+                    if(request.getParameter("projectdeleted")!=null){
+                        if(request.getParameter("projectdeleted").equals("yes")){
+                            %>The pending project was deleted.<%
+                        }
+                    }            
+                %> 
+            </strong>
             <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
         <table>
         <tr>
