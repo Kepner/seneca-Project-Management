@@ -70,10 +70,6 @@ public class Teammember implements Serializable {
     return memberId;
   }
 
-  public void setMemberId(Integer memberId) {
-    this.memberId = memberId;
-  }
-
   public String getFirstName() {
     return firstName;
   }
