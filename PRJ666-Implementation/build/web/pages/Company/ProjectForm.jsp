@@ -83,7 +83,7 @@
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {

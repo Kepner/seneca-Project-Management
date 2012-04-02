@@ -44,8 +44,7 @@ public class UserSession {
     try {
       Accounts account = pc.getAccount( aUserIdentifier );
       if(account != null) {
-        if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())
-            == true && account.getAccountStatus() == 1) {
+        if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())) {
           loggedUser = account;
           return true;
         }
