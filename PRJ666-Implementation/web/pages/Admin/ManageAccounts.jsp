@@ -162,7 +162,7 @@
                 }
                 out.println("<div style='float: left'><input type='submit' value='Create New Account' name='create' /></div>");
                 out.println("<div style='float: left'><input type='submit' value='Edit Selected Account' name='edit' /></div>");
-                out.println("<div style='float: left'><input type='submit' value='Remove Selected Account' name='remove' /></div>");
+                //out.println("<div style='float: left'><input type='submit' value='Remove Selected Account' name='remove' /></div>");
                 out.println("<div style='float: right'>");
                 int pages = (int) Math.ceil( (double) accts.size() / items);
                 out.println(" Page(s): ");
