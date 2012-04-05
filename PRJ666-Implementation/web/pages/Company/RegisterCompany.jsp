@@ -105,6 +105,9 @@
         } else if(user.isEmpty() == true) {
             session.setAttribute("user", "Cannot be empty!");
             errorFound = true;
+        } else if(user.length() < 5) {
+            session.setAttribute("user", "Username length must be at least 5 characters!");
+            errorFound = true;
         } else {
             if(Validation.isValidUsername(user) == true) {
                 account.setUserIdentifier(user);
@@ -139,7 +142,7 @@
             session.setAttribute("pass1", "Cannot be empty!");
             errorFound = true;
         } else if(pass1.length() < 5) {
-            session.setAttribute("pass1", "Password length must be at least 5 characters.");
+            session.setAttribute("pass1", "Password length must be at least 5 characters!");
             errorFound = true;
         } else if(pass2 == null) {
             session.setAttribute("pass2", "Cannot be empty!");
