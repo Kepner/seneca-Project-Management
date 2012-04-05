@@ -13,7 +13,7 @@
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
-        }            
+        }
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
@@ -42,7 +42,7 @@
     <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>

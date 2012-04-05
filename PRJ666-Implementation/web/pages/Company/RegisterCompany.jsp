@@ -34,9 +34,6 @@
         } else if(cname.isEmpty() == true) {
             session.setAttribute("cname", "Cannot be empty!");
             errorFound = true;
-        } else if(cname.length() > 25) {
-            session.setAttribute("cname", "Cannot be longer than 25 characters!");
-            errorFound = true;
         } else {
             company.setCompanyName(cname);
         }
@@ -48,9 +45,6 @@
         } else if(careas.isEmpty() == true) {
             session.setAttribute("careas", "Cannot be empty!");
             errorFound = true;
-        } else if(careas.length() > 200) {
-            session.setAttribute("careas", "Cannot be longer than 200 characters!");
-            errorFound = true;
         } else {
             company.setBusinessAreas(careas);
         }
@@ -61,9 +55,6 @@
             errorFound = true;
         } else if(cdesc.isEmpty() == true) {
             session.setAttribute("cdesc", "Cannot be empty!");
-            errorFound = true;
-        } else if(cdesc.length() > 600) {
-            session.setAttribute("cdesc", "Cannot be longer than 600 characters!");
             errorFound = true;
         } else {
             company.setCompanyDescription(cdesc);
@@ -209,7 +200,7 @@
   <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
