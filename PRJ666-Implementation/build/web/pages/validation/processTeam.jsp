@@ -162,9 +162,7 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
   
   
   if (team != null){
-    System.out.println("in team null check");
       Teammember teamMember = userBean.getLeader(team.getTeamId());
-      System.out.println("got leader");
       teamMember.setDescription(tlDesc);
       teamMember.setFirstName(tlFName);
       teamMember.setLastName(tlLName);
@@ -172,11 +170,9 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
       teamMember.setMemberImage(tlImage);
       teamMember.setTeamLeader(1);
       teamMember.setTeamId(team.getTeamId());
-      System.out.println("set all fields");
       
       
       if (userBean.updateMember( teamMember )) {
-          System.out.println("updated leader");
         for (int i = 0; i < count;){
           teamMember = new Teammember();
         
@@ -189,7 +185,6 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
           teamMember.setMemberImage(tmImage[i]);
           
           if ( userBean.addMember( teamMember ) ){
-              System.out.println("added member");
             i++;
           }
           else {
@@ -239,22 +234,22 @@ else if (request.getParameter("editTeamInfo") != null){
   t.setTeamDescription(tDesc);
   
   if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
-    session.setAttribute("editTeamFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
+    session.setAttribute("editTeamFail", "Error. Team Name must be only alphanumeric and between 1 and 20 characters in length.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tLogo.isEmpty() || tLogo.length() > 65000){
-    session.setAttribute("editTeamFail" , "Error. Image can not be empty.");
+    session.setAttribute("editTeamFail" , "Error. Team Logo can not be empty.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tDesc.isEmpty() || tDesc.length() > 65000){
-    session.setAttribute("editTeamFail", "Error. Description can't be empty or greater than 65000 characters.");
+    session.setAttribute("editTeamFail", "Error. Team Description can't be empty or greater than 65000 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tCons.isEmpty() || tCons.length() > 65000){
-    session.setAttribute("editTeamFail", "Error. Constraints can't be empty or greater than 65000 characters.");
+    session.setAttribute("editTeamFail", "Error. Team Constraints can't be empty or greater than 65000 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
@@ -290,8 +285,6 @@ else if (request.getParameter("editMemberInfo") != null) {
   m.setMemberId(Integer.parseInt(mId));
   m.setTeamId(t.getTeamId());
   m.setTeamLeader(Integer.parseInt(mLeader));
-  
-  System.out.println(mLeader);
   
   if(!mFName.matches("[A-Za-z\\s]{1,15}")){
     session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 1 and 15 characters in length.");

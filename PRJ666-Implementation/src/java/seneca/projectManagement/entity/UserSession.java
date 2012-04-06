@@ -258,8 +258,8 @@ public class UserSession {
     return pc.updateAccounts(a);
   } 
   
-  public List<Teams> getUnMatchedTeams( Integer aStatus ){
-      return pc.getUnMatchedTeams(aStatus);
+  public List<Teams> getUnMatchedTeams(){
+      return pc.getUnMatchedTeams();
   }
   
   public Teams getProjectTeam(int aId){
@@ -314,5 +314,9 @@ public class UserSession {
   //Edouard
   public boolean removeProject(Projects aProject){
     return pc.removeProject(aProject);
+  }
+  
+  public List<Teammember> getActiveRegisteredTeamMembers(){
+    return pc.getActiveRegisteredTeamMembers();
   }
 }
