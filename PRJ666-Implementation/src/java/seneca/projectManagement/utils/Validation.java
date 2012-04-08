@@ -41,8 +41,12 @@ public class Validation {
         boolean value = true;
         
         try {
-            PersistenceController pc = new PersistenceController();
-            if(pc.getAccount(username) != null) {
+            if(username.matches("^\\w+$")) {
+                PersistenceController pc = new PersistenceController();
+                if(pc.getAccount(username) != null) {
+                    value = false;
+                }
+            } else {
                 value = false;
             }
         }
