@@ -124,7 +124,7 @@
                 if(userBean.updateProject(p) == false) {
                     out.print("An unexpected error has occured while updating the project!");
                 } else {
-                    out.print("<h1>Project " + p.getPrjName() + " has been approved!</h1>");
+                    session.setAttribute("approveSuccess", "Project " + p.getPrjName() + " has been approved!");
                 }
             %>
         </td>

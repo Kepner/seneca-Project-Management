@@ -161,12 +161,16 @@
                     out.println("<a href='PendingProjects.jsp?items=" + projects.size() + "'>View All</a>");
                     out.println("</div>");
                     out.print("<div style='clear: both'></div>");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
                 } else {
                     out.println("<h1>No projects to display.</h1>");
+                }
+                if(session.getAttribute("Error") != null) {
+                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                    session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("approveSuccess") != null){
+                    out.println("<span style='color: green'>" + session.getAttribute("approveSuccess") + "</span>");
+                    session.removeAttribute("approveSuccess");                  
                 }
             %>
             </form>

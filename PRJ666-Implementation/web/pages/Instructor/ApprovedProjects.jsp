@@ -113,7 +113,7 @@
             <%
                 Projects p = null;
                 //List<Projects> projects = userBean.getAllProjects();
-                List<Projects> projects = userBean.getAllProjects("AP", userBean.getLoggedUser());
+                List<Projects> projects = userBean.getAllProjects("AP");
                 if(projects.size() > 0) {
                     Collections.sort(projects, new ProjectSorting());
                     Integer beg = 0;
