@@ -8,7 +8,16 @@
 <%@page import="seneca.projectManagement.utils.CryptoUtil"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
-<%
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
+    <script type="text/javascript" src="../resources/js/twitter.js"></script>
+    <title>Instructor</title>
+  </head>
+  <body>
+  <%
     Accounts a = new Accounts();
     a.setUserIdentifier("");
     a.setUserFName("");
@@ -69,13 +78,14 @@
                 }
             }
             
-            a.setUserRole(request.getParameter("id_role"));
-            a.setAccountStatus(new Integer(request.getParameter("id_status")));
-            a.setUserIdentifier(request.getParameter("id_user"));
-            
-            if(errorFound == true) {
+            if(errorFound) {
                 session.setAttribute("Account", a);
                 request.getRequestDispatcher("CreateTeam.jsp").forward(request, response);
+            }
+            else{
+                a.setUserRole(request.getParameter("id_role"));
+                a.setAccountStatus(1);
+                a.setUserIdentifier(request.getParameter("id_user"));
             }
         }
     }
@@ -83,16 +93,6 @@
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
 %>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
-    <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Instructor</title>
-  </head>
-  <body>
     <table> 
       <tr>
         <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
@@ -154,7 +154,7 @@
             <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
@@ -167,7 +167,7 @@
         <td>
             <h1>Create Team Account</h1>
             <%
-                if(errorFound != true) {
+                if(!errorFound) {
                     String pass = CryptoUtil.generateRandomPassword();
                     a.setPasswordHashed(pass);
                     if(userBean.addTeam(a) == true) {

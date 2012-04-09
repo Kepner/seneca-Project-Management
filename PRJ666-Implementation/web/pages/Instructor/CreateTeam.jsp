@@ -165,14 +165,6 @@
                     </select>
                 </div>
                 <div style="clear: both"></div>
-                <div style="float: left; width: 150px">Status:</div>
-                <div style="float: left">
-                    <select name="id_status">
-                        <option value="1" <%= a.getAccountStatus() == 1 ? "selected" : "" %>>Active</option>
-                        <option value="0" <%= a.getAccountStatus() == 0 ? "selected" : "" %>>Inactive</option>
-                    </select>
-                </div>
-                <div style="clear: both"></div>
             </div>
             <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
                 <input type="submit" value="Create">
