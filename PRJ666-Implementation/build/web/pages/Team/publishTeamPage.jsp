@@ -31,7 +31,6 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
     <title>PRJ566 - Publish Team Page</title>
   </head>
   <body>
