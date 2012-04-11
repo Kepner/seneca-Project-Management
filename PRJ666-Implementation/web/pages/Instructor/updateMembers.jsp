@@ -54,6 +54,21 @@
             }
           }
           %>
+          <div style="text-align: center;">
+              <ul>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+		<li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/postNews.jsp">Post<br/>News</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/ViewClients.jsp">View<br/>All<br/>Clients</a><li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/ViewProjects.jsp">View<br/>All<br/>Projects</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Instructor/ViewTeams.jsp">View<br/>All<br/>Teams</a></li>
+              </ul>
+          </div>
           <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -87,17 +102,11 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
-          <ul>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/postNews.jsp">Post<br/>News</a></li>
-            <li><a href="../logout.jsp">Logout</a></li>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
           </ul>
         </td>
       </tr>
@@ -108,10 +117,11 @@
                 Create New Member
                 **************************************************************/
                 if(request.getParameter("createMember") != null || session.getAttribute("createMember") != null) {
-                    out.println("<h1>Create New Member</h1>");
+                    out.println("<hr>");
+                    out.println("<h3>Create New Member</h3>");
           %>
                     <form method="POST" action="../validation/processInstructor.jsp">
-                      <div style="width: 900px">
+                      <div style="width: 600px">
                         <div style="padding: 5px; background-color: #D5E7E9">
                           Member Information
                         </div>
@@ -179,13 +189,23 @@
                     mbr = userBean.getMember(new Integer(request.getParameter("mId")));
                     List<Teammember> tmbrs = userBean.getAllMembers(mbr.getTeamId());
                     Teams t = userBean.getTeamById(mbr.getTeamId());
+                    Teammember tm = null;
+                    
+                    String emails = "";
+                    
+                    for(int i = 0; i < tmbrs.size(); i++){
+                        tm = tmbrs.get(i);
+                        emails += tm.getEmail() + ";";
+                    }
+                    
+                    t.setTeamEmail(emails);
                     
                     if(tmbrs.size() == 1 && t.getProjectId() != null){
                       session.setAttribute("memberError", "Can not remove the team member. Last team member of the group and the group has"
                               + " been matched to a project.");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");  
                     }
-                    else if(userBean.removeMember(mbr)){
+                    else if(userBean.removeMember(mbr) && userBean.updateTeam(t)){
                       session.removeAttribute("deleteMember");
                       session.setAttribute("memberSuccess", "Successfully deleted " + mbr.getFirstName() + " " + mbr.getLastName() + ".");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");

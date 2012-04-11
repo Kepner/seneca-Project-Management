@@ -35,9 +35,9 @@
       </tr>
       <tr valign="top">
         <td rowspan="5" align="left" width="200"> 
-          <img src="/PRJ666-Implementation/pages/resources/images/seneca_logo.gif" title="Seneca logo"/>
+          <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
-          <img src="/PRJ666-Implementation/pages/resources/images/ICT_Logo.png" title="ICT Logo"/>
+          <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
           <%
           if(userBean != null) {
@@ -50,6 +50,14 @@
             }
           }
           %>
+          <div style="text-align: center;">
+            <ul>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company<br/>Home</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Info</a></li>
+            </ul>
+          </div>
           <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -83,38 +91,17 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
-          <ul>
-          <% 
-            if(userBean.isLogged()) {
-              if(userBean.getLoggedUser().getUserRole().equals("CR")){
-          %>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
-          <%
-              }
-            }
-          %>
-          </ul>    
-          <div style="float: right;">
-            <ul>
-              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
-              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
-              <li><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
-              <%
-                if(userBean.isLogged())
-                  out.println("<li><a href='/PRJ666-Implementation/pages/logout.jsp'>Logout</a></li>");
-                else
-                  out.println("<li><a href='/PRJ666-Implementation/pages/login.jsp'>Login</a></li>");
-              %>
-            </ul>
-          </div>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
+          </ul>
         </td>
       </tr>
       <tr>
         <td>
+            <hr>
         <h1>Agreement Form</h1>
         <form method="POST" action="Agreed.jsp">
             <div style="width: 700px">

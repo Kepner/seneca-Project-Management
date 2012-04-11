@@ -62,6 +62,14 @@
             }
           }
           %>
+          <div style="text-align: center;">
+            <ul>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company<br/>Home</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
+              <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Info</a></li>
+            </ul>
+          </div>
           <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -94,23 +102,18 @@
 		          } ).render().setUser( "Seneca_College" ).start();
 		        </script>
 		      </div>
-        </td>      
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
-          <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
+        </td>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
           </ul>
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
         </td>
       </tr>
       <tr>
         <td>
+            <hr>
         <%if(id.equals("x")){
             %><h1>You do not have permission to access this page.</h1><%
          }else if(!id.equals("")){%>

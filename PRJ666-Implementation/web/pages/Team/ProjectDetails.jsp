@@ -47,6 +47,25 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Teams temp_t = userBean.getTeam();
+              out.print("Hello, Team " + temp_t.getTeamName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
+          <div style="text-align: center;">
+              <ul>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li> 
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Available<br/>Projects</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li> 
+              </ul>
+          </div>
           <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -80,22 +99,17 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
-          <ul>
-            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Available<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Team<br/>Project</a></li>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
           </ul>
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
         </td>
       </tr>
       <tr>
         <td>
+            <hr>
                 <%
                     String s = request.getParameter("Project");
                     Projects p = null;

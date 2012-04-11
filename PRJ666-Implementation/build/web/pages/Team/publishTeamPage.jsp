@@ -42,7 +42,7 @@
         </td>
       </tr>
       <tr valign="top">
-        <td rowspan="50" align="left" width="200"> 
+        <td rowspan="5" align="left" width="200"> 
           <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
@@ -91,17 +91,18 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
+          </ul>
         </td>
       </tr>
       <tr>
         <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;
             text-align: center;">
+            <hr>
           <h2>Welcome to Team Page Publish Form</h2>       
           </td>
       </tr>

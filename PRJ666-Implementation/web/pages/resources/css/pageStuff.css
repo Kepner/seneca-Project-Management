@@ -9,8 +9,26 @@ ul
   padding:0;
 }
 
-li{
+li {
+  background-image: url('../images/header_bg.jpg');
+  -webkit-border-radius: 12px;
+     -moz-border-radius: 12px;
+      border-radius: 12px;
+}
+
+li.normalLinks{
   float: left;
+  width: 100px;
+  margin-top: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: -5px;
+  height: 35px;
+  vertical-align: text-top;
+}
+
+li.roleLinks{
+  margin: 3px;
 }
 
 li a:link, li a:visited
@@ -18,7 +36,6 @@ li a:link, li a:visited
   font-size: 75%;
   display:block;
   color:#FFFFFF;
-  width:75px;
   text-align:center;
   padding:1px;
   text-decoration:none;

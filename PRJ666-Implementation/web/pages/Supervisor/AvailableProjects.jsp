@@ -61,6 +61,13 @@
             }
           }
           %>
+          <div style="text-align: center;">
+              <ul>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Supervisor/HomeSupervisor.jsp">Supervisor<br/>Home</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Supervisor/ProjectUpdate.jsp">Change<br/>Project<br/>Status<br/>to<br/>Past</a></li>
+                <li class="roleLinks"><a href="/PRJ666-Implementation/pages/Supervisor/AvailableProjects.jsp">Current<br/>Semester<br/>Available<br/>Projects</a></li>
+              </ul>
+          </div>
           <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -94,22 +101,18 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
-          <ul>
-            <li><a href="/PRJ666-Implementation/pages/Supervisor/HomeSupervisor.jsp">Supervisor Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Supervisor/AvailableProjects.jsp">Current Semester Available Projects</a></li>
+        <td>
+          <ul style="float: right;">
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+            <li class="normalLinks"><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
           </ul>
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
         </td>
       </tr>
       <tr>
         <td>
-          <h1>List of Available Projects (<%= Validation.getSemesterToday() %>)</h1>
+            <hr>
+          <h3>List of Available Projects (<%= Validation.getSemesterToday() %>)</h3>
            <form name="form1" method="POST" action="ProjectDetails.jsp">
             <%
                 Projects p = null;
