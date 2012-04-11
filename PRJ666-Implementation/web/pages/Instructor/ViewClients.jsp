@@ -98,7 +98,7 @@
             <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
@@ -120,15 +120,11 @@
                     try {
                         items = new Integer(request.getParameter("items"));
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    catch (Exception e) {}
                     try {
                         beg = new Integer(request.getParameter("beg")) * items;
                     }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    catch (Exception e) {}
                     for(int i = beg; i < beg + items && i < companies.size() ; i++) {
                         c = companies.get(i);
                         Accounts a = userBean.getAccount(c.getUserId());
@@ -143,7 +139,24 @@
                             <b>Business Areas:</b><br/><%= c.getBusinessAreas()%><br/><br/>
                             <b>Phone:</b><br /><%= c.getCompanyPhone()%><br/><br/>
                             <b>Representative: </b><br /><%=a.getUserFName()%> <%=a.getUserLName()%><br/>
-                            <a href=mailto:'<%=a.getUserEmail()%>'>Send email</a><br/>
+                            <a href='mailto:<%=a.getUserEmail()%>'>Send email</a><br/><br/>
+                            <b>Projects: </b><br/>
+                            <%
+                                List<Projects> projects = userBean.getCompanyProjects(c);
+                                Projects p = null;
+                                if(projects != null && projects.size() > 0){
+                                    
+                                  for(int k = 0; k < projects.size(); k++){
+                                    p = projects.get(k);
+                                    %>
+                                    <a href="/PRJ666-Implementation/pages/Instructor/ProjectDetails.jsp?Project=<%= p.getProjectId() %>"><%= p.getPrjName() %></a>
+                                    <br/>
+                                    <%
+                                  }
+                                }
+                                else
+                                  out.println("The Company doesn't have any projects!");
+                            %>
                         </div>
                         <%
                     }

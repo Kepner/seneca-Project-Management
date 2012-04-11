@@ -204,11 +204,7 @@
             <%}            
         }
         %>
-        <% if(team!=null && team.getTeamId()!=0){%>
-        <p>Assigned Team: <a href="#"><%=team.getTeamName()%></a></p>
-        <%}else{%>
-        <p><strong>Currently no team assigned</strong></p>
-        <%}
+        <%
           if(proj.getStatus().equals("PA")){
         %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
           }

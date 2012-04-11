@@ -79,13 +79,12 @@
             }
             
             if(errorFound) {
-                session.setAttribute("Account", a);
                 request.getRequestDispatcher("CreateTeam.jsp").forward(request, response);
             }
             else{
-                a.setUserRole(request.getParameter("id_role"));
+                a.setUserRole("TL");
                 a.setAccountStatus(1);
-                a.setUserIdentifier(request.getParameter("id_user"));
+                a.setUserIdentifier(Validation.getPRJ566SemesterUsername(request.getParameter("id_section")));
             }
         }
     }
