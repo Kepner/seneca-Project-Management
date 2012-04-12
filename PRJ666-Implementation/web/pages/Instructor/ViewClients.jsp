@@ -119,8 +119,7 @@
       <tr>
         <td>
             <hr>
-          <h1>List of clients</h1>
-          <form name="form1">
+          <h3>List of Clients</h3>
               <% 
                 List<Company> companies = userBean.getAllCompanies();
                 Company c = null;
@@ -187,7 +186,6 @@
                     out.println("<p>There are currently no clients</p>");
                 }
               %>
-          </form>
         </td>
       </tr>             
     </table>

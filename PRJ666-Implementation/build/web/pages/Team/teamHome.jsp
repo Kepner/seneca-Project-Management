@@ -119,6 +119,15 @@
             <img src="<%= team.getTeamLogo() == null || team.getTeamLogo().isEmpty() ? "/PRJ666-Implementation/pages/resources/images/logoDefault.jpg" : team.getTeamLogo() %>"
                  alt="Team Logo" style="max-width: 400px; max-height: 200px;"/>
           </div>
+          <div style="margin: 0 auto;">
+              <%= team.getTeamConstraints() %>
+          </div>
+          <br/>
+          <br/>
+          <div style="margin: 0 auto;">
+              <%= team.getTeamDescription() %>
+          </div>
+          <br/>
           <div style="text-align: center; margin-bottom: 10px;">
             <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
           </div>
@@ -140,8 +149,10 @@
                 <%= m.getFirstName() + " " + m.getLastName() %>
               </div>
               <%
-              if(count == 3)
+              if(count == 3){
                 out.println("<br/>");
+                count = 0;
+              }
               count++;
             }
           %>

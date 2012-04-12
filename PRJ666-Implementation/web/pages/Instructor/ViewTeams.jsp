@@ -148,8 +148,20 @@
                         </div>
                         <div style='background-color: skyblue; padding: 10px; display:none' id='_<%=i%>'>
                             <b>Team Description:</b><br/><%=t.getTeamDescription()%><br/><br/>
-                            <b>Team Constraints:</b><br/><%=t.getTeamConstraints()%><br/>
-                            <br /><a href='mailto:<%=t.getTeamEmail()%>'>Send email</a><br/><br/>
+                            <b>Team Constraints:</b><br/><%=t.getTeamConstraints()%><br/><br/>
+                            <b>Team Project:</b><br/>
+                            <%
+                                if(t.getProjectId() != null){
+                                    Projects p = userBean.getProject(t.getProjectId());
+                            %>
+                            <a href="../Instructor/ProjectDetails.jsp?Project=<%= t.getProjectId() %>"><%= p.getPrjName() %></a><br/>
+                            <%
+                                } 
+                                else
+                                    out.println("Team is not matched to any project!<br/>");
+                                                           
+                            %>
+                            <br /><a href='mailto:<%=t.getTeamEmail()%>'>Email Team</a><br/>
                         </div>
                         <%
                     }

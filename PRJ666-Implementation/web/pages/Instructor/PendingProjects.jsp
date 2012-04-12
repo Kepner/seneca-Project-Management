@@ -120,6 +120,16 @@
         <td>
             <hr>
           <h3>List of Pending Projects</h3>
+          <%
+          if(session.getAttribute("Error") != null) {
+                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                    session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("approveSuccess") != null){
+                    out.println("<span style='color: green'>" + session.getAttribute("approveSuccess") + "</span>");
+                    session.removeAttribute("approveSuccess");                                     
+                }
+          %>
           <form name="form1" method="POST" action="ProjectDetails.jsp">
             <%
                 Projects p = null;
@@ -174,14 +184,6 @@
                     out.print("<div style='clear: both'></div>");
                 } else {
                     out.println("<h1>No projects to display.</h1>");
-                }
-                if(session.getAttribute("Error") != null) {
-                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                    session.removeAttribute("Error");
-                }
-                else if(session.getAttribute("approveSuccess") != null){
-                    out.println("<span style='color: green'>" + session.getAttribute("approveSuccess") + "</span>");
-                    session.removeAttribute("approveSuccess");                  
                 }
             %>
             </form>

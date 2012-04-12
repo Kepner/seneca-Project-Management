@@ -152,7 +152,7 @@
             
             session.setAttribute("project", p);
           %>
-          <h1><%= p.getPrjName() %> Project Details</h1>
+          <h3><%= p.getPrjName() %> Project Details</h3>
           <% if(showButton == true) {%>
           <form name="form1" method="POST" action="ProjectSetApproved.jsp">
           <% } else { %>

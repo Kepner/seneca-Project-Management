@@ -205,12 +205,26 @@
                               + " been matched to a project.");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");  
                     }
+                    else if(tmbrs.size() == 1 && t.getProjectId() == null){
+                        if(userBean.removeMember(mbr) && userBean.removeTeam(t)){
+                            session.removeAttribute("deleteMember");
+                            session.setAttribute("memberSuccess", "Successfully deleted " + mbr.getFirstName() + " " + mbr.getLastName() + " and team "
+                                    + t.getTeamName() + " as team no longer had members.");
+                            response.sendRedirect("../Instructor/manageTeamMembers.jsp");
+                        }
+                        else{
+                            session.removeAttribute("deleteMember");
+                            session.setAttribute("memberError", "Member or Team removal failed. Please try manually removing them.");
+                            response.sendRedirect("../Instructor/manageTeamMembers.jsp");
+                        }                   
+                    }
                     else if(userBean.removeMember(mbr) && userBean.updateTeam(t)){
                       session.removeAttribute("deleteMember");
                       session.setAttribute("memberSuccess", "Successfully deleted " + mbr.getFirstName() + " " + mbr.getLastName() + ".");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");
                     }
                     else {
+                      session.removeAttribute("deleteMember");
                       session.setAttribute("memberError", "Member removal failed. Please try manually removing them.");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");
                     }

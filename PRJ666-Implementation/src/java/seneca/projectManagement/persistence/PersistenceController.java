@@ -632,4 +632,19 @@ public class PersistenceController extends EntityControllerBase {
     em.close();
     return ret;
   }
+  
+  public boolean removeTeam( Teams aTeam ){
+    boolean ret = false;
+    em = getEntityManager();
+    try {
+      em.getTransaction().begin();
+      em.remove(em.merge(aTeam));
+      em.getTransaction().commit();
+      ret = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    em.close();
+    return ret; 
+  }
 }

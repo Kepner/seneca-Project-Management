@@ -148,7 +148,12 @@
                             out.println("<input type='radio' name='mId' value=" + m.getMemberId() + " />");
                         out.println("</div>");
                         out.println("<div style='float: left; padding: 1px; width: 250px'>" + m.getFirstName() + " " + m.getLastName() + "</div>");
-                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + m.getDescription() + "</div>");
+
+                        String desc = m.getDescription();
+                        if (desc.length() > 50){
+                            desc = m.getDescription().substring(0, 50) + " ...";
+                        }
+                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + desc + "</div>");
                         out.println("<div style='float: left; padding: 1px; width: 150px'><a href='mailto:" + m.getEmail() + "'>Email</a></div>");
                         out.println("<div style='clear: both'></div>");
                     out.println("</div>");

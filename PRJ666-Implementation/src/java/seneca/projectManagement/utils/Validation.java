@@ -104,7 +104,7 @@ public class Validation {
         String value = "";
         Integer i = 1;
         do {
-            value = getSemesterToday().replace("PRJ6", "PRJ5") + "_" + i + section;
+            value = getSemesterToday().replace("PRJ6", "PRJ5") + "_" + section + i;
             i++;
         } while(isValidUsername(value) == false);
         return value;

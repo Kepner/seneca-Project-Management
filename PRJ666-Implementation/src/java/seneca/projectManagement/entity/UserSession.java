@@ -252,7 +252,11 @@ public class UserSession {
   
   public boolean removeAccounts(Accounts a) {
     return pc.removeAccounts(a);
-  }  
+  }
+  
+  public boolean removeTeam( Teams aTeam ){
+    return pc.removeTeam( aTeam );
+  }
 
   public boolean updateAccounts(Accounts a) {
     return pc.updateAccounts(a);

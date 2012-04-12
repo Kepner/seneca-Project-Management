@@ -171,7 +171,7 @@
             }
             else {
               out.println("Error. You obviously navigated to the page without going to Update Projects first. Click"
-                      + "<a href='../Instructor/updateProjects.jsp'>this link</a> to go there.");  
+                      + " <a href='../Instructor/updateProjects.jsp'>this link</a> to go there.");  
             }
           %>
           </form>

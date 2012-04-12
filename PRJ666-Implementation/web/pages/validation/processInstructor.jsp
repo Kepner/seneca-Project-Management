@@ -123,12 +123,35 @@ else if(request.getParameter("createTeamMember") != null){
   }
 }
 else if(request.getParameter("proceedProject") != null){
-  System.out.println("proceeding project");
   String period = request.getParameter("semesterPeriod"),
          year = request.getParameter("year"),
          pId = request.getParameter("pId");
   
-  if(year.equals("0")){
+  int month = 0, currMonth, currYear = 0;
+  Calendar cal = Calendar.getInstance();
+  currMonth = cal.get(Calendar.MONTH);
+  currYear = cal.get(Calendar.YEAR);
+  
+  if(period.equals("WIN"))
+      month = 4;
+  else if(period.equals("FALL"))
+      month = 12;
+  else if(period.equals("SUM"))
+      month = 8;
+  
+  if(currMonth < 4 && currMonth >= 1)
+      currMonth = 4;
+  else if(currMonth < 8 && currMonth >= 5)
+      currMonth = 8;
+  else if(currMonth < 12 && currMonth >= 9)
+      currMonth = 12;
+  
+  if(month <= currMonth && Integer.parseInt(year) == currYear){
+    session.setAttribute("proceedFail", "Error. Project must be proceeded to next semester at the minimum.");
+    session.setAttribute("Project", pId);
+    request.getRequestDispatcher("../Instructor/changeProjectStatus.jsp").forward(request, response); 
+  }     
+  else if(year.equals("0")){
     session.setAttribute("proceedFail", "Error. Must select a year to proceed the project.");
     session.setAttribute("Project", pId);
     request.getRequestDispatcher("../Instructor/changeProjectStatus.jsp").forward(request, response);
