@@ -116,8 +116,7 @@
            <form name="form1" method="POST" action="ProjectDetails.jsp">
             <%
                 Projects p = null;
-                //List<Projects> projects = userBean.getAllProjects();
-                List<Projects> projects = userBean.getAllProjects("AV", Validation.getSemesterToday());
+                List<Projects> projects = userBean.getAllProjects("AV");
                 if(projects.size() > 0) {
                     Collections.sort(projects, new ProjectSorting());
                     Integer beg = 0;

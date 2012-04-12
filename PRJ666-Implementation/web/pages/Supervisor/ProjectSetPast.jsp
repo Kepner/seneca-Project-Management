@@ -117,6 +117,7 @@
                     for(String s1 : s) {
                         id = new Integer(s1);
                         Projects p = userBean.getProject(id);
+                        System.out.println(p.getProjectId());
                         out.print("<div style='font-weight: bold; width: 100%; padding: 5px; color: white; background-color: ");
                         if(color == 0) {
                             out.print("#6F93C9");

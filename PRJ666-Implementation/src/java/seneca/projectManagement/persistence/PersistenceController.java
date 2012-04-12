@@ -86,7 +86,8 @@ public class PersistenceController extends EntityControllerBase {
     em = getEntityManager();
     
     em.getTransaction().begin();
-    return em.find(Teams.class, aTeamId);
+    Query q = em.createNamedQuery("Teams.findByTeamId").setParameter("teamId", aTeamId);
+    return (Teams)q.getSingleResult();
   }
   
   public Accounts getAccount( String aUserIdentifier ){
