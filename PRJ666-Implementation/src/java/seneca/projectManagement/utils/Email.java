@@ -1,8 +1,6 @@
 package seneca.projectManagement.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -16,20 +14,18 @@ import javax.mail.internet.MimeMessage;
 * Run from the command line. Please edit the implementation
 * to use correct email addresses and host name.
 */
-public final class Email {
+public class Email {
+  @Resource(name = "mail/prj666")
+  private static Session mailSession;
 
   /**
   * Send a single email.
   */
-  public void sendEmail(
+  public static boolean sendEmail(
     String aFromEmailAddr, String aToEmailAddr,
     String aSubject, String aBody
   ){
-    //Here, no Authenticator argument is used (it is null).
-    //Authenticators are used to prompt the user for user
-    //name and password.
-    Session session = Session.getDefaultInstance( fMailServerConfig, null );
-    MimeMessage message = new MimeMessage( session );
+    MimeMessage message = new MimeMessage( mailSession );
     try {
       //the "from" address may be set in code, or set in the
       //config file under "mail.from" ; here, the latter style is used
@@ -40,50 +36,11 @@ public final class Email {
       message.setSubject( aSubject );
       message.setText( aBody );
       Transport.send( message );
+      return true;
     }
     catch (MessagingException ex){
       System.err.println("Cannot send email. " + ex);
-    }
-  }
-
-  /**
-  * Allows the config to be refreshed at runtime, instead of
-  * requiring a restart.
-  */
-  public static void refreshConfig() {
-    fMailServerConfig.clear();
-    fetchConfig();
-  }
-
-  // PRIVATE //
-
-  private static Properties fMailServerConfig = new Properties();
-
-  static {
-    fetchConfig();
-  }
-
-  /**
-  * Open a specific text file containing mail server
-  * parameters, and populate a corresponding Properties object.
-  */
-  private static void fetchConfig() {
-    InputStream input = null;
-    try {
-      //If possible, one should try to avoid hard-coding a path in this
-      //manner; in a web application, one should place such a file in
-      //WEB-INF, and access it using ServletContext.getResourceAsStream.
-      //Another alternative is Class.getResourceAsStream.
-      //This file contains the javax.mail config properties mentioned above.
-      fMailServerConfig.put("mail.smtp.host", "learn.senecac.on.ca");
-    }
-    finally {
-      try {
-        if ( input != null ) input.close();
-      }
-      catch ( IOException ex ){
-        System.err.println( "Cannot close mail server properties file." );
-      }
+      return false;
     }
   }
 } 

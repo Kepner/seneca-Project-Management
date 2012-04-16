@@ -15,7 +15,7 @@ CREATE TABLE accounts (
   userIdentifier varchar(25) NOT NULL UNIQUE,
   userFName varchar(16) NOT NULL,
   userLName varchar(16) NOT NULL,
-  userEmail varchar(50) NOT NULL,
+  userEmail varchar(50) NOT NULL UNIQUE,
   userRole varchar(2) NOT NULL,
   password varchar(50) NOT NULL,
   accountStatus int DEFAULT 1
@@ -34,7 +34,7 @@ CREATE TABLE teams (
   teamId int AUTO_INCREMENT PRIMARY KEY,
   teamEmail varchar(400) NOT NULL,
   teamStatus int DEFAULT 1,
-  teamName varchar(20),
+  teamName varchar(20) UNIQUE,
   teamConstraints TEXT,
   teamDescription TEXT,
   teamLogo TEXT,

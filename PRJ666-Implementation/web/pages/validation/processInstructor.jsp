@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="java.util.Calendar"%>
 <%@ page
   import="seneca.projectManagement.utils.CryptoUtil,
@@ -59,9 +60,29 @@ if(request.getParameter("matchTeam") != null){
       
       p.setPrjIdentifier(value);
       if(userBean.updateProject(p)){
-        session.setAttribute("matchSuccess", "Matched Team " + t.getTeamName() + " with " + p.getPrjName() + " successfully.");
+        session.setAttribute("matchSuccess", "Matched Team " + t.getTeamName() + " with " + p.getPrjName() + " successfully "
+                + "with emails sent.");
         session.removeAttribute("Team");
-        response.sendRedirect("../Instructor/matching.jsp");
+        
+        Company c = userBean.getCompanyByID(p.getCompanyId());
+        Accounts a = userBean.getAccount(c.getUserId()),
+                 i = userBean.getLoggedUser(),
+                 tm = userBean.getAccount(t.getUserId());
+        
+        String cSubject = "Your Project, " + p.getPrjName() + " has been matched!";
+        String cBody = "Greetings,\n\nYour Project has been matched! You will be receiving correspondence from the team shortly!"
+                 + "\n\nThanks,\n" + i.getUserFName() + " " + i.getUserLName();
+        String tSubject = "You have been matched!";
+        String tBody = "Greetings,\n\nYour team has been matched with the project " + p.getPrjName() + ". Please go login to your account "
+                + "and select the your project link to view additional details now available about the project, including all files associated "
+                + "with it. Then go ahead and contact them!\n\nThanks,\n" + i.getUserFName() + " " + i.getUserLName();
+        
+        // Company Email
+        Email.sendEmail(i.getUserEmail(), a.getUserEmail(), cSubject, cBody);
+        
+        // Team Email
+        Email.sendEmail(i.getUserEmail(), tm.getUserEmail(), tSubject, tBody);
+        request.getRequestDispatcher("../Instructor/matching.jsp").forward(request, response);
       }
       else {
         session.setAttribute("Error", "Error. Failed to update the projects information. Please manually change it.");

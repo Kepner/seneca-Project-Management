@@ -12,7 +12,7 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 
 /* password is 12345, Company Rep */
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Megan', 'Reed', 'm.reed@sarifindustries.com', 'megan.reed', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo='); 
+  VALUES ('Megan', 'Reed', 'schranz.m@gmail.com', 'megan.reed', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo='); 
 
 /* password is 12345, Company Rep */
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 

@@ -13,7 +13,7 @@ import javax.ejb.StatefulTimeout;
 import seneca.projectManagement.persistence.PersistenceController;
 import seneca.projectManagement.utils.CryptoUtil;
 
-@Stateful
+@Stateful(name="userSession")
 @LocalBean
 @StatefulTimeout(unit = TimeUnit.MINUTES, value = 60)
 public class UserSession {

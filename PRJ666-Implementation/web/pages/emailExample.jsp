@@ -9,22 +9,22 @@
 <%
   Email emailer = new Email();
   
-  emailer.sendEmail( "matthew.schranz@senecacollege.ca", "schranz.m@gmail.com",
+  Email.sendEmail( "matthew.schranz@senecacollege.ca", "schranz.m@gmail.com",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + " using an outside email as the recipient.");
   
-  emailer.sendEmail( "matthew.schranz@senecacollege.ca", "mjschranz@learn.senecac.on.ca",
+  Email.sendEmail( "matthew.schranz@senecacollege.ca", "mjschranz@learn.senecac.on.ca",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + "using an @learn.senecac.on.ca as the recipient.");
   
-  emailer.sendEmail( "emile.ohan@senecacollege.ca", "matthew.schranz@senecacollege.ca",
+  Email.sendEmail( "emile.ohan@senecacollege.ca", "matthew.schranz@senecacollege.ca",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + "using an @senecacollege.ca as the recipient.");
 %>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Email Example</title>
   </head>
   <body>
     <h3>You sent an email to mjschranz@learn.senecac.on.ca from matthew.schranz@senecacollege.ca.</h3>

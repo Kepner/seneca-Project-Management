@@ -175,14 +175,16 @@ Document   : Home
             List<News> allNews = userBean.getRecentNews();
             News n = null;
             Accounts a = null;
+            String newsText;
             
             if(allNews != null){
               for(int i = 0; i < allNews.size(); i++){
                 n = allNews.get(i);
                 a = userBean.getAccount(n.getInstructorId());
+                newsText = n.getPostText().replace("\n", "<br>");
                 out.println("<h3 class='title'>" + n.getPostTitle() + "</h3>By: " + a.getUserFName() + " " + a.getUserLName() +
                         "<br/>Date: " + new SimpleDateFormat("MM/dd/yyyy").format(n.getPostDate()));
-                out.println("<p>" + n.getPostText() + "</p><hr/>");
+                out.println("<p>" + newsText + "</p><hr/>");
               }
             }
             else
