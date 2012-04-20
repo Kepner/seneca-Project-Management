@@ -250,6 +250,10 @@ public class UserSession {
       return pc.getAllAccounts();
   }
   
+  public List<Accounts> getAllAccountsByRole( String aRole ){
+    return pc.getAllAccountsByRole( aRole );
+  }
+  
   public boolean removeAccounts(Accounts a) {
     return pc.removeAccounts(a);
   }

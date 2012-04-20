@@ -4,6 +4,8 @@
     Author     : KepneR
 --%>
 
+<%@page import="javax.mail.Message"%>
+<%@page import="java.util.List"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%@page import="seneca.projectManagement.entity.*" %>
 <%@page import="seneca.projectManagement.utils.*" %>
@@ -115,6 +117,23 @@
                 if(userBean.addProject(proj) == false) {
                     out.println("An unexpected error has occured while registering the Project.");
                     errorFound = true;
+                }
+                else {
+                  List<Accounts> instructors = userBean.getAllAccountsByRole( "IN" );
+                  
+                  Email emailer = new Email();
+                  emailer.addRecipient(Message.RecipientType.TO, instructors.get(1).getUserEmail());
+                  for(int i = 1; i < instructors.size(); i++){
+                    emailer.addRecipient(Message.RecipientType.CC, instructors.get(i).getUserEmail());
+                  }
+                  
+                  Company c2 = userBean.getCompany();
+                  String fromAddr = userBean.getLoggedUser().getUserEmail();
+                  String subject = "New Project Proposal from company " + c2.getCompanyName();
+                  String body = "Greetings,\n\n" + c2.getCompanyName() + " has proposed a new project. It's name is " + proj.getPrjName() + "."
+                         + "\n\n It is available in your Pending Projects page! Please view it as soon as possible.\n\n-System";
+                  
+                  emailer.sendEmail(fromAddr, subject, body);
                 }
 
                 if(projFile.getFileName().equals("") == false) {

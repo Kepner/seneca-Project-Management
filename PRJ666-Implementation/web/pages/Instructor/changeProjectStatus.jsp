@@ -4,6 +4,8 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="javax.mail.Message"%>
+<%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="seneca.projectManagement.entity.Projects"%>
 <%@page import="seneca.projectManagement.entity.Accounts"%>
@@ -120,6 +122,15 @@
               
               if(userBean.updateProject(p)){
                 session.setAttribute("updateSuccess", "Successfully updated the status of project " + p.getPrjName() + ".");
+                Email emailer = new Email();
+                Accounts c = userBean.getAccount(userBean.getCompanyByID(p.getCompanyId()).getUserId()),
+                         in = userBean.getLoggedUser();
+                  
+                emailer.addRecipient(Message.RecipientType.TO, c.getUserEmail());
+                emailer.sendEmail(in.getUserEmail(), "Seneca Project Management - Project Available", 
+                  "Greetings,\n\nYour project, " + p.getPrjName() + " is now available to current Teams. They will now be able to look "
+                  + "over it and be potentially matched with it. Notification will be sent if this happens."
+                  + "\n\n- " + in.getUserFName() + " " + in.getUserLName());
                 response.sendRedirect("updateProjects.jsp");
               }
               else {

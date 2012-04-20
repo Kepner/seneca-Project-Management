@@ -3,21 +3,28 @@
     Created on : Feb 18, 2012, 2:01:06 PM
     Author     : matthewschranz
 --%>
+<%@page import="javax.mail.Message"%>
 <%@page import="seneca.projectManagement.utils.Email"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+  // You need to create a new email each time, since the old message attribute will contain
+  // previous To addresses
   Email emailer = new Email();
-  
-  Email.sendEmail( "matthew.schranz@senecacollege.ca", "schranz.m@gmail.com",
+  emailer.addRecipient(Message.RecipientType.TO, "schranz.m@gmail.com");
+  emailer.sendEmail( "matthew.schranz@senecacollege.ca",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + " using an outside email as the recipient.");
   
-  Email.sendEmail( "matthew.schranz@senecacollege.ca", "mjschranz@learn.senecac.on.ca",
+  emailer = new Email();
+  emailer.addRecipient(Message.RecipientType.TO, "mjschranz@learn.senecac.on.ca");
+  emailer.sendEmail( "matthew.schranz@senecacollege.ca",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + "using an @learn.senecac.on.ca as the recipient.");
   
-  Email.sendEmail( "emile.ohan@senecacollege.ca", "matthew.schranz@senecacollege.ca",
+  emailer = new Email();
+  emailer.addRecipient(Message.RecipientType.TO, "matthew.schranz@senecacollege.ca");
+  emailer.sendEmail( "emile.ohan@senecacollege.ca",
           "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
           + "using an @senecacollege.ca as the recipient.");
 %>

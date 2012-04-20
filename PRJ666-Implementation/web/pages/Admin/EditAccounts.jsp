@@ -1,3 +1,5 @@
+<%@page import="javax.mail.Message"%>
+<%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="seneca.projectManagement.utils.CryptoUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
@@ -111,6 +113,7 @@
             <h3>Updated Accounts</h3>
             <%
                 Accounts a = (Accounts) session.getAttribute("ModifyAccounts");
+                Email emailer = new Email();
                 
                 boolean showNewPass = false;
                 String fname = request.getParameter("id_fname");
@@ -127,9 +130,21 @@
                 a.setUserRole(role);
                 a.setAccountStatus(new Integer(status));
                 
-                if(sType.equals("Reset Password") == true){
-                    a.setPasswordHashed(pass);
-                    showNewPass = true;
+                String subject = "Seneca Project Management - Account Updated";
+                Accounts i = userBean.getLoggedUser();
+                
+                if(sType.equals("Reset Password")){
+                  a.setPasswordHashed(pass);
+                  emailer.addRecipient(Message.RecipientType.TO, a.getUserEmail()); 
+                  emailer.sendEmail(i.getUserEmail(), subject, "Greetings,\n\n Your password has been reset to the following below: "
+                    + pass + "\n\nPlease keep in somewhere in your reconds.\n\n- " + i.getUserFName() + " " + i.getUserLName());
+                }
+                
+                if(status.equals("0")){
+                  emailer = new Email();
+                  emailer.addRecipient(Message.RecipientType.TO, a.getUserEmail());
+                  emailer.sendEmail(i.getUserEmail(), subject, "Greetings,\n\n Your account has been deactivated."
+                    + "\n\nPlease contact the Admin if there are any complications.\n\n- " + i.getUserFName() + " " + i.getUserLName());
                 }
                 
                 /*
@@ -142,12 +157,11 @@
                 */
                 
                 if(userBean.updateAccounts(a)) {
-                    out.println("Account for " + fname + " " + lname + " has been updated successfully");
-                    if(showNewPass == true) {
-                        out.println("<div style='padding: 10px; background-color: skyblue;'>");
-                        out.println("Username: <b>" + a.getUserIdentifier() + "</b><br/>");
-                        out.println("Password: <b>" + pass + "</b></div>");
-                        out.println("<div style='color: red'>IMPORTANT: Please write down or keep a backup of your account information.</div>");
+                    out.println("Account for " + fname + " " + lname + " has been updated successfully and emailed.");
+                    if(!sType.equals("Reset Password") && !status.equals("0")){
+                      emailer.addRecipient(Message.RecipientType.TO, a.getUserEmail()); 
+                      emailer.sendEmail(i.getUserEmail(), subject, "Greetings,\n\n Your account information has been updated."
+                        + "\n\nPlease contact the admin if there are any complications.\n\n-" + i.getUserFName() + " " + i.getUserLName());
                     }
                 } else {
                     out.println("An unexpected error has occured while updating the account!");

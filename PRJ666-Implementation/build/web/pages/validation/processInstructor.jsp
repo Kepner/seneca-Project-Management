@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="javax.mail.Message"%>
 <%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="java.util.Calendar"%>
 <%@ page
@@ -63,6 +64,7 @@ if(request.getParameter("matchTeam") != null){
         session.setAttribute("matchSuccess", "Matched Team " + t.getTeamName() + " with " + p.getPrjName() + " successfully "
                 + "with emails sent.");
         session.removeAttribute("Team");
+        Email emailer = new Email();
         
         Company c = userBean.getCompanyByID(p.getCompanyId());
         Accounts a = userBean.getAccount(c.getUserId()),
@@ -78,10 +80,13 @@ if(request.getParameter("matchTeam") != null){
                 + "with it. Then go ahead and contact them!\n\nThanks,\n" + i.getUserFName() + " " + i.getUserLName();
         
         // Company Email
-        Email.sendEmail(i.getUserEmail(), a.getUserEmail(), cSubject, cBody);
+        emailer.addRecipient(Message.RecipientType.TO, a.getUserEmail());
+        emailer.sendEmail(i.getUserEmail(), cSubject, cBody);
         
         // Team Email
-        Email.sendEmail(i.getUserEmail(), tm.getUserEmail(), tSubject, tBody);
+        emailer = new Email();
+        emailer.addRecipient(Message.RecipientType.TO, tm.getUserEmail());
+        emailer.sendEmail(i.getUserEmail(), tSubject, tBody);
         request.getRequestDispatcher("../Instructor/matching.jsp").forward(request, response);
       }
       else {
@@ -134,6 +139,15 @@ else if(request.getParameter("createTeamMember") != null){
       Teams t = userBean.getTeamById(new Integer(tId));
       session.removeAttribute("createMember");
       session.setAttribute("memberSuccess", "Successfully added " + mFName + " " + mLName + " to " + t.getTeamName() + ".");
+      Email emailer = new Email();
+      Accounts t2 = userBean.getAccount(userBean.getTeamById(m.getTeamId()).getUserId()),
+               in = userBean.getLoggedUser();
+                  
+      emailer.addRecipient(Message.RecipientType.TO, t2.getUserEmail());
+      emailer.sendEmail(in.getUserEmail(), "Seneca Project Management - New Team Member Created", 
+        "Greetings,\n\nA new member has been added to your team, as requested. They will be viewable in your team's "
+        + "manage team page area of your account. Please contact me if there are any other issues."
+        + "\n\n- " + in.getUserFName() + " " + in.getUserLName());
       response.sendRedirect("../Instructor/manageTeamMembers.jsp");
     }
     else {
@@ -192,6 +206,15 @@ else if(request.getParameter("proceedProject") != null){
     if(userBean.updateProject(p)){
       session.setAttribute("updateSuccess", "Successfully proceeded project " + p.getPrjName() + " to " + identifier + ".");
       session.removeAttribute("Project");
+      Email emailer = new Email();
+      Accounts c = userBean.getAccount(userBean.getCompanyByID(p.getCompanyId()).getUserId()),
+               in = userBean.getLoggedUser();
+                  
+      emailer.addRecipient(Message.RecipientType.TO, c.getUserEmail());
+      emailer.sendEmail(in.getUserEmail(), "Seneca Project Management - Project has been Proceeded to Implementation Phase", 
+        "Greetings,\n\nYour project, " + p.getPrjName() + " has completed it's design phase and has a start period set for implementation. "
+        + "Your team will be starting this in " + period + " " + year + ". "
+        + "\n\n- " + in.getUserFName() + " " + in.getUserLName());
       response.sendRedirect("../Instructor/updateProjects.jsp");
     }
     else {
@@ -215,10 +238,6 @@ else if(request.getParameter("publishNewsPost") != null){
   }
   else {
     News n = new News();
-    
-    for(int i = 0; i < pText.length(); i++){
-      System.out.println(pText.charAt(i));
-    }
     
     n.setInstructorId(userBean.getLoggedUser().getUserId());
     n.setPostTitle(pTitle);

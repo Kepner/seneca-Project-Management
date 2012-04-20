@@ -4,6 +4,8 @@
     Author     : KepneR
 --%>
 
+<%@page import="javax.mail.Message"%>
+<%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="seneca.projectManagement.utils.Validation"%>
 <%@page import="seneca.projectManagement.utils.CryptoUtil"%>
 <%@page import="java.util.Collections"%>
@@ -200,8 +202,16 @@
                         out.println("Account for " + a.getUserFName() + " " + a.getUserLName() + " has been successfully created.<br/>");
                         out.println("<div style='padding: 10px; background-color: skyblue;'>");
                         out.println("Username: <b>" + a.getUserIdentifier() + "</b><br/>");
-                        out.println("Password: <b>" + pass + "</b></div>");
-                        out.println("<div style='color: red'>IMPORTANT: Please write down or keep a backup of your account information.</div>");
+                        out.println("<div style='color: green'>An email has been sent with the account information.</div>");
+                        
+                        Email emailer = new Email();
+                        Accounts i = userBean.getLoggedUser();
+                        String subject = "Seneca Project Management - New Account Created";
+                        emailer.addRecipient(Message.RecipientType.TO, a.getUserEmail());
+                        emailer.sendEmail(i.getUserEmail(), subject, "Greetings,\n\nA new account has been created for you with the following credentials: \n\n"
+                                + "Username: " + a.getUserIdentifier() + "\n\nPassword: " + pass + "Please attempt to use it as soon as possible "
+                                + "and notify us of any issues.\n\n- " + i.getUserFName() + " " + i.getUserLName());
+                        
                     } else {
                         out.println("An unexpected error has occured while creating new account.");
                     }

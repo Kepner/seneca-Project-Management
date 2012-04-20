@@ -4,6 +4,7 @@
     Author     : KepneR
 --%>
 
+<%@page import="javax.mail.Message"%>
 <%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="seneca.projectManagement.utils.Validation"%>
 <%@page import="seneca.projectManagement.utils.CryptoUtil"%>
@@ -186,14 +187,14 @@
                     body = "Greetings,\n\nA team account has successfully been created for you, " + a.getUserFName() + " " + a.getUserLName() + ". "
                             + "\n\nUsername: " + a.getUserIdentifier() + "\n\nPassword: " + pass + "\n\nPlease login right away to "
                             + "register your team members. Keep this information saved for future use.\n\n- " + i.getUserFName() + " " + i.getUserLName();
-                    subject = "PRJ566: Team Account Created";
+                    subject = "Seneca Project Management - Team Account Created";
                     
-                    boolean result = Email.sendEmail(emailFrom, emailTo, subject, body);
-                    if(userBean.addTeam(a) && result) {
+                    Email emailer = new Email();
+                    emailer.addRecipient(Message.RecipientType.TO, emailTo);
+                    if(userBean.addTeam(a) && emailer.sendEmail(emailFrom, subject, body)) {
                         out.println("Account for " + a.getUserFName() + " " + a.getUserLName() + " has been successfully created.<br/>");
                         out.println("<div style='padding: 10px; background-color: skyblue;'>");
                         out.println("Username: <b>" + a.getUserIdentifier() + "</b><br/>");
-                        out.println("Password: <b>" + pass + "</b></div>");
                         out.println("<div style='color: green;'>Email notification has been sent to " + a.getUserEmail() + ".</div>");
                     } else {
                         out.println("An unexpected error has occured while creating new account.");

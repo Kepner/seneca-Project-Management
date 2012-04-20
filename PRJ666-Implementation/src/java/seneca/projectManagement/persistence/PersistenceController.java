@@ -448,6 +448,14 @@ public class PersistenceController extends EntityControllerBase {
     return (List<Accounts>) q.getResultList();
   }
   
+  public List<Accounts> getAllAccountsByRole( String aRole ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Accounts.findByUserRole" ).setParameter( "userRole", aRole );
+    
+    return q.getResultList().size() > 0 ? (List<Accounts>)q.getResultList() : null;
+  }
+  
   //Edouard
   public List<Teams> getUnMatchedTeams( ){
       em = getEntityManager();

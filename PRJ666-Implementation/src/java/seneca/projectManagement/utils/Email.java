@@ -17,22 +17,30 @@ import javax.mail.internet.MimeMessage;
 public class Email {
   @Resource(name = "mail/prj666")
   private static Session mailSession;
+  private MimeMessage message;
 
   /**
   * Send a single email.
   */
-  public static boolean sendEmail(
-    String aFromEmailAddr, String aToEmailAddr,
-    String aSubject, String aBody
-  ){
-    MimeMessage message = new MimeMessage( mailSession );
-    try {
-      //the "from" address may be set in code, or set in the
-      //config file under "mail.from" ; here, the latter style is used
-      message.setFrom( new InternetAddress(aFromEmailAddr) );
+  public Email(){
+    message = new MimeMessage( mailSession );
+  }
+  
+  public void addRecipient( Message.RecipientType aTo, String aToEmailAddr ){
+    try{
       message.addRecipient(
-        Message.RecipientType.TO, new InternetAddress(aToEmailAddr)
+        aTo, new InternetAddress(aToEmailAddr)
       );
+    }
+    catch(Exception e){
+      System.err.println("Cannot add email address");
+    }
+  }
+  public boolean sendEmail(
+    String aFromEmailAddr, String aSubject, String aBody
+  ){
+    try {
+      message.setFrom( new InternetAddress(aFromEmailAddr) );
       message.setSubject( aSubject );
       message.setText( aBody );
       Transport.send( message );

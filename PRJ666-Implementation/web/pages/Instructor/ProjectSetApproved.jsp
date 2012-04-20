@@ -4,6 +4,8 @@
     Author     : KepneR
 --%>
 
+<%@page import="javax.mail.Message"%>
+<%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*" %>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
@@ -131,10 +133,18 @@
                 
                 p.setInstructorId(userBean.getLoggedUser().getUserId());
                 p.setStatus("AP");
-                if(userBean.updateProject(p) == false) {
+                if(!userBean.updateProject(p)) {
                     out.print("An unexpected error has occured while updating the project!");
                 } else {
-                    session.setAttribute("approveSuccess", "Project " + p.getPrjName() + " has been approved!");
+                  Email emailer = new Email();
+                  Accounts c = userBean.getAccount(userBean.getCompanyByID(p.getCompanyId()).getUserId()),
+                           in = userBean.getLoggedUser();
+                  
+                  emailer.addRecipient(Message.RecipientType.TO, c.getUserEmail());
+                  emailer.sendEmail(in.getUserEmail(), "Seneca Project Management - Project Approved", 
+                    "Greetings,\n\nYour project, " + p.getPrjName() + " has been approved! Soon it will be available for teams to "
+                    + "be matched with. You will receive additional notification when this happens.\n\n- " + in.getUserFName() + " " + in.getUserLName());
+                  session.setAttribute("approveSuccess", "Project " + p.getPrjName() + " has been approved!");
                 }
             %>
         </td>

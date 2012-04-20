@@ -3,6 +3,7 @@
     Created on : Jan 26, 2012, 10:13:28 PM
     Author     : matthewschranz
 --%>
+<%@page import="javax.mail.Message"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page import="seneca.projectManagement.utils.Email"%>
 <%@page import="java.util.List"%>
@@ -103,6 +104,21 @@
                     userBean.removeProjectFile(projFiles.get(i));
                 }
             }
+            List<Accounts> instructors = userBean.getAllAccountsByRole( "IN" );
+                  
+            Email emailer = new Email();
+            emailer.addRecipient(Message.RecipientType.TO, instructors.get(1).getUserEmail());
+            for(int i = 1; i < instructors.size(); i++){
+              emailer.addRecipient(Message.RecipientType.CC, instructors.get(i).getUserEmail());
+            }
+                  
+            Company c2 = userBean.getCompany();
+            String fromAddr = userBean.getLoggedUser().getUserEmail();
+            String subject = "New Project Proposal from company " + c2.getCompanyName();
+            String body = "Greetings,\n\n" + c2.getCompanyName() + " has removed their proposed project, " + proj.getPrjName() + "."
+              + "\n\n-System";
+                  
+            emailer.sendEmail(fromAddr, subject, body);
             response.sendRedirect("../Company/ViewCompanyProjects.jsp?id="+proj.getProjectId()+"&projectdeleted=yes" );       
         }
 
