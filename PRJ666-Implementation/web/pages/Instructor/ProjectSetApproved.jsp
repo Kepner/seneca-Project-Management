@@ -22,6 +22,7 @@
     
     if(session.getAttribute("Second") == null) {
         response.sendRedirect("PendingProjects.jsp");
+        return;
     }
 %>
 

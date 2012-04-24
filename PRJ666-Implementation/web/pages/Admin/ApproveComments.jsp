@@ -20,6 +20,7 @@
     
     if(session.getAttribute("First") == null) {
         response.sendRedirect("PendingComments.jsp");
+        return;
     }
 %>
 

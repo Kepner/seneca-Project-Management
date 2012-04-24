@@ -17,6 +17,7 @@
     
     if(session.getAttribute("Second") == null) {
         response.sendRedirect("ManageAccounts.jsp");
+        return;
     }
 %>
 
